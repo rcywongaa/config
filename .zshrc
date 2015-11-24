@@ -32,7 +32,7 @@ bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
-IGNORE=("tar" "make")
+IGNORE=("tar" "make" "gitk" "yum")
 
 #Refer to http://mimosa-pudica.net/src/incr-0.2.zsh
 trim_list(){
@@ -42,17 +42,27 @@ trim_list(){
     fi
 }
 
-function self-insert
+function shouldComplete
 {
-    zle .self-insert
     if [[ ${(w)#BUFFER} -gt 1 ]]; then
         for ignore in "${IGNORE[@]}"; do
             buffer=(${=BUFFER})
-            if [[ "${buffer[1]}" == "${ignore}" ]]; then
+            if [[ "${buffer[1]}" == "${ignore}" || ("${buffer[1]}" == "sudo" && "${buffer[2]}" == "${ignore}") ]]; then
                 zle -M ""
-                return
+                return 0
             fi
         done
+    fi
+    return 1
+}
+
+function self-insert
+{
+    zle .self-insert
+    shouldComplete
+    ret=$?
+    if [[ "${ret}" == 0 ]]; then
+        return
     fi
     comppostfuncs=(trim_list)
     zle list-choices
@@ -60,6 +70,11 @@ function self-insert
 function magic-space
 {
     zle .magic-space
+    shouldComplete
+    ret=$?
+    if [[ "${ret}" == 0 ]]; then
+        return
+    fi
     comppostfuncs=(trim_list)
     zle list-choices
 }
@@ -68,6 +83,11 @@ function backward-delete-char
     zle .backward-delete-char
     if [[ ${#BUFFER} -lt 1 ]]; then
         zle -M ""
+        return
+    fi
+    shouldComplete
+    ret=$?
+    if [[ "${ret}" == 0 ]]; then
         return
     fi
     comppostfuncs=(trim_list)
