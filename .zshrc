@@ -34,14 +34,19 @@ bindkey "^[[F" end-of-line
 
 IGNORE=("tar" "make" "gitk" "yum")
 
+shouldTrim=1
 #Refer to http://mimosa-pudica.net/src/incr-0.2.zsh
 trim_list(){
-    if [[ ${compstate[list_lines]} -gt 10 ]]; then
+    if [[ ${compstate[list_lines]} -gt 10 && shouldTrim -gt 0 ]]; then
         compstate[list]=""
         zle -M "${compstate[nmatches]} matches..."
+    elif [[ ${compstate[list_lines]} -eq 0 ]]; then
+        zle -M ""
     fi
+    shouldTrim=1
 }
 
+#Handle ignore list for auto-complete
 function shouldComplete
 {
     if [[ ${(w)#BUFFER} -gt 1 ]]; then
@@ -97,6 +102,7 @@ function expand-or-complete
 {
     # compinit redefines the expand-or-complete function and bind it to complete-word
     zle complete-word
+    shouldTrim=0
     comppostfuncs=(trim_list)
     zle list-choices
 }
@@ -140,6 +146,4 @@ chpwd() {
     esac
 }
 
-#TODO: Ignore list for completion
 #TODO: Hint for ..
-#TODO: Alt-. to cycle through previous arguments

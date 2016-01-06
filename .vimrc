@@ -46,10 +46,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 inoremap jk <Esc>l
 
 " Window Scrolling
-noremap <C-J> <C-E>j
-noremap <C-K> <C-Y>k
-noremap <C-H> zhh
-noremap <C-L> zll
+nnoremap <C-J> <C-E>j
+nnoremap <C-K> <C-Y>k
+nnoremap <C-H> zhh
+nnoremap <C-L> zll
 
 nnoremap ZZ <nop>
 nnoremap <leader>o o<Esc>
@@ -84,6 +84,10 @@ nnoremap <leader><PAGEDOWN> gt
 nnoremap <leader>h :tabm -1<CR>
 nnoremap <leader>l :tabm +1<CR>
 nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR>
+
+" Save session
+nnoremap <leader>s :mksession! session.vim<CR>
+
 " Convenience
 nnoremap <leader>= mzgg=G`z:retab<CR>
 " Remove trailing whitespace, Unicode (non-ASCII) characters, tabs
