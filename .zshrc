@@ -7,6 +7,8 @@ unsetopt autocd beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 
+alias ls='ls --color=auto'
+
 # Avoid slowdown when completing git files
 __git_files () { 
     _wanted files expl 'local files' _files     
