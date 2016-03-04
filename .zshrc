@@ -26,8 +26,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-RPROMPT="%B%~%b"
-PROMPT="→ "
+autoload -U colors && colors
+RPROMPT="%{$fg[cyan]%}%B%~%b%{$reset_color%}"
+PROMPT="%{$fg[red]%}→ %{$reset_color%}"
 
 bindkey -e
 bindkey "^[[3~" delete-char # Delete key
