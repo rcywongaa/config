@@ -2,6 +2,9 @@
 !.vim/
 !.vim/*
 !.vim/*/*
+!.vim/*/*/*
+!.vim/*/*/*/*
 !.vimrc
 !.zshrc
+!.tmux.conf
 !.gitignore
