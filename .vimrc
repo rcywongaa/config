@@ -50,12 +50,15 @@ nnoremap <C-L> zll
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
+noremap s <nop>
 nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
-nnoremap <leader>j J
+nnoremap <leader>J J
 nnoremap <leader><CR> i<CR><Esc>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
+noremap * *N
 " Search from clipboard
 nnoremap <leader>/ /<C-R>+
 " Search for visually selected text
@@ -102,7 +105,7 @@ nnoremap J <nop>
 nnoremap K <nop>
 nnoremap <leader>h :tabm -1<CR>
 nnoremap <leader>l :tabm +1<CR>
-nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR>
+nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR>:e %<CR>
 
 " Save session
 map <F2> :mksession session.vim<CR>
