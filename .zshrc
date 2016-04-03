@@ -3,18 +3,19 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
 setopt appendhistory sharehistory nomatch notify HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
-unsetopt autocd beep
+unsetopt autocd beep correct
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 
 alias ls='ls --color=auto'
 
 # Avoid slowdown when completing git files
-__git_files () { 
-    _wanted files expl 'local files' _files     
+__git_files () {
+    _wanted files expl 'local files' _files
 }
 
-zstyle ':completion:*' completer _complete _ignored 
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*:*:ps:*' ignored-patterns '*'
 zstyle ':completion:*' insert-unambiguous true
 zstyle :compinstall filename '/home/rwong/.zshrc'
 # Disable hostname completion
@@ -35,7 +36,7 @@ bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
-IGNORE=("tar" "make" "gitk" "yum")
+IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps")
 
 shouldTrim=1
 #Refer to http://mimosa-pudica.net/src/incr-0.2.zsh
@@ -52,7 +53,7 @@ trim_list(){
 #Handle ignore list for auto-complete
 function shouldComplete
 {
-    if [[ ${(w)#BUFFER} -gt 1 ]]; then
+    if [[ ${(w)#BUFFER} -gt 2 ]]; then
         for ignore in "${IGNORE[@]}"; do
             buffer=(${=BUFFER})
             if [[ "${buffer[1]}" == "${ignore}" || ("${buffer[1]}" == "sudo" && "${buffer[2]}" == "${ignore}") ]]; then
