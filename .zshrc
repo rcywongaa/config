@@ -36,7 +36,7 @@ bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
-IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps")
+IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps" "git")
 
 shouldTrim=1
 #Refer to http://mimosa-pudica.net/src/incr-0.2.zsh

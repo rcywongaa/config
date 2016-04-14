@@ -73,14 +73,14 @@ vnoremap // y/<C-R>"<CR>
 " Unhighlight
 nnoremap // :noh<CR>
 " Copy to clipboard
-nnoremap <leader>y "*y
-nnoremap <leader>d "*d
-nnoremap <leader>p "*p
-nnoremap <leader>P "*P
-vnoremap <leader>y "*y
-vnoremap <leader>d "*d
-vnoremap <leader>p "*p
-vnoremap <leader>P "*P
+nnoremap <leader>y "+y
+nnoremap <leader>d "+d
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>y "+y
+vnoremap <leader>d "+d
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 " Do not overwrite register
 nnoremap x "_x
 nnoremap D "_d
@@ -112,7 +112,7 @@ nnoremap H 20h
 nnoremap L 20l
 nnoremap <leader>h :tabm -1<CR>
 nnoremap <leader>l :tabm +1<CR>
-nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR>:e %<CR>
+nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR><C-W>=<CR>:e %<CR>
 
 " Save session
 map <F2> :mksession session.vim<CR>
@@ -146,5 +146,4 @@ endif
 :set laststatus=2
 :set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
-" Automatically resize
-:autocmd VimResized * ^W=
+:set undolevels=5000
