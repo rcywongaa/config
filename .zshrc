@@ -29,7 +29,7 @@ compinit
 
 autoload -U colors && colors
 RPROMPT="%{$fg[cyan]%}%B%~%b%{$reset_color%}"
-PROMPT="%{$fg[red]%}→ %{$reset_color%}"
+PROMPT="%B%{$fg[black]%}=%{$fg[red]%}=%{$fg[yellow]%}=%{$fg[green]%}=%{$fg[cyan]%}=%{$fg[blue]%}=%{$fg[magenta]%}=%{$fg[white]%}> %{$reset_color%}%b"
 
 bindkey -e
 bindkey "^[[3~" delete-char # Delete key
@@ -53,6 +53,9 @@ trim_list(){
 #Handle ignore list for auto-complete
 function shouldComplete
 {
+    if [[ ${#BUFFER} -lt 2 ]]; then
+        return 0
+    fi
     if [[ ${(w)#BUFFER} -gt 2 ]]; then
         for ignore in "${IGNORE[@]}"; do
             buffer=(${=BUFFER})
@@ -138,16 +141,5 @@ zle -N magic-space
 zle -N backward-delete-char
 zle -N expand-or-complete
 zle -N insert-last-word
-
-precmd () { print -Pn "\e]2;%n@%M | %~\a" }
-chpwd() {
-    [[ -t 1 ]] || return
-    case $TERM in
-        sun-cmd) print -Pn "\e]l%~\e\\"
-        ;;
-        *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
-        ;;
-    esac
-}
 
 #TODO: Hint for ..

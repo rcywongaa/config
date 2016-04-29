@@ -35,6 +35,9 @@ filetype plugin indent on    " required
 " Auto block comments
 :set formatoptions=ro
 
+:set ttyfast
+:set lazyredraw
+
 :set t_Co=256
 :colorscheme koehler
 :set relativenumber
@@ -48,6 +51,8 @@ inoremap jk <Esc>l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
+nnoremap zl 10zl
+nnoremap zh 10zh
 
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
@@ -81,6 +86,9 @@ vnoremap <leader>y "+y
 vnoremap <leader>d "+d
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+" Yank line paste inline
+nnoremap dl ^d$
+nnoremap yl ^y$
 " Do not overwrite register
 nnoremap x "_x
 nnoremap D "_d
@@ -108,10 +116,11 @@ nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 nnoremap J gT
 nnoremap K gt
-nnoremap H 20h
-nnoremap L 20l
 nnoremap <leader>h :tabm -1<CR>
 nnoremap <leader>l :tabm +1<CR>
+" Moving between cursorcolumns
+noremap H 20h
+noremap L 20l
 nnoremap <leader><leader> :mapclear<CR>:source $MYVIMRC<CR><C-W>=<CR>:e %<CR>
 
 " Save session
@@ -136,13 +145,13 @@ endif
 
 " Navigation guides
 :set colorcolumn=20,40,60,80,100,120,140,160
-:hi ColorColumn guibg=#000000 ctermbg=Black
-:hi CursorLine guibg=#000000 cterm=NONE ctermbg=Black
-:hi CursorColumn guibg=#000000 cterm=NONE ctermbg=Black
+:hi ColorColumn ctermbg=Black
+:hi CursorLine cterm=NONE ctermbg=Black
+:hi CursorColumn cterm=NONE ctermbg=Black
 :set cursorline
 ":set cursorcolumn
 
-:hi StatusLine ctermbg=Red
+:hi StatusLine ctermbg=Blue
 :set laststatus=2
 :set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
