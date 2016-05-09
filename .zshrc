@@ -1,3 +1,5 @@
+# Disable Ctrl-S freeze
+stty -ixon
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=5000
