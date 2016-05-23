@@ -35,6 +35,9 @@ filetype plugin indent on " required
 " Auto block comments
 :set formatoptions-=o formatoptions-=r
 
+" Free cursor movement
+:set virtualedit=all
+
 :set ttyfast
 :set lazyredraw
 
@@ -54,8 +57,8 @@ inoremap jk <Esc>l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
-nnoremap zl 10zl
-nnoremap zh 10zh
+noremap zl 10zl
+noremap zh 10zh
 
 " Split navigation
 nnoremap <C-J> <C-W>j
@@ -63,6 +66,7 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
 :ca rvsp botright vsp
+:ca bsp rightbelow sp
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
@@ -74,12 +78,12 @@ nnoremap <leader><CR> i<CR><Esc>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
-noremap * *Nzz
+nnoremap * *Nzz
 nnoremap <leader>* *N:vsp<CR><C-W>l
 " Search from clipboard
 nnoremap <leader>/ /<C-R>+
 " Search for visually selected text
-vnoremap // y/<C-R>"<CR>
+vnoremap * y/<C-R>"<CR>
 " Search for bad whitespace
 nnoremap <leader>$ /[ ]\+$<CR>``zz
 " Unhighlight
@@ -121,6 +125,12 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
+nnoremap <leader>10 10gt
+nnoremap <leader>11 11gt
+nnoremap <leader>12 12gt
+nnoremap <leader>13 13gt
+nnoremap <leader>14 14gt
+nnoremap <leader>15 15gt
 nnoremap <F6> gT
 nnoremap <F7> gt
 nnoremap <F5> :tabm -1<CR>
@@ -186,6 +196,8 @@ nmap \ <Plug>(easymotion-overwin-f)
 
 
 
+" ShowOrig show original file
+command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
 
 " WatchForChanges
 " If you are using a console version of Vim, or dealing
@@ -398,3 +410,23 @@ if exists("+showtabline")
     set showtabline=1
     highlight link TabNum Special
 endif
+
+" Speed up loading large files
+" file is large from 10mb
+let g:LargeFile = 1024 * 1024 * 10
+augroup LargeFile 
+ autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+augroup END
+
+function! LargeFile()
+ " no syntax highlighting etc
+ set eventignore+=FileType
+ " save memory when other file is viewed
+ setlocal bufhidden=unload
+ " is read-only (write with :w new_filename)
+ setlocal buftype=nowrite
+ " no undo possible
+" setlocal undolevels=-1
+ " display message
+ autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
+endfunction

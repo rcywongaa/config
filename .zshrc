@@ -53,7 +53,8 @@ trim_list(){
 #Handle ignore list for auto-complete
 function shouldComplete
 {
-    if [[ ${#BUFFER} -lt 2 ]]; then
+    if [[ ${#BUFFER} -lt 2 || "${=BUFFER: -1}" == " " ]]; then
+        zle -M ""
         return 0
     fi
     if [[ ${(w)#BUFFER} -gt 2 ]]; then
