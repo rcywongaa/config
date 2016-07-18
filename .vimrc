@@ -80,6 +80,10 @@ nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
 nnoremap <leader>* *N:vsp<CR><C-W>l
+nnoremap N Nzz
+nnoremap n nzz
+nnoremap < <<
+nnoremap > >>
 " Search from clipboard
 nnoremap <leader>/ /<C-R>+
 " Search for visually selected text
@@ -132,17 +136,19 @@ nnoremap <leader>13 13gt
 nnoremap <leader>14 14gt
 nnoremap <leader>15 15gt
 nnoremap <F6> gT
+nnoremap [ gT
+nnoremap ] gt
 nnoremap <F7> gt
 nnoremap <F5> :tabm -1<CR>
 nnoremap <F8> :tabm +1<CR>
 " Moving between cursorcolumns
-noremap H 20h
-noremap L 20l
-noremap J 5h
-noremap K 5l
+noremap ; 20h
+noremap ' 20l
+noremap H 5h
+noremap L 5l
 
 " Reload
-nnoremap <leader><leader> :mapclear<CR>:tabdo windo source $MYVIMRC<CR><C-W>=<CR>:tabdo windo e %<CR>
+nnoremap <leader><leader> :mapclear<CR>:tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>
 :set autoread
 
 " Save session
