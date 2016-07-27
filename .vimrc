@@ -50,6 +50,9 @@ filetype plugin indent on " required
 :set nowrap
 :let mapleader = " "
 inoremap jk <Esc>l
+:hi TabLineFill ctermfg=Gray ctermbg=Black
+:hi TabLine ctermfg=White ctermbg=Black
+:hi TabLineSel ctermfg=Black ctermbg=White
 
 " Change directory to currently editing file
 :set autochdir
