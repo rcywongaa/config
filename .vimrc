@@ -85,8 +85,6 @@ nnoremap * *Nzz
 nnoremap <leader>* *N:vsp<CR><C-W>l
 nnoremap N Nzz
 nnoremap n nzz
-nnoremap < <<
-nnoremap > >>
 " Search from clipboard
 nnoremap <leader>/ /<C-R>+
 " Search for visually selected text
@@ -96,14 +94,14 @@ nnoremap <leader>$ /[ ]\+$<CR>``zz
 " Unhighlight
 nnoremap // :noh<CR>
 " Copy to clipboard
-nnoremap <leader>y "+y
-nnoremap <leader>d "+d
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>y "+y
-vnoremap <leader>d "+d
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nnoremap y "+y
+nnoremap d "+d
+nnoremap p "+p
+nnoremap P "+P
+vnoremap y "+y
+vnoremap d "+d
+vnoremap p "+p
+vnoremap P "+P
 " Yank line paste inline
 nnoremap dl ^d$
 nnoremap yl ^y$
@@ -154,10 +152,10 @@ noremap L 5l
 nnoremap <leader><leader> :mapclear<CR>:tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>
 :set autoread
 
-" Save session
-map <F2> :mksession session.vim<CR>
 " Load session
-map <F3> :source session.vim<CR>
+map <F2> :source session.vim<CR>
+" Save session
+map <F3> :mksession session.vim<CR>
 " Remove session
 map <F4> :!rm session.vim<CR>
 
