@@ -68,7 +68,9 @@ nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
-:ca rvsp botright vsp
+:ca lsp vsp
+:ca rsp botright vsp
+:ca tsp sp
 :ca bsp rightbelow sp
 
 nnoremap ZZ <nop>
