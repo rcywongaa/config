@@ -57,11 +57,14 @@ inoremap jk <Esc>l
 " Change directory to currently editing file
 :set autochdir
 
+" Match angle brackets
+:set matchpairs+=<:>
+
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
-noremap zl 10zl
-noremap zh 10zh
+noremap zl 20zl
+noremap zh 20zh
 
 " Split navigation
 nnoremap <C-J> <C-W>j
@@ -72,6 +75,7 @@ nnoremap <C-L> <C-W>l
 :ca rsp botright vsp
 :ca tsp sp
 :ca bsp rightbelow sp
+:ca cd cd %:h
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
@@ -80,7 +84,7 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
 nnoremap <leader><CR> i<CR><Esc>
-nnoremap <leader>w :w<CR>
+nnoremap <leader>w :%s/\ *$//g<CR>:noh<CR>:w<CR>``
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
@@ -120,8 +124,8 @@ nnoremap <leader>({ F(%r}``r{
 nnoremap d( F(%x``x
 nnoremap d[ F[%x``x
 nnoremap d{ F{%x``x
-" Comment line
-nnoremap <leader>% ^i%<Esc>
+nnoremap d< F<%x``x
+
 " Moving between tabs
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -141,6 +145,8 @@ nnoremap <leader>15 15gt
 nnoremap <F6> gT
 nnoremap [ gT
 nnoremap ] gt
+nnoremap { :tabm -1<CR>
+nnoremap } :tabm +1<CR>
 nnoremap <F7> gt
 nnoremap <F5> :tabm -1<CR>
 nnoremap <F8> :tabm +1<CR>
@@ -201,6 +207,10 @@ nmap \ <Plug>(easymotion-overwin-f)
 :set tags=./tags,tags;
 :let generate_tags=1
 :let ctags_statusline=1
+nnoremap <leader>] <C-]>
+nnoremap <leader>[ <C-t>
+nnoremap <leader>n :tn<CR>
+nnoremap <leader>p :tp<CR>
 
 
 
@@ -423,7 +433,7 @@ endif
 " Speed up loading large files
 " file is large from 10mb
 let g:LargeFile = 1024 * 1024 * 10
-augroup LargeFile 
+augroup LargeFile
  autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
 augroup END
 
