@@ -146,3 +146,6 @@ zle -N expand-or-complete
 zle -N insert-last-word
 
 #TODO: Hint for ..
+
+# Launch tmux on start
+if [ "$TMUX" = "" ]; then tmux; fi
