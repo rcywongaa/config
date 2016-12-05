@@ -125,6 +125,7 @@ nnoremap d( F(%x``x
 nnoremap d[ F[%x``x
 nnoremap d{ F{%x``x
 nnoremap d< F<%x``x
+nnoremap <leader>% [{
 
 " Moving between tabs
 nnoremap <leader>1 1gt
