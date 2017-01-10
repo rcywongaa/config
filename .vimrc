@@ -10,10 +10,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'kana/vim-smartword'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -31,6 +32,15 @@ filetype plugin indent on " required
 " "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Fix tmux arrow key mapping
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
 
 " Auto block comments
 :set formatoptions-=o formatoptions-=r
@@ -57,8 +67,46 @@ inoremap jk <Esc>l
 " Change directory to currently editing file
 :set autochdir
 
-" Match angle brackets
-:set matchpairs+=<:>
+
+
+
+
+"-------------------- Plugins --------------------
+" EasyMotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key
+" binding.
+" " `s{char}{label}`
+" nmap <leader>f <Plug>(easymotion-prefix)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+
+" NERDCommenter
+map <leader># <Plug>NERDCommenterToggle
+
+" ctags
+:set tags=./tags,tags;
+:let generate_tags=1
+:let ctags_statusline=1
+nnoremap <leader>] <C-]>
+nnoremap <leader>[ <C-t>
+nnoremap <leader>n :tn<CR>
+nnoremap <leader>p :tp<CR>
+
+" smartword
+map W <Plug>(smartword-w)
+map B  <Plug>(smartword-b)
+map E  <Plug>(smartword-e)
+"-------------------- Plugins --------------------
+
+
+
+
 
 " Window Scrolling
 nnoremap <C-E> <C-E>j
@@ -77,6 +125,12 @@ nnoremap <C-L> <C-W>l
 :ca bsp rightbelow sp
 :ca cd cd %:h
 
+" Resize splits
+nnoremap <F9> :vertical resize -20<CR>
+nnoremap <F11> :res +10<CR>
+nnoremap <F10> :res -10<CR>
+nnoremap <F12> :vertical resize +20<CR>
+
 nnoremap ZZ <nop>
 nnoremap J <nop>
 noremap s <nop>
@@ -84,7 +138,7 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
 nnoremap <leader><CR> i<CR><Esc>
-nnoremap <leader>w :%s/\ *$//g<CR>:noh<CR>:w<CR>``
+nnoremap <leader>w :%s/\ *$//g<CR>:noh<CR>:w<CR>``zz
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
@@ -114,17 +168,21 @@ nnoremap yl ^y$
 " Do not overwrite register
 noremap x "_x
 noremap D "_d
+" Move to brackets
+noremap ( F(
+noremap ) f)
+noremap { F{
+noremap } f}
+noremap [ F[
+noremap ] f]
 " Replace brackets
-nnoremap <leader>{[ F{%r]``r[
-nnoremap <leader>{( F{%r)``r(
-nnoremap <leader>[{ F[%r}``r{
-nnoremap <leader>[( F[%r)``r(
-nnoremap <leader>([ F(%r]``r[
-nnoremap <leader>({ F(%r}``r{
+nnoremap r[ %r]``r[
+nnoremap r( %r)``r(
+nnoremap r{ %r}``r{
 nnoremap d( F(%x``x
 nnoremap d[ F[%x``x
 nnoremap d{ F{%x``x
-nnoremap d< F<%x``x
+nnoremap d" F"xf"x
 nnoremap <leader>% [{
 
 " Moving between tabs
@@ -137,36 +195,28 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
-nnoremap <leader>10 10gt
-nnoremap <leader>11 11gt
-nnoremap <leader>12 12gt
-nnoremap <leader>13 13gt
-nnoremap <leader>14 14gt
-nnoremap <leader>15 15gt
 nnoremap <F6> gT
-nnoremap [ gT
-nnoremap ] gt
-nnoremap { :tabm -1<CR>
-nnoremap } :tabm +1<CR>
+nnoremap - gT
+nnoremap = gt
+nnoremap _ :tabm -1<CR>
+nnoremap + :tabm +1<CR>
 nnoremap <F7> gt
 nnoremap <F5> :tabm -1<CR>
 nnoremap <F8> :tabm +1<CR>
 " Moving between cursorcolumns
-noremap ; 20h
-noremap ' 20l
-noremap H 5h
-noremap L 5l
+noremap H 20h
+noremap L 20l
 
+" Next / Previous find command
+nnoremap ; ,
+nnoremap ' ;
+
+" Move through changelist instead of jumplist
+nnoremap <C-I> g,
+nnoremap <C-O> g;
 " Reload
-nnoremap <leader><leader> :mapclear<CR>:tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>
+nnoremap <leader><leader> :mapclear<CR>:tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
-
-" Load session
-map <F2> :source session.vim<CR>
-" Save session
-map <F3> :mksession session.vim<CR>
-" Remove session
-map <F4> :!rm session.vim<CR>
 
 " Remove trailing whitespace, Unicode (non-ASCII) characters, tabs, excess whitespace, whitespace before [,*]
 nnoremap <leader>r :%s/\s\+$//e<CR>:%s/[^[:alnum:][:punct:][:space:]]//gce<CR>:%s/\t/    /ge<CR>mzgg=G`z:retab<CR>:%s/\([^ ]\+\)[ ]\+\([^ ]\)/\1 \2/g<CR>:%s/ \([,]\)/\1/g<CR>
@@ -182,10 +232,10 @@ endif
 :set softtabstop=4
 
 " Navigation guides
-:set colorcolumn=20,40,60,80,100,120,140,160
-:hi ColorColumn ctermbg=Black
+":set colorcolumn=20,40,60,80,100,120,140,160
+":hi ColorColumn ctermbg=Black
 :hi CursorLine cterm=NONE ctermbg=Black
-:hi CursorColumn cterm=NONE ctermbg=Black
+":hi CursorColumn cterm=NONE ctermbg=Black
 :set cursorline
 ":set cursorcolumn
 
@@ -193,25 +243,11 @@ endif
 :set laststatus=2
 :set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
+" Undo tree navigation
 :set undolevels=5000
+nnoremap <C-Left> 10g-
+nnoremap <C-Right> 10g+
 
-" EasyMotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key
-" binding.
-" " `s{char}{label}`
-" nmap \ <Plug>(easymotion-prefix)
-nmap \ <Plug>(easymotion-overwin-f)
-
-" ctags
-:set tags=./tags,tags;
-:let generate_tags=1
-:let ctags_statusline=1
-nnoremap <leader>] <C-]>
-nnoremap <leader>[ <C-t>
-nnoremap <leader>n :tn<CR>
-nnoremap <leader>p :tp<CR>
 
 
 
