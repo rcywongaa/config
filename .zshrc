@@ -31,7 +31,7 @@ compinit
 
 autoload -U colors && colors
 RPROMPT="%{$fg[cyan]%}%B%~%b%{$reset_color%}"
-PROMPT="%B%{$fg[black]%}=%{$fg[red]%}=%{$fg[yellow]%}=%{$fg[green]%}=%{$fg[cyan]%}=%{$fg[blue]%}=%{$fg[magenta]%}=%{$fg[white]%}> %{$reset_color%}%b"
+PROMPT="%B%{$fg[red]%}=%{$fg[yellow]%}=%{$fg[green]%}=%{$fg[cyan]%}=%{$fg[blue]%}=%{$fg[magenta]%}=%{$fg[black]%}> %{$reset_color%}%b"
 
 bindkey -e
 bindkey "^[[3~" delete-char # Delete key
@@ -149,3 +149,6 @@ zle -N insert-last-word
 
 # Launch tmux on start
 if [ "$TMUX" = "" ]; then tmux; fi
+
+# Anaconda
+export PATH="/home/rufus/anaconda3/bin:$PATH"

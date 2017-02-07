@@ -19,6 +19,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-smartword'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -64,11 +65,6 @@ endif
 :set nowrap
 :let mapleader = " "
 :set cursorline
-inoremap jk <Esc>l
-inoremap <C-H> <Esc>ldbi
-inoremap <C-L> <Esc>ldwi
-inoremap <C-J> <Esc>ld$i
-inoremap <C-K> <Esc>ld^i
 
 " Change directory to currently editing file
 :set autochdir
@@ -89,11 +85,15 @@ map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
 map T <Plug>(easymotion-Tl)
+map <leader>f <Plug>(easymotion-f2)
+map <leader>F <Plug>(easyomtion-F2)
+map <leader>t <Plug>(easyomtion-t2)
+map <leader>T <Plug>(easymotion-T2)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
 " NERDCommenter
-map <leader># <Plug>NERDCommenterToggle
+map # <Plug>NERDCommenterToggle
 
 " ctags
 :set tags=./tags,tags;
@@ -116,7 +116,22 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 :set laststatus=2
-"-------------------- Plugins --------------------
+:set noshowmode
+:set noshowcmd
+"----------------------------------------
+
+
+
+
+
+"------------------- Insert Mode --------------------
+inoremap jk <Esc>l
+inoremap <C-H> <Esc>ldbi
+inoremap <C-L> <Esc>ldwi
+inoremap <C-J> <Esc>ld$i
+inoremap <C-K> <Esc>ld^i
+inoremap <C-P> <C-R>+
+"----------------------------------------
 
 
 
@@ -133,6 +148,7 @@ nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
+nnoremap <C-=> <C-W>=
 :ca lsp vsp
 :ca rsp botright vsp
 :ca tsp sp
@@ -152,10 +168,11 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
 nnoremap <leader><CR> i<CR><Esc>
-nnoremap <leader>w :%s/\ *$//g<CR>:noh<CR>:w<CR>``zz
+nnoremap <leader>w :w<CR>zz
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
+" start in new split
 nnoremap <leader>* *N:vsp<CR><C-W>l
 nnoremap N Nzz
 nnoremap n nzz
@@ -233,7 +250,9 @@ nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:ta
 :set autoread
 
 " Remove trailing whitespace, Unicode (non-ASCII) characters, tabs, excess whitespace, whitespace before [,*]
-nnoremap <leader>r :%s/\s\+$//e<CR>:%s/[^[:alnum:][:punct:][:space:]]//gce<CR>:%s/\t/    /ge<CR>mzgg=G`z:retab<CR>:%s/\([^ ]\+\)[ ]\+\([^ ]\)/\1 \2/g<CR>:%s/ \([,]\)/\1/g<CR>
+nnoremap <leader>r :%s/\s\+$//e<CR>:%s/[^[:alnum:][:punct:][:space:]]//gce<CR>:%s/\t/    /ge<CR>:%s/\([^ ]\+\)[ ]\+\([^ ]\)/\1 \2/g<CR>:%s/ \([,]\)/\1/g<CR>
+" Retab
+nnoremap <leader><TAB> mzgg=G`z:retab<CR>
 " Open at last edit position
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
