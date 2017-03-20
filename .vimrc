@@ -14,7 +14,6 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
@@ -57,7 +56,7 @@ endif
 :set lazyredraw
 
 :set t_Co=256
-:colorscheme zenburn "bubblegum kolor zenburn jellybeans
+:colorscheme Tomorrow-Night "bubblegum kolor zenburn jellybeans Tomorrow-Night
 :set relativenumber
 :set hlsearch
 :set incsearch
@@ -168,7 +167,7 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
 nnoremap <leader><CR> i<CR><Esc>
-nnoremap <leader>w :w<CR>zz
+nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
@@ -214,6 +213,7 @@ nnoremap d( F(%x``x
 nnoremap d[ F[%x``x
 nnoremap d{ F{%x``x
 nnoremap d" F"xf"x
+nnoremap d' F'xf'x
 nnoremap <leader>% [{
 
 " Moving between tabs
@@ -271,3 +271,13 @@ nnoremap <C-Right> 10g+
 
 " ShowOrig show original file
 command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
+
+" Always sync syntax
+autocmd BufEnter * :syntax sync fromstart
+
+" Remove cursor if out of focus
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
+augroup END
