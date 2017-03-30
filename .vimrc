@@ -281,3 +281,6 @@ augroup BgHighlight
     autocmd WinEnter * set cul
     autocmd WinLeave * set nocul
 augroup END
+"
+" Do not clear clipboard on close
+autocmd VimLeave * call system("xsel -ib", getreg('+'))

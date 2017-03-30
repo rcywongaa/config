@@ -150,5 +150,4 @@ zle -N insert-last-word
 # Launch tmux on start
 if [ "$TMUX" = "" ]; then tmux; fi
 
-# Anaconda
-export PATH="/home/rufus/anaconda3/bin:$PATH"
+alias vim='gvim -v'
