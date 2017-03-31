@@ -11,7 +11,11 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugin 'scrooloose/syntastic'
-" Plugin 'tpope/vim-fugitive'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-obsession'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
@@ -19,6 +23,8 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-smartword'
 Plugin 'mileszs/ack.vim'
+"Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -117,6 +123,27 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 :set laststatus=2
 :set noshowmode
 :set noshowcmd
+
+" vim-tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
+
+" vim-obsession
+autocmd VimEnter * Obsess .
+ca QA :Obsess!<CR>:qa<CR>
+
+" IndentLine
+"let g:indentLine_char = '⦙'
+"let g:indentLine_enabled = 1
+"let g:indentLine_setColors = 1
+"let g:indentLine_color_gui = '#000000'
+"let g:indentLine_color_term = 25
+
+" vim-indent-guides
+"let g:indent_guides_auto_colors = 0
+":hi IndentGuidesOdd  ctermbg=234
+":hi IndentGuidesEven ctermbg=233
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_default_mapping = 0
 "----------------------------------------
 
 
@@ -226,14 +253,10 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
-nnoremap <F6> gT
 nnoremap - gT
 nnoremap = gt
 nnoremap _ :tabm -1<CR>
 nnoremap + :tabm +1<CR>
-nnoremap <F7> gt
-nnoremap <F5> :tabm -1<CR>
-nnoremap <F8> :tabm +1<CR>
 " Moving between cursorcolumns
 noremap H 20h
 noremap L 20l
