@@ -307,3 +307,16 @@ augroup END
 "
 " Do not clear clipboard on close
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
+
+autocmd FocusLost * call MyFocusLost()
+autocmd FocusGained * call MyFocusGained()
+function! MyFocusLost()
+    colorscheme 256_noir
+    "highlight Normal ctermbg=232
+    AirlineRefresh
+endfunction
+function! MyFocusGained()
+    colorscheme Tomorrow-Night
+    "highlight Normal ctermbg=0
+    AirlineRefresh
+endfunction
