@@ -156,7 +156,7 @@ inoremap <C-H> <Esc>ldbi
 inoremap <C-L> <Esc>ldwi
 inoremap <C-J> <Esc>ld$i
 inoremap <C-K> <Esc>ld^i
-inoremap <C-P> <C-R>+
+"inoremap <C-P> <C-R>+
 "----------------------------------------
 
 
