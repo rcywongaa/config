@@ -311,12 +311,14 @@ autocmd VimLeave * call system("xsel -ib", getreg('+'))
 autocmd FocusLost * call MyFocusLost()
 autocmd FocusGained * call MyFocusGained()
 function! MyFocusLost()
-    colorscheme 256_noir
+    "colorscheme monochrome
     "highlight Normal ctermbg=232
-    AirlineRefresh
+    "AirlineRefresh
+    set nocul
 endfunction
 function! MyFocusGained()
-    colorscheme Tomorrow-Night
+    "colorscheme Tomorrow-Night
     "highlight Normal ctermbg=0
-    AirlineRefresh
+    "AirlineRefresh
+    set cul
 endfunction
