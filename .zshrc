@@ -36,7 +36,11 @@ PROMPT="%B%{$fg[red]%}=%{$fg[yellow]%}=%{$fg[green]%}=%{$fg[cyan]%}=%{$fg[blue]%
 bindkey -e
 bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[7~" beginning-of-line
 bindkey "^[[F" end-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[8~" end-of-line
 
 IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps" "git" "zypper")
 
