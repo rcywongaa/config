@@ -163,6 +163,7 @@ inoremap <C-K> <Esc>ld^i
 
 
 
+nnoremap $ $l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
@@ -220,8 +221,8 @@ vnoremap d "+d
 vnoremap p "+p
 vnoremap P "+P
 " Yank line paste inline
-nnoremap dl ^d$
-nnoremap yl ^y$
+nnoremap dl ^"+d$
+nnoremap yl ^"+y$
 " Do not overwrite register
 noremap x "_x
 noremap D "_d
