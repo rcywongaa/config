@@ -86,14 +86,14 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " binding.
 " " `s{char}{label}`
 " nmap <leader>f <Plug>(easymotion-prefix)
-map f <Plug>(easymotion-fl)
-map F <Plug>(easymotion-Fl)
-map t <Plug>(easymotion-tl)
-map T <Plug>(easymotion-Tl)
-map <leader>f <Plug>(easymotion-f2)
-map <leader>F <Plug>(easyomtion-F2)
-map <leader>t <Plug>(easyomtion-t2)
-map <leader>T <Plug>(easymotion-T2)
+map f <Plug>(easymotion-bd-fl)
+noremap F f
+map t <Plug>(easymotion-bd-tl)
+noremap T t
+map <leader>f <Plug>(easymotion-bd-f2)
+"map <leader>F <Plug>(easyomtion-F2)
+map <leader>t <Plug>(easyomtion-bd-t2)
+"map <leader>T <Plug>(easymotion-T2)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
@@ -101,6 +101,7 @@ map <leader>k <Plug>(easymotion-k)
 map # <Plug>NERDCommenterToggle
 
 " ctags
+":ca ctags !ctags -R .
 :set tags=./tags,tags;
 :let generate_tags=1
 :let ctags_statusline=1
