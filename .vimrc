@@ -15,7 +15,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-obsession'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+"Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
