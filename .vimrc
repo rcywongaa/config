@@ -192,10 +192,10 @@ nnoremap <C-=> <C-W>=
 :ca cd cd %:h
 
 " Resize splits
-nnoremap <F9> :vertical resize -20<CR>
-nnoremap <F11> :res +10<CR>
-nnoremap <F10> :res -10<CR>
-nnoremap <F12> :vertical resize +20<CR>
+nnoremap <F1> :vertical resize -20<CR>
+nnoremap <F2> :res +10<CR>
+nnoremap <F3> :res -10<CR>
+nnoremap <F4> :vertical resize +20<CR>
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
