@@ -14,7 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-obsession' " Automatic session tracking
 "Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -23,6 +23,9 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-smartword'
 Plugin 'mileszs/ack.vim'
+Plugin 'brookhong/cscope.vim'
+Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
+Plugin 'MattesGroeger/vim-bookmarks'
 "Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'Yggdroot/indentLine'
 
@@ -72,7 +75,7 @@ endif
 :set cursorline
 
 " Change directory to currently editing file
-:set autochdir
+":set autochdir
 
 
 
@@ -101,14 +104,36 @@ map <leader>k <Plug>(easymotion-k)
 map # <Plug>NERDCommenterToggle
 
 " ctags
-":ca ctags !ctags -R .
+:ca ctags !ctags -R .
 :set tags=./tags,tags;
 :let generate_tags=1
 :let ctags_statusline=1
 nnoremap <leader>] <C-]>
 nnoremap <leader>[ <C-t>
+nnoremap <silent><leader>} <C-w><C-]><C-w>T
+nnoremap <silent><leader>{ <C-w><C-t><C-w>T
 nnoremap <leader>n :tn<CR>
 nnoremap <leader>p :tp<CR>
+
+" cscope
+" s: Find this C symbol
+" nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+" nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+" nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+" nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+" nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+" nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+" nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+" nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+"nnoremap  c[ :call CscopeFind('c', expand('<cword>'))<CR>
+":ca cscope !~/cscope_gen.sh
 
 " smartword
 map W <Plug>(smartword-w)
@@ -137,8 +162,11 @@ let g:airline_section_y = ''
 let g:tmux_navigator_disable_when_zoomed = 1
 
 " vim-obsession
-autocmd VimEnter * Obsess .
-ca QA :Obsess!<CR>:qa<CR>
+"autocmd VimEnter * Obsess .
+ca ss :Obsess .<CR>
+
+" Fswitch
+nmap <silent> <Tab> :FSHere<cr>
 
 " IndentLine
 "let g:indentLine_char = '⦙'
@@ -153,6 +181,7 @@ ca QA :Obsess!<CR>:qa<CR>
 ":hi IndentGuidesEven ctermbg=233
 "let g:indent_guides_enable_on_vim_startup = 1
 "let g:indent_guides_default_mapping = 0
+
 "----------------------------------------
 
 
@@ -185,6 +214,8 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
 nnoremap <C-=> <C-W>=
+nnoremap ;sp :vsp<CR><C-W>l
+nnoremap ;ta :vsp<CR><C-W>T
 :ca lsp vsp
 :ca rsp botright vsp
 :ca tsp sp
@@ -208,8 +239,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
-" start in new split
-nnoremap <leader>* *N:vsp<CR><C-W>l
+nnoremap <leader>* *Nyw:!ack -r <C-R>"<CR>
 nnoremap N Nzz
 nnoremap n nzz
 " Search from clipboard
@@ -235,6 +265,7 @@ nnoremap yl ^"+y$
 " Do not overwrite register
 noremap x "_x
 noremap D "_d
+
 " Move to brackets
 noremap ( F(
 noremap ) f)
@@ -272,12 +303,14 @@ noremap H 20h
 noremap L 20l
 
 " Next / Previous find command
-nnoremap ; ,
-nnoremap ' ;
+"nnoremap ; ,
+"nnoremap ' ;
 
+" Move current pane to new window
+nnoremap <leader>t <C-w>T
 " Move through changelist instead of jumplist
-nnoremap <C-I> g,
-nnoremap <C-O> g;
+"nnoremap <C-I> g,
+"nnoremap <C-O> g;
 " Reload
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
@@ -301,6 +334,9 @@ endif
 :set undolevels=5000
 nnoremap <C-Left> 10g-
 nnoremap <C-Right> 10g+
+
+" :tabnew and :Explore
+:ca tabexp :tabnew<CR>:Explore<CR>
 
 " ShowOrig show original file
 command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
