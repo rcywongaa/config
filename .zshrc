@@ -42,7 +42,7 @@ bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[8~" end-of-line
 
-IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps" "git" "zypper")
+IGNORE=("tar" "make" "gitk" "yum" "apt-get" "ps" "git" "zypper" "ssh" "scp")
 
 shouldTrim=1
 #Refer to http://mimosa-pudica.net/src/incr-0.2.zsh
@@ -155,3 +155,4 @@ zle -N insert-last-word
 if [ "$TMUX" = "" ]; then tmux; fi
 
 alias vim='gvim -v'
+alias cgrep='grep -r --include="*.cpp" --include="*.h"'
