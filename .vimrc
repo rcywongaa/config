@@ -223,10 +223,10 @@ nnoremap ;ta :vsp<CR><C-W>T
 :ca cd cd %:h
 
 " Resize splits
-nnoremap <F1> :vertical resize -20<CR>
-nnoremap <F2> :res +10<CR>
-nnoremap <F3> :res -10<CR>
-nnoremap <F4> :vertical resize +20<CR>
+nnoremap <S-F1> :vertical resize -20<CR>
+nnoremap <S-F2> :res +10<CR>
+nnoremap <S-F3> :res -10<CR>
+nnoremap <S-F4> :vertical resize +20<CR>
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
