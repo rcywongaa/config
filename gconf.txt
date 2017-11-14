@@ -1,0 +1,33 @@
+[/]
+enabled-extensions=['clipboard-indicator@tudmotu.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-grid@mathematical.coffee.gmail.com', 'hidetopbar@mathieu.bidon.ca', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com']
+favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop']
+
+[extensions/dash-to-dock]
+apply-custom-theme=true
+show-windows-preview=false
+dock-fixed=false
+intellihide=false
+isolate-workspaces=true
+intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+show-show-apps-button=false
+
+[extensions/workspace-grid]
+wraparound=true
+wrap-to-same=true
+
+[extensions/app-keys]
+cycle-windows-active=true
+
+[extensions/hidetopbar]
+enable-active-window=false
+mouse-sensitive=true
+enable-intellihide=false
+
+[window-switcher]
+app-icon-mode='both'
+
+[overrides]
+dynamic-workspaces=false
+
+[app-switcher]
+current-workspace-only=true
