@@ -23,7 +23,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kana/vim-smartword'
 Plugin 'mileszs/ack.vim'
-Plugin 'brookhong/cscope.vim'
+"Plugin 'brookhong/cscope.vim'
 Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
 Plugin 'MattesGroeger/vim-bookmarks'
 "Plugin 'nathanaelkane/vim-indent-guides'
