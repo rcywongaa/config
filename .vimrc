@@ -338,6 +338,9 @@ nnoremap <C-Right> 10g+
 " :tabnew and :Explore
 :ca tabexp :tabnew<CR>:Explore<CR>
 
+" Open file under cursor
+nnoremap <leader><Enter> <c-w>gf
+
 " ShowOrig show original file
 command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
 
