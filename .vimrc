@@ -189,7 +189,7 @@ nmap <silent> <Tab> :FSHere<cr>
 
 
 "------------------- Insert Mode --------------------
-inoremap jk <Esc>l
+inoremap jk <Esc>`^
 inoremap <C-H> <Esc>ldbi
 inoremap <C-L> <Esc>ldwi
 inoremap <C-J> <Esc>ld$i
@@ -308,6 +308,8 @@ noremap L 20l
 
 " Move current pane to new window
 nnoremap <leader>t <C-w>T
+" Duplicate current tab
+nnoremap <leader>d :tab split<CR>
 " Move through changelist instead of jumplist
 "nnoremap <C-I> g,
 "nnoremap <C-O> g;
