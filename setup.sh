@@ -7,7 +7,7 @@ echo "Updating..."
 sudo dnf -y update
 
 echo "Installing common packages..."
-sudo dnf -y install util-linux-user gvim zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla octave xournal ack mosh sshfs xsel
+sudo dnf -y install util-linux-user gvim zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla octave xournal ack mosh sshfs xsel ibus-cangjie
 
 echo "Installing google chrome..."
 echo "
