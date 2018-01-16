@@ -151,8 +151,8 @@ zle -N insert-last-word
 
 #TODO: Hint for ..
 
-# Launch tmux on start
-if [ "$TMUX" = "" ]; then tmux; fi
+# Launch tmux on start, randomize session name so tmux resurrect works
+if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
 alias vim='gvim -v'
 alias cgrep='grep -r --include="*.cpp" --include="*.h"'
