@@ -220,7 +220,7 @@ nnoremap ;ta :vsp<CR><C-W>T
 :ca rsp botright vsp
 :ca tsp sp
 :ca bsp rightbelow sp
-:ca cd cd %:h
+:ca cd. cd %:h
 
 " Resize splits
 nnoremap <S-F1> :vertical resize -20<CR>
