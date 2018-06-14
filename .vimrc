@@ -185,7 +185,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 ca ss :Obsess .<CR>
 
 " Fswitch
-nmap <silent> <Tab> :FSHere<cr>
+nmap <silent> <S-TAB> :FSHere<cr>
 
 " IndentLine
 "let g:indentLine_char = '⦙'
