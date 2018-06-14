@@ -19,7 +19,7 @@ __git_files () {
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*:*:ps:*' ignored-patterns '*'
 zstyle ':completion:*' insert-unambiguous true
-zstyle :compinstall filename '/home/rwong/.zshrc'
+zstyle :compinstall filename '/home/rufus/.zshrc'
 # Disable hostname completion
 zstyle ':completion:*:(ssh|scp):hosts' hosts 'reply=()'
 zstyle -e ':completion:*' hosts 'reply=()'
@@ -49,5 +49,4 @@ bindkey "^[[8~" end-of-line
 # Launch tmux on start, randomize session name so tmux resurrect works
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
-alias vim='gvim -v'
 alias cgrep='grep -r --include="*.cpp" --include="*.h"'

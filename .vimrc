@@ -220,6 +220,8 @@ inoremap <C-K> <Esc>ld^i
 
 
 
+:ca cd. cd %:h
+
 nnoremap $ $l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
@@ -239,7 +241,6 @@ nnoremap ;ta :vsp<CR><C-W>T
 :ca rsp botright vsp
 :ca tsp sp
 :ca bsp rightbelow sp
-:ca cd. cd %:h
 
 " Resize splits
 nnoremap <S-F1> :vertical resize -20<CR>
