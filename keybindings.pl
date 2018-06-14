@@ -1,6 +1,10 @@
 #!/usr/bin/perl
 
 # Taken from https://askubuntu.com/questions/26056/where-are-gnome-keyboard-shortcuts-stored/217310
+# Dump keybindings:
+#   ./keybindings.pl -e /tmp/keys.csv
+# Restore keybindings:
+#   ./keybindings.pl -i /tmp/keys.csv
 
 use strict;
 

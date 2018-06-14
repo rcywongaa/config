@@ -59,7 +59,7 @@ gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 echo "Loading saved gnome configs..."
 ./keybindings.pl -i keybindings.csv
-dconf load /org/gnome/shell/ < gconf.txt
+dconf load /org/gnome/shell/ < dconf.txt
 
 echo "Done, please relog in"
 
