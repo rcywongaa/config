@@ -46,15 +46,34 @@ filetype plugin indent on " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Fix tmux arrow key mapping
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-endif
-
+execute "set <xUp>=\e[1;*A"
+execute "set <xDown>=\e[1;*B"
+execute "set <xRight>=\e[1;*C"
+execute "set <xLeft>=\e[1;*D"
+execute "set <xHome>=\e[1;*H"
+execute "set <xEnd>=\e[1;*F"
+execute "set <PageUp>=\e[5;*~"
+execute "set <PageDown>=\e[6;*~"
+execute "set <F1>=\eOP"
+execute "set <F2>=\eOQ"
+execute "set <F3>=\eOR"
+execute "set <F4>=\eOS"
+execute "set <S-F1>=\e[1;2P"
+execute "set <S-F2>=\e[1;2Q"
+execute "set <S-F3>=\e[1;2R"
+execute "set <S-F4>=\e[1;2S"
+execute "set <xF1>=\e1;*P"
+execute "set <xF2>=\e1;*Q"
+execute "set <xF3>=\e1;*R"
+execute "set <xF4>=\e1;*S"
+execute "set <F5>=\e[15;*~"
+execute "set <F6>=\e[17;*~"
+execute "set <F7>=\e[18;*~"
+execute "set <F8>=\e[19;*~"
+execute "set <F9>=\e[20;*~"
+execute "set <F10>=\e[21;*~"
+execute "set <F11>=\e[23;*~"
+execute "set <F12>=\e[24;*~"
 " Auto block comments
 :set formatoptions-=o formatoptions-=r
 
