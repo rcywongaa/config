@@ -48,11 +48,12 @@ echo "Installing tpm plugins..."
 echo "Grabbing gnome extensions..."
 sudo wget -P ~ "https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/ubuntugnome/gnomeshell-extension-manage"
 sudo chmod +x ~/gnomeshell-extension-manage
-~/gnomeshell-extension-manage --install --extension-id 779 --user
-~/gnomeshell-extension-manage --install --extension-id 10 --user
-~/gnomeshell-extension-manage --install --extension-id 307 --user
-~/gnomeshell-extension-manage --install --extension-id 484 --user
-~/gnomeshell-extension-manage --install --extension-id 545 --user
+~/gnomeshell-extension-manage --install --extension-id 779 --user # clipboard indicator
+~/gnomeshell-extension-manage --install --extension-id 10 --user # windowNavigator
+~/gnomeshell-extension-manage --install --extension-id 307 --user # Dash to Dock
+~/gnomeshell-extension-manage --install --extension-id 484 --user # worspace grid
+~/gnomeshell-extension-manage --install --extension-id 545 --user # hide top bar
+~/gnomeshell-extension-manage --install --extension-id 28 --user # gTile
 
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
