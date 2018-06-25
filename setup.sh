@@ -1,26 +1,43 @@
 #!/bin/bash
 
 echo "DO NOT RUN IN SUDO!"
-sleep 5
 
-echo "Updating..."
-sudo dnf -y update
+read distro
 
-echo "Installing common packages..."
-sudo dnf -y install util-linux-user gvim zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla octave xournal ack mosh sshfs xsel ibus-cangjie
+if [ $distro = "fedora" ]; then
+    echo "Updating..."
+    sudo dnf -y update
 
-echo "Installing google chrome..."
-echo "
-[google-chrome]
-name=google-chrome - \$basearch
-baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
-" | sudo tee /etc/yum.repos.d/google-chrome.repo
+    echo "Installing common packages..."
+    sudo dnf -y install util-linux-user gvim zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla octave xournal ack mosh sshfs xsel ibus-cangjie
 
-sudo dnf -y update
-sudo dnf -y install google-chrome-stable
+    echo "Installing google chrome..."
+    echo "
+    [google-chrome]
+    name=google-chrome - \$basearch
+    baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch
+    enabled=1
+    gpgcheck=1
+    gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+    " | sudo tee /etc/yum.repos.d/google-chrome.repo
+
+    sudo dnf -y update
+    sudo dnf -y install google-chrome-stable
+fi
+if [ $distro = "ubuntu" ]; then
+    echo "Updating..."
+    sudo apt -y update
+
+    echo "Installing common packages..."
+    sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie
+
+    echo "Installing google chrome..."
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+    sudo apt -y update
+    sudo apt -y install google-chrome-stable
+fi
 
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
@@ -48,12 +65,12 @@ echo "Installing tpm plugins..."
 echo "Grabbing gnome extensions..."
 sudo wget -P ~ "https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/ubuntugnome/gnomeshell-extension-manage"
 sudo chmod +x ~/gnomeshell-extension-manage
-~/gnomeshell-extension-manage --install --extension-id 779 --user # clipboard indicator
-~/gnomeshell-extension-manage --install --extension-id 10 --user # windowNavigator
-~/gnomeshell-extension-manage --install --extension-id 307 --user # Dash to Dock
-~/gnomeshell-extension-manage --install --extension-id 484 --user # worspace grid
-~/gnomeshell-extension-manage --install --extension-id 545 --user # hide top bar
-~/gnomeshell-extension-manage --install --extension-id 28 --user # gTile
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 779 --user # clipboard indicator
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 307 --user # Dash to Dock
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 484 --user # worspace grid
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
+~/gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
 
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
