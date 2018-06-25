@@ -62,6 +62,9 @@ echo "Loading saved gnome configs..."
 dconf load /org/gnome/shell/ < shell.dconf
 dconf load /org/gnome/terminal/ < terminal.dconf
 
-echo "Done, please relog in"
-
 #sudo systemctl start sshd.service
+
+git config --global user.email "rcywongaa@gmail.com"
+git config --global user.name "Rufus Wong"
+
+echo "Done, please relog in"
