@@ -1,6 +1,6 @@
 [/]
-enabled-extensions=['clipboard-indicator@tudmotu.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-grid@mathematical.coffee.gmail.com', 'hidetopbar@mathieu.bidon.ca', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com']
-favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop']
+enabled-extensions=['clipboard-indicator@tudmotu.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-grid@mathematical.coffee.gmail.com', 'hidetopbar@mathieu.bidon.ca', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'gTile@vibou']
+favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'org.gnome.Nautilus.desktop']
 
 [extensions/dash-to-dock]
 apply-custom-theme=true
@@ -11,8 +11,15 @@ isolate-workspaces=true
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
 show-show-apps-button=false
 
+[extensions/gtile]
+resize5='1x1 0:0 0:0'
+resize6='2x2 1:0 1:1'
+resize1='2x2 0:1 0:1'
+resize4='2x2 0:0 0:1'
+
 [extensions/workspace-grid]
 wraparound=true
+num-rows=3
 wrap-to-same=true
 
 [extensions/app-keys]
