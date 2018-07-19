@@ -29,9 +29,22 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Available colors:
+# black
+# red
+# green
+# yellow
+# blue
+# magenta
+# cyan
+# white
+
 autoload -U colors && colors
 RPROMPT="%{$fg[cyan]%}%B%~%b%{$reset_color%}"
-PROMPT="%B%{$fg[red]%}=%{$fg[yellow]%}=%{$fg[green]%}=%{$fg[cyan]%}=%{$fg[blue]%}=%{$fg[magenta]%}=%{$fg[black]%}> %{$reset_color%}%b"
+PROMPT="%{$fg[black]%}$%B%{$fg[yellow]%}>%b%{$fg[black]%}$%{$reset_color%}"
+
+setopt promptsubst
+PS1=%B%{$fg[blue]%}$'${(r:$COLUMNS::\u2501:)}'%{$reset_color%}%b$PS1
 
 bindkey -e
 bindkey "^[[3~" delete-char # Delete key
