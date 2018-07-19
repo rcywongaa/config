@@ -1,50 +1,27 @@
 #!/bin/bash
 
 echo "DO NOT RUN IN SUDO!"
+sleep 5
 
-read distro
+echo "Updating..."
+sudo apt -y update
 
-if [ $distro = "fedora" ]; then
-    echo "Updating..."
-    sudo dnf -y update
+echo "Installing common packages..."
+sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie
 
-    echo "Installing common packages..."
-    sudo dnf -y install util-linux-user gvim zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla octave xournal ack mosh sshfs xsel ibus-cangjie
+echo "Installing google chrome..."
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
-    echo "Installing google chrome..."
-    echo "
-    [google-chrome]
-    name=google-chrome - \$basearch
-    baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch
-    enabled=1
-    gpgcheck=1
-    gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
-    " | sudo tee /etc/yum.repos.d/google-chrome.repo
-
-    sudo dnf -y update
-    sudo dnf -y install google-chrome-stable
-fi
-if [ $distro = "ubuntu" ]; then
-    echo "Updating..."
-    sudo apt -y update
-
-    echo "Installing common packages..."
-    sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie
-
-    echo "Installing google chrome..."
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-    sudo apt -y update
-    sudo apt -y install google-chrome-stable
-fi
+sudo apt -y update
+sudo apt -y install google-chrome-stable
 
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
-echo "Grabbing customizations from github.com/rcywongaa/Customizations.git"
+echo "Grabbing customizations from github.com/rcywongaa/customizations.git"
 git init
-git remote add origin https://github.com/rcywongaa/Customizations.git
+git remote add origin https://github.com/rcywongaa/customizations.git
 git pull origin master
 
 echo "Cloning Vundle..."
