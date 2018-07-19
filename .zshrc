@@ -55,6 +55,29 @@ bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[8~" end-of-line
 
+word_pos=-1
+cmd_pos=-1
+word_count=0
+offset=1
+function insert-last-word
+{
+    zmodload -i zsh/parameter
+    zle .insert-last-word -- ${cmd_pos} ${word_pos}
+    buffer=${history[`expr $HISTNO - $offset`]}
+    word_count=${(w)#history[`expr $HISTNO - $offset`]}
+    word_pos=`expr "${word_pos}" - 1`
+    if [[ `expr 0 - $word_pos` -gt $word_count ]]; then
+        word_pos=-1
+        cmd_pos=-1
+        #while [[ ${history[`expr $HISTNO - $offset`]} == ${history[`expr $HISTNO - $offset - 1`]} ]]; do
+            offset=`expr "${offset}" + 1`
+        #done
+    else
+        cmd_pos=0
+    fi
+}
+zle -N insert-last-word
+
 #source ~/auto-list.zsh
 
 #TODO: Hint for ..
