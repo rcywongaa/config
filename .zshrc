@@ -86,6 +86,7 @@ zle -N insert-last-word
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
 alias cgrep='grep -r --include="*.cpp" --include="*.h"'
+alias cack='ack --type=cpp'
 
 # Install z directory jumper
 . ~/configs/z/z.sh
