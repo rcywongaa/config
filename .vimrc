@@ -28,7 +28,8 @@ Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
 Plugin 'MattesGroeger/vim-bookmarks'
 "Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'Yggdroot/indentLine'
-
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype plugin indent on " required
