@@ -49,12 +49,9 @@ sudo chmod +x ~/gnomeshell-extension-manage
 ~/gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
 ~/gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
 
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
-
 echo "Loading saved gnome configs..."
 ./keybindings.pl -i keybindings.csv
-dconf load /org/gnome/shell/ < shell.dconf
-dconf load /org/gnome/terminal/ < terminal.dconf
+dconf load /org/gnome/ < gnome.dconf
 
 #sudo systemctl start sshd.service
 
