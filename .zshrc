@@ -85,8 +85,8 @@ zle -N insert-last-word
 # Launch tmux on start, randomize session name so tmux resurrect works
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
-alias cgrep='grep -r --include="*.cpp" --include="*.h"'
-alias cack='ack --type=cpp'
+alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
+alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" | ack --files-from=- '
 
 # Install z directory jumper
 . ~/configs/z/z.sh
