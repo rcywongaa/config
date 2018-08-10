@@ -1,0 +1,309 @@
+[settings-daemon/plugins/power]
+power-button-action='suspend'
+button-hibernate='hibernate'
+button-sleep='suspend'
+button-power='interactive'
+button-suspend='suspend'
+sleep-inactive-ac-timeout=3600
+sleep-inactive-ac-type='nothing'
+
+[settings-daemon/plugins/media-keys]
+logout='<Control><Alt>Delete'
+screenreader='<Alt><Super>s'
+volume-mute='XF86AudioMute'
+volume-up='XF86AudioRaiseVolume'
+window-screenshot='<Alt>Print'
+control-center='XF86Tools'
+stop='XF86AudioStop'
+home='XF86Explorer'
+terminal='<Primary><Alt>t'
+screenshot-clip='<Ctrl>Print'
+previous='XF86AudioPrev'
+magnifier='<Alt><Super>8'
+help=''
+search='XF86Search'
+window-screenshot-clip='<Ctrl><Alt>Print'
+magnifier-zoom-in='<Alt><Super>equal'
+calculator='XF86Calculator'
+video-out='<Super>p'
+eject='XF86Eject'
+area-screenshot-clip='<Ctrl><Shift>Print'
+media='XF86AudioMedia'
+www='XF86WWW'
+play='XF86AudioPlay'
+email='XF86Mail'
+volume-down='XF86AudioLowerVolume'
+decrease-text-size=''
+on-screen-keyboard=''
+next='XF86AudioNext'
+screenshot='Print'
+increase-text-size=''
+magnifier-zoom-out='<Alt><Super>minus'
+screencast='<Ctrl><Shift><Alt>R'
+screensaver='<Super>l'
+toggle-contrast=''
+pause='XF86AudioPause'
+area-screenshot='<Shift>Print'
+
+[settings-daemon/plugins/xsettings]
+hinting='slight'
+
+[settings-daemon/peripherals/keyboard]
+numlock-state='on'
+
+[shell]
+enabled-extensions=['clipboard-indicator@tudmotu.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-grid@mathematical.coffee.gmail.com', 'hidetopbar@mathieu.bidon.ca', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'gTile@vibou']
+favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'arduino-arduinoide.desktop']
+
+[shell/extensions/dash-to-dock]
+shift-click-action='minimize'
+shift-middle-click-action='launch'
+show-windows-preview=false
+dock-fixed=false
+intellihide=false
+intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+show-show-apps-button=false
+apply-custom-theme=true
+middle-click-action='launch'
+isolate-workspaces=true
+
+[shell/extensions/gtile]
+resize1='2x2 0:1 0:1'
+preset-resize-1=['<Primary><Super>KP_1']
+preset-resize-2=['<Primary><Super>KP_2']
+preset-resize-3=['<Primary><Super>KP_3']
+preset-resize-4=['<Primary><Super>KP_4']
+preset-resize-5=['<Primary><Super>KP_5']
+preset-resize-6=['<Primary><Super>KP_6']
+preset-resize-7=['<Primary><Super>KP_7']
+preset-resize-8=['<Primary><Super>KP_8']
+preset-resize-9=['<Primary><Super>KP_9']
+resize4='2x2 0:0 0:1'
+resize5='1x1 0:0 0:0'
+resize6='2x2 1:0 1:1'
+preset-resize-11=['<Alt><Super>KP_1']
+preset-resize-12=['<Alt><Super>KP_2']
+preset-resize-13=['<Alt><Super>KP_3']
+preset-resize-14=['<Alt><Super>KP_4']
+preset-resize-15=['<Alt><Super>KP_5']
+preset-resize-16=['<Alt><Super>KP_6']
+preset-resize-17=['<Alt><Super>KP_7']
+preset-resize-18=['<Alt><Super>KP_8']
+preset-resize-19=['<Alt><Super>KP_9']
+
+[shell/extensions/workspace-grid]
+wraparound=true
+num-rows=3
+wrap-to-same=true
+
+[shell/extensions/app-keys]
+cycle-windows-active=true
+
+[shell/extensions/clipboard-indicator]
+notify-on-copy=false
+
+[shell/extensions/hidetopbar]
+enable-active-window=false
+mouse-sensitive=true
+enable-intellihide=false
+
+[shell/window-switcher]
+app-icon-mode='both'
+
+[shell/overrides]
+dynamic-workspaces=false
+
+[shell/app-switcher]
+current-workspace-only=true
+
+[nautilus/preferences]
+default-folder-viewer='icon-view'
+search-filter-time-type='last_modified'
+
+[nautilus/window-state]
+sidebar-width=196
+geometry='890x547+447+133'
+maximized=false
+
+[file-roller/listing]
+sort-method='name'
+name-column-width=250
+sort-type='ascending'
+list-mode='as-folder'
+show-path=false
+
+[file-roller/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[evolution-data-server]
+network-monitor-gio-name=''
+migrated=true
+
+[desktop/app-folders]
+folder-children=['Utilities', 'Sundry', 'YaST']
+
+[desktop/app-folders/folders/Utilities]
+translate=true
+categories=['X-GNOME-Utilities']
+apps=['org.gnome.baobab.desktop', 'deja-dup-preferences.desktop', 'eog.desktop', 'evince.desktop', 'org.gnome.FileRoller.desktop', 'gnome-calculator.desktop', 'gnome-dictionary.desktop', 'org.gnome.Characters.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Screenshot.desktop', 'gnome-system-log.desktop', 'gnome-system-monitor.desktop', 'gnome-tweak-tool.desktop', 'gucharmap.desktop', 'seahorse.desktop', 'vinagre.desktop', 'yelp.desktop']
+name='X-GNOME-Utilities.directory'
+
+[desktop/app-folders/folders/Sundry]
+translate=true
+categories=['X-GNOME-Sundry']
+apps=['alacarte.desktop', 'authconfig.desktop', 'ca.desrt.dconf-editor.desktop', 'fedora-release-notes.desktop', 'firewall-config.desktop', 'flash-player-properties.desktop', 'gconf-editor.desktop', 'gnome-abrt.desktop', 'gnome-power-statistics.desktop', 'ibus-setup-anthy.desktop', 'ibus-setup.desktop', 'ibus-setup-hangul.desktop', 'ibus-setup-libbopomofo.desktop', 'ibus-setup-libpinyin.desktop', 'ibus-setup-m17n.desktop', 'ibus-setup-typing-booster.desktop', 'im-chooser.desktop', 'itweb-settings.desktop', 'jhbuild.desktop', 'javaws.desktop', 'java-1.7.0-openjdk-jconsole.desktop', 'java-1.7.0-openjdk-policytool.desktop', 'log4j-chainsaw.desktop', 'log4j-logfactor5.desktop', 'nm-connection-editor.desktop', 'orca.desktop', 'setroubleshoot.desktop', 'system-config-date.desktop', 'system-config-firewall.desktop', 'system-config-keyboard.desktop', 'system-config-language.desktop', 'system-config-printer.desktop', 'system-config-users.desktop', 'vino-preferences.desktop']
+name='X-GNOME-Sundry.directory'
+
+[desktop/app-folders/folders/YaST]
+translate=true
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+
+[desktop/notifications]
+application-children=['org-gnome-nautilus', 'gnome-network-panel', 'update-manager', 'wireshark', 'apport-gtk']
+
+[desktop/notifications/application/wireshark]
+application-id='wireshark.desktop'
+
+[desktop/notifications/application/update-manager]
+application-id='update-manager.desktop'
+
+[desktop/notifications/application/apport-gtk]
+application-id='apport-gtk.desktop'
+
+[desktop/notifications/application/gnome-network-panel]
+application-id='gnome-network-panel.desktop'
+
+[desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+[desktop/datetime]
+automatic-timezone=true
+
+[desktop/interface]
+gtk-im-module='gtk-im-context-simple'
+
+[desktop/input-sources]
+sources=[('xkb', 'us')]
+xkb-options=@as []
+
+[desktop/wm/preferences]
+num-workspaces=9
+
+[desktop/wm/keybindings]
+cycle-windows-backward=['<Shift><Alt>Escape']
+minimize=['<Super>h']
+move-to-workspace-7=@as []
+move-to-workspace-8=@as []
+move-to-workspace-9=@as []
+move-to-monitor-left=['<Super><Shift>Left']
+move-to-workspace-5=@as []
+move-to-workspace-6=@as []
+move-to-workspace-10=@as []
+move-to-workspace-11=@as []
+move-to-workspace-12=@as []
+move-to-center=@as []
+unmaximize=['<Super>Down', '<Alt>F5']
+panel-main-menu=['<Alt>F1']
+cycle-windows=['<Alt>Escape']
+cycle-panels-backward=['<Shift><Control><Alt>Escape']
+panel-run-dialog=['<Alt>F2']
+switch-to-workspace-down=['<Super>Page_Down', '<Control><Alt>Down']
+move-to-corner-ne=@as []
+move-to-side-e=@as []
+move-to-workspace-right=['<Control><Shift><Alt>Right']
+always-on-top=@as []
+move-to-workspace-up=['<Super><Shift>Page_Up', '<Control><Shift><Alt>Up']
+raise=@as []
+maximize=['<Super>Up']
+cycle-group-backward=['<Shift><Alt>F6']
+move-to-side-n=@as []
+move-to-side-s=@as []
+maximize-horizontally=@as []
+move-to-side-w=@as []
+move-to-corner-nw=@as []
+switch-windows=@as []
+begin-move=['<Alt>F7']
+move-to-monitor-down=['<Super><Shift>Down']
+switch-windows-backward=@as []
+move-to-workspace-left=['<Control><Shift><Alt>Left']
+move-to-corner-se=@as []
+activate-window-menu=@as []
+switch-input-source=['<Super>space']
+toggle-above=@as []
+move-to-monitor-right=['<Super><Shift>Right']
+switch-input-source-backward=['<Shift><Super>space']
+move-to-workspace-last=['<Super><Shift>End']
+lower=@as []
+cycle-panels=['<Control><Alt>Escape']
+toggle-fullscreen=@as []
+toggle-on-all-workspaces=@as []
+move-to-monitor-up=['<Super><Shift>Up']
+move-to-corner-sw=@as []
+toggle-shaded=@as []
+switch-to-workspace-1=['<Super>Home']
+switch-to-workspace-2=@as []
+switch-to-workspace-3=@as []
+switch-to-workspace-4=@as []
+raise-or-lower=@as []
+switch-panels=['<Control><Alt>Tab']
+switch-panels-backward=['<Shift><Control><Alt>Tab']
+switch-applications-backward=['<Shift><Super>Tab', '<Shift><Alt>Tab']
+maximize-vertically=@as []
+switch-to-workspace-7=@as []
+switch-to-workspace-5=@as []
+show-desktop=@as []
+switch-to-workspace-8=@as []
+switch-to-workspace-9=@as []
+switch-to-workspace-6=@as []
+switch-applications=['<Super>Tab', '<Alt>Tab']
+switch-to-workspace-10=@as []
+switch-to-workspace-11=@as []
+switch-to-workspace-12=@as []
+switch-to-workspace-left=['<Control><Alt>Left']
+toggle-maximized=['<Alt>F10']
+set-spew-mark=@as []
+begin-resize=['<Alt>F8']
+move-to-workspace-down=['<Super><Shift>Page_Down', '<Control><Shift><Alt>Down']
+switch-to-workspace-last=['<Super>End']
+switch-group-backward=['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
+switch-group=['<Super>Above_Tab', '<Alt>Above_Tab']
+cycle-group=['<Alt>F6']
+close=['<Alt>F4']
+switch-to-workspace-up=['<Super>Page_Up', '<Control><Alt>Up']
+move-to-workspace-1=['<Super><Shift>Home']
+move-to-workspace-2=@as []
+move-to-workspace-3=@as []
+move-to-workspace-4=@as []
+switch-to-workspace-right=['<Control><Alt>Right']
+
+[control-center]
+last-panel='wifi'
+
+[terminal/legacy/keybindings]
+full-screen='disabled'
+
+[terminal/legacy]
+menu-accelerator-enabled=false
+schema-version=uint32 3
+default-show-menubar=false
+
+[nm-applet/eap/07095948-eddc-392c-a16d-e0a10e9d7df9]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
+
+[nm-applet/eap/bc5f7791-e309-4dd3-945c-461d202dff7b]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
+
+[nm-applet/eap/8355fa78-019d-4673-b0f9-6c419b4f0675]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
+
+[mutter]
+dynamic-workspaces=false
+
+[software]
+check-timestamp=int64 1533689346

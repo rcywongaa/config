@@ -97,8 +97,9 @@ execute "set <F12>=\e[24;*~"
 " Change directory to currently editing file
 ":set autochdir
 
-
-
+" Make interactive to load zshrc
+" https://stackoverflow.com/questions/4642822/commands-executed-from-vim-are-not-recognizing-bash-command-aliases
+":set shellcmdflag=-ic
 
 
 "-------------------- Plugins --------------------
@@ -121,6 +122,7 @@ map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
 " NERDCommenter
+let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 map # <Plug>NERDCommenterToggle
 
 " ctags
@@ -202,6 +204,8 @@ nmap <silent> <S-TAB> :FSHere<cr>
 ":hi IndentGuidesEven ctermbg=233
 "let g:indent_guides_enable_on_vim_startup = 1
 "let g:indent_guides_default_mapping = 0
+
+" CtrlP
 
 "----------------------------------------
 

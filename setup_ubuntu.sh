@@ -1,7 +1,9 @@
 #!/bin/bash
 
-echo "DO NOT RUN IN SUDO!"
-sleep 5
+if [ "$EUID" -eq 0 ]
+    then echo "DO NOT RUN IN SUDO!"
+    exit
+fi
 
 echo "Updating..."
 sudo apt -y update
@@ -20,9 +22,15 @@ echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
 echo "Grabbing customizations from github.com/rcywongaa/customizations.git"
-git init
-git remote add origin https://github.com/rcywongaa/customizations.git
-git pull origin master
+#git init
+#git remote add origin https://github.com/rcywongaa/customizations.git
+#git pull origin master
+git clone --recurse-submodules https://github.com/rcywongaa/customizations.git
+cd config
+
+ln -s "$(pwd)/.vimrc" ~/.vimrc
+ln -s "$(pwd)/.zshrc" ~/.zshrc
+ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf
 
 echo "Cloning Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -39,12 +47,12 @@ echo "Installing tpm plugins..."
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 779 --user # clipboard indicator
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 307 --user # Dash to Dock
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 484 --user # worspace grid
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
-~/gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 779 --user # clipboard indicator
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 307 --user # Dash to Dock
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 484 --user # worspace grid
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
 
 echo "Loading saved gnome configs..."
 ./keybindings.pl -i keybindings.csv
@@ -54,5 +62,7 @@ dconf load /org/gnome/ < gnome.dconf
 
 git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
+
+mv ~/setup_ubuntu.sh ~"$(pwd)/"
 
 echo "Done, please relog in"
