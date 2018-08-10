@@ -39,9 +39,6 @@ echo "Installing tpm plugins..."
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
-echo "Grabbing gnome extensions..."
-sudo wget -P ~ "https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/ubuntugnome/gnomeshell-extension-manage"
-sudo chmod +x ~/gnomeshell-extension-manage
 ~/gnomeshell-extension-manage --version 'latest' --install --extension-id 779 --user # clipboard indicator
 ~/gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
 ~/gnomeshell-extension-manage --version 'latest' --install --extension-id 307 --user # Dash to Dock
