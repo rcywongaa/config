@@ -206,6 +206,7 @@ nmap <silent> <S-TAB> :FSHere<cr>
 "let g:indent_guides_default_mapping = 0
 
 " CtrlP
+let g:ctrlp_regexp = 1 " Default regex
 
 "----------------------------------------
 
