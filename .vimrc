@@ -21,7 +21,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'kana/vim-smartword'
 Plugin 'mileszs/ack.vim'
 "Plugin 'brookhong/cscope.vim'
 Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
@@ -30,6 +29,7 @@ Plugin 'MattesGroeger/vim-bookmarks'
 "Plugin 'Yggdroot/indentLine'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
+Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype plugin indent on " required
@@ -157,10 +157,19 @@ nnoremap <leader>p :tp<CR>
 "nnoremap  c[ :call CscopeFind('c', expand('<cword>'))<CR>
 ":ca cscope !~/cscope_gen.sh
 
-" smartword
-map W <Plug>(smartword-w)
-map B  <Plug>(smartword-b)
-map E  <Plug>(smartword-e)
+" CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " airline
 let g:airline_left_sep = ''
