@@ -25,7 +25,7 @@ echo "Grabbing customizations from github.com/rcywongaa/customizations.git"
 #git init
 #git remote add origin https://github.com/rcywongaa/customizations.git
 #git pull origin master
-git clone --recurse-submodules https://github.com/rcywongaa/customizations.git
+git clone --recurse-submodules https://github.com/rcywongaa/config.git
 cd config
 
 ln -s "$(pwd)/.vimrc" ~/.vimrc
