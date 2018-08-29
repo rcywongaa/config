@@ -158,15 +158,16 @@ nnoremap <leader>p :tp<CR>
 ":ca cscope !~/cscope_gen.sh
 
 " CamelCaseMotion
+" Unmap cr used by vim-abolish for coersion: https://github.com/tpope/vim-abolish#coercion
+silent! sunmap cr
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-nnoremap W w
-nnoremap B b
-nnoremap E e
+map <silent> c <Plug>CamelCaseMotion_ge
+noremap W w
+noremap B b
+noremap E e
+noremap C gE
 omap <silent> iw <Plug>CamelCaseMotion_iw
 xmap <silent> iw <Plug>CamelCaseMotion_iw
 omap <silent> ib <Plug>CamelCaseMotion_ib
