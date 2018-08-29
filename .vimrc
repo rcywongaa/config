@@ -292,11 +292,12 @@ nnoremap <leader>$ /[ ]\+$<CR>``zz
 nnoremap // :noh<CR>
 " Copy to clipboard
 nnoremap y "+y
-nnoremap d "+d
+nnoremap D "+d
+nnoremap DD "+dd
 nnoremap p "+p
 nnoremap P "+P
 vnoremap y "+y
-vnoremap d "+d
+vnoremap D "+d
 vnoremap p "+p
 vnoremap P "+P
 " Yank line paste inline
@@ -304,7 +305,8 @@ nnoremap dl ^"+d$
 nnoremap yl ^"+y$
 " Do not overwrite register
 noremap x "_x
-noremap D "_d
+noremap d "_d
+nnoremap dd "_dd
 
 " Move to brackets
 noremap ( F(
