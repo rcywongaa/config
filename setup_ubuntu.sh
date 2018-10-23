@@ -9,7 +9,7 @@ echo "Updating..."
 sudo apt -y update
 
 echo "Installing common packages..."
-sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie guvcview
+sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie guvcview flameshot tig
 
 echo "Installing google chrome..."
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -56,6 +56,7 @@ echo "Installing tpm plugins..."
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 484 --user # worspace grid
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
+./gnomeshell-extension-manage --version 'latest' --install --extension-id 1267 --user # No Title Bar
 
 echo "Loading saved gnome configs..."
 ./keybindings.pl -i keybindings.csv
@@ -65,6 +66,7 @@ dconf load /org/gnome/ < gnome.dconf
 
 git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
+git config --global core.editor "vim"
 
 mv ~/setup_ubuntu.sh ~"$(pwd)/"
 
