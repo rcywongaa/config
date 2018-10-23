@@ -111,13 +111,9 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " " `s{char}{label}`
 " nmap <leader>f <Plug>(easymotion-prefix)
 map f <Plug>(easymotion-bd-fl)
-noremap F f
 map t <Plug>(easymotion-bd-tl)
-noremap T t
-map <leader>f <Plug>(easymotion-bd-f2)
-"map <leader>F <Plug>(easyomtion-F2)
-map <leader>t <Plug>(easyomtion-bd-t2)
-"map <leader>T <Plug>(easymotion-T2)
+map F <Plug>(easymotion-bd-f2)
+map T <Plug>(easyomtion-bd-t2)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
