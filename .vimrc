@@ -299,15 +299,12 @@ nnoremap <leader>$ /[ ]\+$<CR>``zz
 " Unhighlight
 nnoremap // :noh<CR>
 " Copy to clipboard
-nnoremap y "+y
-nnoremap D "+d
+noremap y "+y
+nnoremap yy "+yy
+noremap D "+d
 nnoremap DD "+dd
-nnoremap p "+p
-nnoremap P "+P
-vnoremap y "+y
-vnoremap D "+d
-vnoremap p "+p
-vnoremap P "+P
+noremap p "+p
+noremap P "+P
 " Yank line paste inline
 nnoremap dl ^"+d$
 nnoremap yl ^"+y$
