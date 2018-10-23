@@ -75,6 +75,9 @@ execute "set <F9>=\e[20;*~"
 execute "set <F10>=\e[21;*~"
 execute "set <F11>=\e[23;*~"
 execute "set <F12>=\e[24;*~"
+
+" Disable swap file
+set noswapfile
 " Auto block comments
 :set formatoptions-=o formatoptions-=r
 
