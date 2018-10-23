@@ -164,6 +164,14 @@ noremap W w
 noremap B b
 noremap E e
 noremap C gE
+onoremap iW iw
+onoremap iB ib
+onoremap iE ie
+onoremap iC igE
+xnoremap iW iw
+xnoremap iB ib
+xnoremap iE ie
+xnoremap iC igE
 omap <silent> iw <Plug>CamelCaseMotion_iw
 xmap <silent> iw <Plug>CamelCaseMotion_iw
 omap <silent> ib <Plug>CamelCaseMotion_ib
