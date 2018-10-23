@@ -32,6 +32,9 @@ ln -s "$(pwd)/.vimrc" ~/.vimrc
 ln -s "$(pwd)/.zshrc" ~/.zshrc
 ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf
 
+echo "Cloning fzf..."
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
 echo "Cloning Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
