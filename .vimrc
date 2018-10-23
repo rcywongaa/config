@@ -223,9 +223,10 @@ nmap <silent> <S-TAB> :FSHere<cr>
 "let g:indent_guides_default_mapping = 0
 
 " CtrlP
-let g:ctrlp_regexp = 1 " Default regex
-
-"----------------------------------------
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_mruf_relative = 1 "Only show mru in current working directory
+let g:ctrlp_regexp = 1 "Default regex
+let g:ctrlp_working_path_mode = '' "search entire current working directory
 
 
 
