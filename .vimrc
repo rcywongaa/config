@@ -360,6 +360,9 @@ nnoremap <leader>d :tab split<CR>
 " Move through changelist instead of jumplist
 "nnoremap <C-I> g,
 "nnoremap <C-O> g;
+
+nnoremap <leader>e :e %:h<CR>
+
 " Reload
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
