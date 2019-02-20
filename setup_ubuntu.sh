@@ -9,7 +9,10 @@ echo "Updating..."
 sudo apt -y update
 
 echo "Installing common packages..."
-sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie guvcview flameshot tig
+sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie guvcview flameshot tig gnome-shell-pomodoro
+
+# Optional packages
+# sudo apt -y install wireshark kicad texstudio freecad
 
 echo "Installing google chrome..."
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -21,19 +24,15 @@ sudo apt -y install google-chrome-stable
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
-echo "Grabbing customizations from github.com/rcywongaa/customizations.git"
-#git init
-#git remote add origin https://github.com/rcywongaa/customizations.git
-#git pull origin master
-git clone --recurse-submodules https://github.com/rcywongaa/config.git
-cd config
+ln -s ~/config/.vimrc ~/.vimrc
+ln -s ~/config/.zshrc ~/.zshrc
+ln -s ~/config/.tmux.conf ~/.tmux.conf
 
-ln -s "$(pwd)/.vimrc" ~/.vimrc
-ln -s "$(pwd)/.zshrc" ~/.zshrc
-ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf
+cd ~/config
+git submodule update --init
 
-echo "Cloning fzf..."
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+echo "Setting up fzf..."
+~/config/fzf/install
 
 echo "Cloning Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -67,7 +66,5 @@ dconf load /org/gnome/ < gnome.dconf
 git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
 git config --global core.editor "vim"
-
-mv ~/setup_ubuntu.sh ~"$(pwd)/"
 
 echo "Done, please relog in"

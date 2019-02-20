@@ -1,6 +1,6 @@
-[submodule "configs/z"]
-	path = configs/z
-	url = https://github.com/rupa/z.git
 [submodule "z"]
 	path = z
 	url = https://github.com/rupa/z.git
+[submodule "fzf"]
+	path = fzf
+	url = http://github.com/junegunn/fzf.git

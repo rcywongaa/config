@@ -1,5 +1,5 @@
 # Disable Ctrl-S freeze
-stty -ixon
+#stty -ixon
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=5000
@@ -46,7 +46,12 @@ PROMPT="%{$fg[black]%}$%B%{$fg[yellow]%}>%b%{$fg[black]%}$%{$reset_color%}"
 setopt promptsubst
 PS1=%B%{$fg[blue]%}$'${(r:$COLUMNS::\u2501:)}'%{$reset_color%}%b$PS1
 
-bindkey -e
+#bindkey -v
+#bindkey jk vi-cmd-mode
+#bindkey "^H" backward-delete-char
+#bindkey "^R" history-incremental-search-backward
+bindkey '\e.' insert-last-word
+
 bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
 bindkey "^[[1~" beginning-of-line
@@ -85,11 +90,18 @@ zle -N insert-last-word
 # Launch tmux on start, randomize session name so tmux resurrect works
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
-alias cgrep='grep -r --include="*.cpp" --include="*.h"'
-alias cack='ack --type=cpp'
+alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
+alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" | ack --files-from=- '
+alias ussh='ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null'
+alias uscp='scp -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null'
+alias fim='vim $(fzf)'
 
 # Install z directory jumper
 . ~/config/z/z.sh
+source /opt/ros/melodic/setup.zsh
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export PATH="$PATH:/opt/tush/bin"
+export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fo [FUZZY PATTERN] - Open the selected file with the default editor

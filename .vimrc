@@ -12,24 +12,26 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugin 'scrooloose/syntastic'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive' " git integration
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-obsession' " Automatic session tracking
 "Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'morhetz/gruvbox'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 "Plugin 'brookhong/cscope.vim'
 Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
 Plugin 'MattesGroeger/vim-bookmarks'
-"Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'Yggdroot/indentLine'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
+"Plugin 'scrooloose/nerdtree' " Nerdtree
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype plugin indent on " required
@@ -88,7 +90,8 @@ set noswapfile
 :set lazyredraw
 
 :set t_Co=256
-:colorscheme Tomorrow-Night "bubblegum kolor zenburn jellybeans Tomorrow-Night
+:set background=dark
+:colorscheme gruvbox "bubblegum kolor zenburn jellybeans Tomorrow-Night
 :set relativenumber
 :set hlsearch
 :set incsearch
@@ -162,19 +165,22 @@ silent! sunmap cr
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
-map <silent> c <Plug>CamelCaseMotion_ge
+map <silent> s <Plug>CamelCaseMotion_ge
+sunmap s
 noremap W w
 noremap B b
 noremap E e
-noremap C gE
+" Remap original S to I
+nnoremap I S
+noremap S gE
 onoremap iW iw
 onoremap iB ib
 onoremap iE ie
-onoremap iC igE
+onoremap iS igE
 xnoremap iW iw
 xnoremap iB ib
 xnoremap iE ie
-xnoremap iC igE
+xnoremap iS igE
 omap <silent> iw <Plug>CamelCaseMotion_iw
 xmap <silent> iw <Plug>CamelCaseMotion_iw
 omap <silent> ib <Plug>CamelCaseMotion_ib
@@ -231,7 +237,12 @@ let g:ctrlp_mruf_relative = 1 "Only show mru in current working directory
 let g:ctrlp_regexp = 1 "Default regex
 let g:ctrlp_working_path_mode = '' "search entire current working directory
 
+" NERDTree
 
+" vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_guide_size = 1
+"----------------------------------------
 
 
 
@@ -244,9 +255,7 @@ inoremap <C-K> <Esc>ld^i
 "inoremap <C-P> <C-R>+
 "----------------------------------------
 
-
-
-
+set noswapfile
 
 :ca cd. cd %:h
 
@@ -254,8 +263,10 @@ nnoremap $ $l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
-noremap zl 20zl
-noremap zh 20zh
+noremap zl 4zl
+noremap zh 4zh
+noremap ZL 16zl
+noremap ZH 16zh
 
 " Split navigation
 nnoremap <C-J> <C-W>j
@@ -278,7 +289,6 @@ nnoremap <S-F4> :vertical resize +20<CR>
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
-noremap s <nop>
 nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
@@ -346,8 +356,8 @@ nnoremap = gt
 nnoremap _ :tabm -1<CR>
 nnoremap + :tabm +1<CR>
 " Moving between cursorcolumns
-noremap H 20h
-noremap L 20l
+"noremap H 20h
+"noremap L 20l
 
 " Next / Previous find command
 "nnoremap ; ,
@@ -367,8 +377,10 @@ nnoremap <leader>e :e %:h<CR>
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
 
+" Remove trailing whitespace (https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file)
+nnoremap <leader>r :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " Remove trailing whitespace, Unicode (non-ASCII) characters, tabs, excess whitespace, whitespace before [,*]
-nnoremap <leader>r :%s/\s\+$//e<CR>:%s/[^[:alnum:][:punct:][:space:]]//gce<CR>:%s/\t/    /ge<CR>:%s/\([^ ]\+\)[ ]\+\([^ ]\)/\1 \2/g<CR>:%s/ \([,]\)/\1/g<CR>
+"nnoremap <leader>R :%s/\s\+$//e<CR>:%s/[^[:alnum:][:punct:][:space:]]//gce<CR>:%s/\t/    /ge<CR>:%s/\([^ ]\+\)[ ]\+\([^ ]\)/\1 \2/g<CR>:%s/ \([,]\)/\1/g<CR>
 " Retab
 nnoremap <leader><TAB> mzgg=G`z:retab<CR>
 " Open at last edit position
@@ -391,7 +403,7 @@ nnoremap <C-Right> 10g+
 :ca tabexp :tabnew<CR>:Explore<CR>
 
 " Open file under cursor
-nnoremap <leader><Enter> <c-w>gf
+map <leader><Enter> <C-P><C-\>w
 
 " ShowOrig show original file
 command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
@@ -423,3 +435,5 @@ function! MyFocusGained()
     "AirlineRefresh
     set cul
 endfunction
+
+autocmd BufNewFile,BufRead *.launch set syntax=xml
