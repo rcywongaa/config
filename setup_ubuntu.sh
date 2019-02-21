@@ -63,6 +63,9 @@ dconf load /org/gnome/ < gnome.dconf
 
 #sudo systemctl start sshd.service
 
+echo "Reducing terminal padding"
+echo "vte-terminal {padding: 0px;}" >> ~/.config/gtk-3.0/gtk.css
+
 git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
 git config --global core.editor "vim"
