@@ -24,9 +24,9 @@ sudo apt -y install google-chrome-stable
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
-ln -s ~/config/.vimrc ~/.vimrc
-ln -s ~/config/.zshrc ~/.zshrc
-ln -s ~/config/.tmux.conf ~/.tmux.conf
+ln -sf ~/config/.vimrc ~/.vimrc
+ln -sf ~/config/.zshrc ~/.zshrc
+ln -sf ~/config/.tmux.conf ~/.tmux.conf
 
 cd ~/config
 git submodule update --init
