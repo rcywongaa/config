@@ -58,7 +58,7 @@ echo "Installing tpm plugins..."
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 1267 --user # No Title Bar
 
 echo "Loading saved gnome configs..."
-./load_keybindings.pl -i keybindings.csv
+./import_export_keybindings.pl -i keybindings.csv
 dconf load /org/gnome/ < gnome.dconf
 
 #sudo systemctl start sshd.service
