@@ -92,15 +92,18 @@ if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" | ack --files-from=- '
-alias ussh='ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null'
-alias uscp='scp -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null'
+alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias fim='vim $(fzf)'
+fack() {
+    find -name "$1" | ack -x "$2"
+}
 
 # Install z directory jumper
 . ~/config/z/z.sh
+
 source /opt/ros/melodic/setup.zsh
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PATH="$PATH:/opt/tush/bin"
 export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
