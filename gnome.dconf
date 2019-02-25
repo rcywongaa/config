@@ -22,11 +22,12 @@ previous='XF86AudioPrev'
 magnifier='<Alt><Super>8'
 help=''
 search='XF86Search'
-window-screenshot-clip='<Ctrl><Alt>Print'
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
 magnifier-zoom-in='<Alt><Super>equal'
 calculator='XF86Calculator'
 video-out='<Super>p'
 eject='XF86Eject'
+window-screenshot-clip='<Ctrl><Alt>Print'
 area-screenshot-clip='<Ctrl><Shift>Print'
 media='XF86AudioMedia'
 www='XF86WWW'
@@ -36,7 +37,7 @@ volume-down='XF86AudioLowerVolume'
 decrease-text-size=''
 on-screen-keyboard=''
 next='XF86AudioNext'
-screenshot='Print'
+screenshot=''
 increase-text-size=''
 magnifier-zoom-out='<Alt><Super>minus'
 screencast='<Ctrl><Shift><Alt>R'
@@ -44,6 +45,11 @@ screensaver='<Super>l'
 toggle-contrast=''
 pause='XF86AudioPause'
 area-screenshot='<Shift>Print'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='Print'
+command='/usr/bin/flameshot gui'
+name='Screenshot with Flameshot'
 
 [settings-daemon/plugins/xsettings]
 hinting='slight'
@@ -120,14 +126,38 @@ dynamic-workspaces=false
 [shell/app-switcher]
 current-workspace-only=true
 
+[gedit/preferences/ui]
+show-tabs-mode='auto'
+
+[gedit/plugins/filebrowser]
+virtual-root='file:///home/rufus/Documents/ikena/mdsp.2019-02-22.15.13.11.318.39704'
+tree-view=true
+root='file:///'
+
+[gedit/plugins]
+active-plugins=['time', 'modelines', 'filebrowser', 'spell', 'docinfo']
+
+[gedit/state/window]
+size=(900, 700)
+state=87168
+bottom-panel-size=140
+side-panel-size=200
+side-panel-active-page='GeditWindowDocumentsPanel'
+
 [nautilus/preferences]
 default-folder-viewer='icon-view'
 search-filter-time-type='last_modified'
 
 [nautilus/window-state]
 sidebar-width=196
-geometry='890x547+447+133'
+geometry='890x544+50+50'
 maximized=false
+
+[nautilus/compression]
+default-compression-format='zip'
+
+[evince/default]
+window-ratio=(3.1372549019607843, 1.3131313131313131)
 
 [file-roller/listing]
 sort-method='name'
@@ -155,6 +185,33 @@ type='google'
 [deja-dup/file]
 migrated=true
 
+[desktop/interface]
+gtk-im-module='gtk-im-context-simple'
+
+[desktop/notifications]
+application-children=['org-gnome-nautilus', 'gnome-network-panel', 'update-manager', 'wireshark', 'apport-gtk', 'flameshot']
+
+[desktop/notifications/application/wireshark]
+application-id='wireshark.desktop'
+
+[desktop/notifications/application/update-manager]
+application-id='update-manager.desktop'
+
+[desktop/notifications/application/apport-gtk]
+application-id='apport-gtk.desktop'
+
+[desktop/notifications/application/firefox]
+application-id='firefox.desktop'
+
+[desktop/notifications/application/gnome-network-panel]
+application-id='gnome-network-panel.desktop'
+
+[desktop/notifications/application/flameshot]
+application-id='flameshot.desktop'
+
+[desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
 [desktop/app-folders]
 folder-children=['Utilities', 'Sundry', 'YaST']
 
@@ -174,37 +231,6 @@ name='X-GNOME-Sundry.directory'
 translate=true
 categories=['X-SuSE-YaST']
 name='suse-yast.directory'
-
-[desktop/notifications]
-application-children=['org-gnome-nautilus', 'gnome-network-panel', 'update-manager', 'wireshark', 'apport-gtk']
-
-[desktop/notifications/application/wireshark]
-application-id='wireshark.desktop'
-
-[desktop/notifications/application/update-manager]
-application-id='update-manager.desktop'
-
-[desktop/notifications/application/apport-gtk]
-application-id='apport-gtk.desktop'
-
-[desktop/notifications/application/firefox]
-application-id='firefox.desktop'
-
-[desktop/notifications/application/gnome-network-panel]
-application-id='gnome-network-panel.desktop'
-
-[desktop/notifications/application/org-gnome-nautilus]
-application-id='org.gnome.Nautilus.desktop'
-
-[desktop/datetime]
-automatic-timezone=true
-
-[desktop/interface]
-gtk-im-module='gtk-im-context-simple'
-
-[desktop/input-sources]
-sources=[('xkb', 'us')]
-xkb-options=@as []
 
 [desktop/session]
 idle-delay=uint32 900
@@ -299,8 +325,22 @@ move-to-workspace-3=@as []
 move-to-workspace-4=@as []
 switch-to-workspace-right=['<Control><Alt>Right']
 
+[desktop/datetime]
+automatic-timezone=true
+
+[desktop/background]
+picture-uri='file:///home/rufus/Pictures/UML.png'
+color-shading-type='solid'
+primary-color='#000000000000'
+picture-options='scaled'
+secondary-color='#000000000000'
+
+[desktop/input-sources]
+sources=[('xkb', 'us')]
+xkb-options=@as []
+
 [control-center]
-last-panel='power'
+last-panel='keyboard'
 
 [terminal/legacy/keybindings]
 full-screen='disabled'
@@ -312,7 +352,12 @@ default-show-menubar=false
 
 [terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 scrollbar-policy='never'
+palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
 audible-bell=false
+
+[nm-applet/eap/36412612-01e6-4dc4-a8ca-0501880d8f47]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
 
 [nm-applet/eap/07095948-eddc-392c-a16d-e0a10e9d7df9]
 ignore-phase2-ca-cert=false
@@ -326,6 +371,10 @@ ignore-ca-cert=false
 ignore-phase2-ca-cert=false
 ignore-ca-cert=false
 
+[nm-applet/eap/f94c37c3-adfb-3a6c-8dce-fe0e6ebcac6f]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
+
 [nm-applet/eap/8355fa78-019d-4673-b0f9-6c419b4f0675]
 ignore-phase2-ca-cert=false
 ignore-ca-cert=false
@@ -334,4 +383,4 @@ ignore-ca-cert=false
 dynamic-workspaces=false
 
 [software]
-check-timestamp=int64 1550702715
+check-timestamp=int64 1551047710
