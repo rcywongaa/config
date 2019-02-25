@@ -28,9 +28,11 @@ Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'Yggdroot/indentLine'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 "Plugin 'scrooloose/nerdtree' " Nerdtree
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -232,10 +234,15 @@ nmap <silent> <S-TAB> :FSHere<cr>
 "let g:indent_guides_default_mapping = 0
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_mruf_relative = 1 "Only show mru in current working directory
-let g:ctrlp_regexp = 1 "Default regex
-let g:ctrlp_working_path_mode = '' "search entire current working directory
+"let g:ctrlp_cmd = 'CtrlPMixed'
+"let g:ctrlp_mruf_relative = 1 "Only show mru in current working directory
+"let g:ctrlp_regexp = 1 "Default regex
+"let g:ctrlp_working_path_mode = '' "search entire current working directory
+
+" fzf
+nnoremap <C-P> :Files<CR>
+" Open file under cursor
+nnoremap <leader><Enter> :call fzf#vim#locate(expand('<cword>'))<CR>
 
 " NERDTree
 
@@ -292,7 +299,6 @@ nnoremap J <nop>
 nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
-nnoremap <leader><CR> i<CR><Esc>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
@@ -401,9 +407,6 @@ nnoremap <C-Right> 10g+
 
 " :tabnew and :Explore
 :ca tabexp :tabnew<CR>:Explore<CR>
-
-" Open file under cursor
-map <leader><Enter> <C-P><C-\>w
 
 " ShowOrig show original file
 command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
