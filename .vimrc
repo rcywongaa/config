@@ -242,7 +242,7 @@ nmap <silent> <S-TAB> :FSHere<cr>
 " fzf
 nnoremap <C-P> :Files<CR>
 " Open file under cursor
-nnoremap <leader><Enter> :call fzf#vim#locate(expand('<cword>'))<CR>
+nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})<CR>
 
 " NERDTree
 
