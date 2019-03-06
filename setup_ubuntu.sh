@@ -9,7 +9,36 @@ echo "Updating..."
 sudo apt -y update
 
 echo "Installing common packages..."
-sudo apt -y --ignore-missing install vim-gtk3 zsh tmux git gitk git-gui meld cmake htop tree xclip sysstat speedcrunch ctags inkscape gnome-tweak-tool gparted filezilla ack sshfs xsel ibus-cangjie guvcview flameshot tig gnome-shell-pomodoro
+sudo apt -y --ignore-missing install \
+    vim-gtk3 \
+    zsh \
+    tmux \
+    git \
+    gitk \
+    git-gui \
+    meld \
+    cmake \
+    htop \
+    tree \
+    xclip \
+    sysstat \
+    speedcrunch \
+    ctags \
+    inkscape \
+    gnome-tweak-tool \
+    gparted \
+    filezilla \
+    ack \
+    sshfs \
+    xsel \
+    ibus-cangjie \
+    guvcview \
+    flameshot \
+    tig \
+    gnome-shell-pomodoro \
+    vinagre \
+    arp-scan \
+    smem
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
