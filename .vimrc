@@ -240,7 +240,8 @@ nmap <silent> <S-TAB> :FSHere<cr>
 "let g:ctrlp_working_path_mode = '' "search entire current working directory
 
 " fzf
-nnoremap <C-P> :Files<CR>
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>P :History<CR>
 " Open file under cursor
 nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})<CR>
 
