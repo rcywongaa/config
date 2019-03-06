@@ -91,12 +91,16 @@ zle -N insert-last-word
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
-alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" | ack --files-from=- '
+alias cfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt"'
+alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias fim='vim $(fzf)'
 fack() {
     find -name "$1" | ack -x "$2"
+}
+mem() {
+    smem -t -k -c pss -P "$1" | tail -n 1
 }
 
 # Install z directory jumper
