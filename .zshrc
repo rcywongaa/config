@@ -91,7 +91,7 @@ zle -N insert-last-word
 if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
 
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
-alias cfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt"'
+alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
@@ -101,6 +101,10 @@ fack() {
 }
 mem() {
     smem -t -k -c pss -P "$1" | tail -n 1
+}
+refactor() {
+    rfind | ack -xl "${1}" | xargs -I{} sed -i "s/${1}/${2}/g" {}
+    rfind | xargs -I{} rename "s/${1}/${2}/" {}
 }
 
 # Install z directory jumper
@@ -118,4 +122,12 @@ fo() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
 }
