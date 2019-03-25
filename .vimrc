@@ -10,30 +10,29 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Plugin 'scrooloose/syntastic'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive' " git integration
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-obsession' " Automatic session tracking
-"Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'w0ng/vim-hybrid'
 Plugin 'morhetz/gruvbox'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
-"Plugin 'brookhong/cscope.vim'
-Plugin 'derekwyatt/vim-fswitch' " Switch between header and source
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'nathanaelkane/vim-indent-guides'
-"Plugin 'Yggdroot/indentLine'
-"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+
+"Plugin 'scrooloose/syntastic'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'brookhong/cscope.vim'
+"Plugin 'mileszs/ack.vim'
 "Plugin 'scrooloose/nerdtree' " Nerdtree
+"Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
+
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype plugin indent on " required
@@ -217,7 +216,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 ca ss :Obsess .<CR>
 
 " Fswitch
-nmap <silent> <S-TAB> :FSHere<cr>
+"nmap <silent> <S-TAB> :FSHere<cr>
 
 " IndentLine
 "let g:indentLine_char = '⦙'
@@ -244,6 +243,9 @@ nnoremap <leader>p :Files<CR>
 nnoremap <leader>P :History<CR>
 " Open file under cursor
 nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})<CR>
+nmap <S-TAB> :call fzf#vim#files('.', {'options':['--query', expand("%:t:r").' h$ \| hpp$ \| cpp$ \| c$']})<CR>
+" https://github.com/junegunn/fzf.vim/issues/346
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " NERDTree
 

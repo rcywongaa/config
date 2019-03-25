@@ -38,7 +38,8 @@ sudo apt -y --ignore-missing install \
     gnome-shell-pomodoro \
     vinagre \
     arp-scan \
-    smem
+    smem \
+    silversearcher-ag
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
