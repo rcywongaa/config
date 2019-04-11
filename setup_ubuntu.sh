@@ -39,7 +39,8 @@ sudo apt -y --ignore-missing install \
     vinagre \
     arp-scan \
     smem \
-    silversearcher-ag
+    silversearcher-ag \
+    parcellite
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad

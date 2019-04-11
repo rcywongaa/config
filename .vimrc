@@ -425,7 +425,8 @@ augroup BgHighlight
 augroup END
 "
 " Do not clear clipboard on close
-autocmd VimLeave * call system("xsel -ib", getreg('+'))
+"autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
+            "\ ' | xclip -selection clipboard')
 
 autocmd FocusLost * call MyFocusLost()
 autocmd FocusGained * call MyFocusGained()
