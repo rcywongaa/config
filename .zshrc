@@ -1,5 +1,5 @@
 # Disable Ctrl-S freeze
-#stty -ixon
+stty -ixon
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=5000
@@ -95,7 +95,13 @@ alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias fim='vim $(fzf)'
+alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
+
+fim() {
+    local file
+    file=$(fzf)
+    [ -n "$file" ] && vim -p "$file"
+}
 fack() {
     find -name "$1" | ack -x "$2"
 }
@@ -130,4 +136,9 @@ fd() {
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
+}
+
+# mkdir and cd
+mkcd() {
+    mkdir "${1}" && cd "${1}"
 }
