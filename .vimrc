@@ -8,7 +8,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive' " git integration
@@ -26,6 +26,7 @@ Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
+" Unused plugins
 "Plugin 'scrooloose/syntastic'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'brookhong/cscope.vim'
@@ -172,7 +173,7 @@ noremap W w
 noremap B b
 noremap E e
 " Remap original S to I
-nnoremap I S
+nnoremap <leader>S S
 noremap S gE
 onoremap iW iw
 onoremap iB ib
@@ -246,6 +247,7 @@ nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('
 nmap <S-TAB> :call fzf#vim#files('.', {'options':['--query', expand("%:t:r").' h$ \| hpp$ \| cpp$ \| c$']})<CR>
 " https://github.com/junegunn/fzf.vim/issues/346
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <leader>a :Ag<CR>
 
 " NERDTree
 
@@ -286,6 +288,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <C-=> <C-W>=
 nnoremap ;sp :vsp<CR><C-W>l
 nnoremap ;ta :vsp<CR><C-W>T
+nnoremap ;tn :tabnew<CR>
+nnoremap ;tt :vsp<CR><C-W>T:e %:h<CR>
 :ca lsp vsp
 :ca rsp botright vsp
 :ca tsp sp
