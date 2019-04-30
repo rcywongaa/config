@@ -376,15 +376,11 @@ nnoremap + :tabm +1<CR>
 "nnoremap ; ,
 "nnoremap ' ;
 
-" Move current pane to new window
-nnoremap <leader>t <C-w>T
-" Duplicate current tab
-nnoremap <leader>d :tab split<CR>
 " Move through changelist instead of jumplist
 "nnoremap <C-I> g,
 "nnoremap <C-O> g;
 
-nnoremap <leader>e :e %:h<CR>
+nnoremap <leader>t :e %:h<CR>
 
 " Reload
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
