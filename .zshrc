@@ -123,6 +123,10 @@ export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-lin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# fzd - return directory
+fzd() {
+    find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m
 }
 
 # fd - cd to selected directory
