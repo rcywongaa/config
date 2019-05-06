@@ -139,6 +139,11 @@ fd() {
   cd "$dir"
 }
 
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -r 's/ *[0-9]*\*? *//')
+}
+
 # mkdir and cd
 mkcd() {
     mkdir "${1}" && cd "${1}"
