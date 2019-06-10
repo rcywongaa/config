@@ -40,7 +40,8 @@ sudo apt -y --ignore-missing install \
     arp-scan \
     smem \
     silversearcher-ag \
-    parcellite
+    parcellite \
+    picocom
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
