@@ -41,7 +41,11 @@ sudo apt -y --ignore-missing install \
     smem \
     silversearcher-ag \
     parcellite \
-    picocom
+    picocom \
+    mpv \
+    clang-tools-8
+
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad

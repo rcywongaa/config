@@ -1,44 +1,37 @@
 set nocompatible " be iMproved, required
-filetype off " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-fugitive' " git integration
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-obsession' " Automatic session tracking
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
-Plugin 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive' " git integration
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-obsession' " Automatic session tracking
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdcommenter'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
+Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Unused plugins
-"Plugin 'scrooloose/syntastic'
-"Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'brookhong/cscope.vim'
-"Plugin 'mileszs/ack.vim'
-"Plugin 'scrooloose/nerdtree' " Nerdtree
-"Plugin 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
-
-" All of your Plugins must be added before the following line
-call vundle#end() " required
-filetype plugin indent on " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+"Plug 'scrooloose/syntastic'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'brookhong/cscope.vim'
+"Plug 'mileszs/ack.vim'
+"Plug 'scrooloose/nerdtree' " Nerdtree
+"Plug 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
+call plug#end()
 
 " Brief help
 " :PluginList - lists configured plugins
@@ -129,37 +122,12 @@ map <leader>k <Plug>(easymotion-k)
 let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 map # <Plug>NERDCommenterToggle
 
-" ctags
-:ca ctags !ctags -R .
-:set tags=./tags,tags;
-:let generate_tags=1
-:let ctags_statusline=1
-nnoremap <leader>] <C-]>
-nnoremap <leader>[ <C-t>
-nnoremap <silent><leader>} <C-w><C-]><C-w>T
-nnoremap <silent><leader>{ <C-w><C-t><C-w>T
-nnoremap <leader>n :tn<CR>
-nnoremap <leader>p :tp<CR>
-
-" cscope
-" s: Find this C symbol
-" nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-" nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-" nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-" nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-" nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-" nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-" nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-" nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-"nnoremap  c[ :call CscopeFind('c', expand('<cword>'))<CR>
-":ca cscope !~/cscope_gen.sh
+" coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " CamelCaseMotion
 " Unmap cr used by vim-abolish for coersion: https://github.com/tpope/vim-abolish#coercion

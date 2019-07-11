@@ -146,3 +146,9 @@ fh() {
 mkcd() {
     mkdir "${1}" && cd "${1}"
 }
+
+# Setup Language Server
+tag() {
+    cmake -H. -B.tag -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+    ln -s .tag/compile_commands.json
+}
