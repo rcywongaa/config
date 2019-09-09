@@ -4,7 +4,7 @@ stty -ixon
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
-setopt appendhistory sharehistory nomatch notify HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
+setopt appendhistory sharehistory nomatch notify hist_expire_dups_first
 unsetopt autocd beep correct
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -87,8 +87,14 @@ zle -N insert-last-word
 
 #TODO: Hint for ..
 
-# Launch tmux on start, randomize session name so tmux resurrect works
-if [ "$TMUX" = "" ]; then tmux new -s $RANDOM; fi
+# Launch tmux on start
+if [[ -z "$TMUX" ]]; then
+    if [[ -n "$(tmux list-session | grep -v 'attached')" ]]; then
+        tmux a
+    else
+        tmux new
+    fi
+fi
 
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
@@ -98,22 +104,6 @@ alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 
-fim() {
-    local file
-    file=$(fzf)
-    [ -n "$file" ] && vim -p "$file"
-}
-fack() {
-    find -name "$1" | ack -x "$2"
-}
-mem() {
-    smem -t -k -c pss -P "$1" | tail -n 1
-}
-refactor() {
-    rfind | ack -xl "${1}" | xargs -I{} sed -i "s/${1}/${2}/g" {}
-    rfind | xargs -I{} rename "s/${1}/${2}/" {}
-}
-
 # Install z directory jumper
 . ~/config/z/z.sh
 
@@ -122,6 +112,49 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+########## CUSTOM ALIAS & FUNCTIONS ##########
+
+# Run fzf and open resultant file in vim
+# $ fzf
+fim() {
+    local file
+    file=$(fzf)
+    [ -n "$file" ] && vim -p "$file"
+}
+
+# Similar to fim but searches file content instead of file name
+# $ aim
+aim() {
+  local file
+  local line
+
+  read -r file line <<<"$(ag --nobreak --noheading . | fzf -0 -1 | awk -F: '{print $1, $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim $file +$line
+  fi
+}
+
+# find file and ack pattern
+# $ fack file_name pattern
+fack() {
+    find -name "$1" | ack -x "$2"
+}
+
+# Check memory usage of process
+# $ mem /opt/google/chrome/chrome
+mem() {
+    smem -t -k -c pss -P "$1" | tail -n 1
+}
+
+# Simple pattern matching refactor (renames variables and file names
+# $ refactor "class_name1" "class_name2"
+refactor() {
+    rfind | ack -xl "${1}" | xargs -I{} sed -i "s/${1}/${2}/g" {}
+    rfind | xargs -I{} rename "s/${1}/${2}/" {}
+}
 
 # fzd - return directory
 fzd() {
@@ -147,8 +180,21 @@ mkcd() {
     mkdir "${1}" && cd "${1}"
 }
 
+#cp here
+cphere() {
+    cp $(z "${1}" && find "$PWD" | fzf) .
+}
+
 # Setup Language Server
 tag() {
     cmake -H. -B.tag -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
     ln -s .tag/compile_commands.json
 }
+
+####################
+
+########## THIS MUST BE AT THE END ##########
+source ~/.zplug/init.zsh
+
+# List zplug plugins here
+zplug "MichaelAquilina/zsh-auto-notify"
