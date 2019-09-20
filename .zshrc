@@ -158,16 +158,13 @@ refactor() {
 
 # fzd - return directory
 fzd() {
-    find ${1:-.} -path '*/\.*' -prune \
+    find "$(pwd)" -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m
 }
 
 # fd - cd to selected directory
 fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+    cd $(fzd)
 }
 
 # fh - repeat history
