@@ -68,14 +68,15 @@ ln -sf ~/config/gtk.css ~/.config/gtk-3.0/gtk.css
 cd ~/config
 git submodule update --init
 
+echo "Install nodejs for coc..."
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install nodejs
+
 echo "Setting up fzf..."
 ~/config/fzf/install
 
-echo "Cloning Vundle..."
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-echo "Installing vim plugins..."
-vim +PluginInstall +qall
+echo "Installing zplug..."
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 echo "Cloning tpm..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
