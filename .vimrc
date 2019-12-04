@@ -255,10 +255,10 @@ nnoremap $ $l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
-noremap zl 4zl
-noremap zh 4zh
-noremap ZL 16zl
-noremap ZH 16zh
+noremap zl 8zl
+noremap zh 8zh
+noremap ZL 32zl
+noremap ZH 32zh
 
 " Split navigation
 nnoremap <C-J> <C-W>j
