@@ -1,0 +1,6 @@
+backends:
+    - linux
+linux:
+    urgency: low
+    transient: true
+    timeout: 2

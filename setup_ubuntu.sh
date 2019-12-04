@@ -45,6 +45,8 @@ sudo apt -y --ignore-missing install \
     mpv \
     clang-tools-8
 
+sudo pip install ntfy
+
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
 # Optional packages

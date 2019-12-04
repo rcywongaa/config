@@ -25,8 +25,13 @@ zstyle ':completion:*:(ssh|scp):hosts' hosts 'reply=()'
 zstyle -e ':completion:*' hosts 'reply=()'
 zstyle ':completion:*:make:*' path-completion false
 
+source "${HOME}"/config/completion.zsh
+
 autoload -Uz compinit
-compinit
+compinit -i
+
+zmodload -i zsh/complist
+
 # End of lines added by compinstall
 
 # Available colors:
@@ -107,9 +112,14 @@ alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 # Install z directory jumper
 . ~/config/z/z.sh
 
+# Use ntfy for notifying long commands
+export AUTO_NTFY_DONE_IGNORE="fim vim screen meld ssh ussh gitk git-gui"
+eval "$(ntfy shell-integration)"
+
 source /opt/ros/melodic/setup.zsh
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
+export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -156,15 +166,10 @@ refactor() {
     rfind | xargs -I{} rename "s/${1}/${2}/" {}
 }
 
-# fzd - return directory
-fzd() {
-    find "$(pwd)" -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m
-}
-
-# fd - cd to selected directory
+# fd - fuzzy find and return directory from ~
 fd() {
-    cd $(fzd)
+    cd ~ && find "$(pwd)" -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m
 }
 
 # fh - repeat history
@@ -173,14 +178,19 @@ fh() {
 }
 
 # mkdir and cd
-mkcd() {
+mcd() {
     mkdir "${1}" && cd "${1}"
 }
 
-#cp here
-cphere() {
-    cp $(z "${1}" && find "$PWD" | fzf) .
+# Home-wide file search
+ff() {
+    $(cd ~ && find "$PWD" | fzf)
 }
+
+this_branch() {
+    git branch | grep \* | cut -d ' ' -f2
+}
+
 
 # Setup Language Server
 tag() {
@@ -194,4 +204,3 @@ tag() {
 source ~/.zplug/init.zsh
 
 # List zplug plugins here
-zplug "MichaelAquilina/zsh-auto-notify"
