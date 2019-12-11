@@ -166,13 +166,13 @@ refactor() {
     rfind | xargs -I{} rename "s/${1}/${2}/" {}
 }
 
-# fd - fuzzy find and return directory from ~
+# fd - fuzzy find directory
 fd() {
-    cd ~ && find "$(pwd)" -path '*/\.*' -prune \
+    cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m
 }
 
-# fh - repeat history
+# fh - fuzzy find history
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
 }
@@ -184,7 +184,7 @@ mcd() {
 
 # Home-wide file search
 ff() {
-    $(cd ~ && find "$PWD" | fzf)
+    cd "${1}" && find "$(pwd)" -print 2>/dev/null | fzf -m
 }
 
 this_branch() {
