@@ -43,7 +43,9 @@ sudo apt -y --ignore-missing install \
     parcellite \
     picocom \
     mpv \
-    clang-tools-8
+    clang-tools-8 \
+    python3-pip \
+    curl
 
 sudo pip3 install ntfy
 
