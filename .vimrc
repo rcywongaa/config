@@ -23,13 +23,13 @@ Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree' " Nerdtree
 
 " Unused plugins
 "Plug 'scrooloose/syntastic'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'brookhong/cscope.vim'
 "Plug 'mileszs/ack.vim'
-"Plug 'scrooloose/nerdtree' " Nerdtree
 "Plug 'tmux-plugins/vim-tmux-focus-events' "this plugin causes tmux to highlight the incorrect window
 call plug#end()
 
@@ -224,16 +224,30 @@ nnoremap <leader>p :Files<CR>
 nnoremap <leader>P :History<CR>
 " Open file under cursor
 nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})<CR>
-nmap <S-TAB> :call fzf#vim#files('.', {'options':['--query', expand("%:t:r").' h$ \| hpp$ \| cpp$ \| c$']})<CR>
+nmap <S-TAB> :call fzf#vim#files('.', {'options':['--query', expand("%:t:r") . '.h$ \| ' . expand("%:t:r") . '.hpp$ \| ' . expand("%:t:r") . '.cpp$ \| ' . expand("%:t:r") . '.c$']})<CR>
 " https://github.com/junegunn/fzf.vim/issues/346
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <leader>a :Ag<CR>
 
 " NERDTree
+let NERDTreeQuitOnOpen=1
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size = 1
+
+" vim-bookmarks
+let g:bookmark_no_default_key_mappings = 1
+nmap M <Plug>BookmarkToggle
+"nmap Mi <Plug>BookmarkAnnotate
+nmap Ma <Plug>BookmarkShowAll
+nmap Mj <Plug>BookmarkNext
+nmap Mk <Plug>BookmarkPrev
+nmap Mc <Plug>BookmarkClear
+nmap Mx <Plug>BookmarkClearAll
+nmap Mkk <Plug>BookmarkMoveUp
+nmap Mjj <Plug>BookmarkMoveDown
+nmap Mg <Plug>BookmarkMoveToLine
 "----------------------------------------
 
 
@@ -360,7 +374,7 @@ nnoremap + :tabm +1<CR>
 "nnoremap <C-I> g,
 "nnoremap <C-O> g;
 
-nnoremap <leader>t :e %:h<CR>
+nnoremap <leader>t :NERDTree %:h<CR>
 
 " Reload
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
