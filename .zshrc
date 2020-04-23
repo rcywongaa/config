@@ -204,3 +204,4 @@ tag() {
 source ~/.zplug/init.zsh
 
 # List zplug plugins here
+zplug "zsh-users/zsh-autosuggestions"
