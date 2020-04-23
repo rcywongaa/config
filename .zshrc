@@ -129,8 +129,8 @@ export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 # $ fzf
 fim() {
     local file
-    file=$(fzf)
-    [ -n "$file" ] && vim -p "$file"
+    file=$(fzf -m)
+    [ -n "$file" ] && vim -p $(echo $file | tr '\n' ' ')
 }
 
 # Similar to fim but searches file content instead of file name
@@ -172,13 +172,13 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m
 }
 
-# fh - fuzzy find history
-fh() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
+# h - fuzzy find history
+h() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | uniq | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
 }
 
 # mkdir and cd
-mcd() {
+md() {
     mkdir "${1}" && cd "${1}"
 }
 
