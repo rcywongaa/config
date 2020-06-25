@@ -113,7 +113,7 @@ alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 . ~/config/z/z.sh
 
 # Use ntfy for notifying long commands
-export AUTO_NTFY_DONE_IGNORE="fim vim screen meld ssh ussh gitk git-gui"
+export AUTO_NTFY_DONE_IGNORE="fim vim nvim screen meld ssh ussh gitk git-gui"
 eval "$(ntfy shell-integration)"
 
 source /opt/ros/melodic/setup.zsh
@@ -122,6 +122,7 @@ export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-lin
 export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 
@@ -130,7 +131,7 @@ export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 fim() {
     local file
     file=$(fzf -m)
-    [ -n "$file" ] && vim -p $(echo $file | tr '\n' ' ')
+    [ -n "$file" ] && nvim -p $(echo $file | tr '\n' ' ')
 }
 
 # Similar to fim but searches file content instead of file name
@@ -141,10 +142,7 @@ aim() {
 
   read -r file line <<<"$(ag --nobreak --noheading . | fzf -0 -1 | awk -F: '{print $1, $2}')"
 
-  if [[ -n $file ]]
-  then
-     vim $file +$line
-  fi
+  [ -n "$file" ] && nvim -p $(echo $file +$line | tr '\n' ' ')
 }
 
 # find file and ack pattern
@@ -177,9 +175,10 @@ h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | uniq | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
 }
 
-# mkdir and cd
-md() {
-    mkdir "${1}" && cd "${1}"
+# Create directory and file and echo back filename for chaining
+create() {
+    mkdir -p "${1%/*}" && touch "${1}"
+    echo "${1}"
 }
 
 # Home-wide file search
