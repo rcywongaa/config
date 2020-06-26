@@ -108,6 +108,7 @@ alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
+alias v='nvim'
 
 # Install z directory jumper
 . ~/config/z/z.sh
@@ -164,13 +165,13 @@ refactor() {
     rfind | xargs -I{} rename "s/${1}/${2}/" {}
 }
 
-# fd - fuzzy find directory
+# home-wide directory search
 fd() {
     cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m
 }
 
-# h - fuzzy find history
+# fuzzy find history
 h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | uniq | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
 }
