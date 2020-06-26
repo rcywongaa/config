@@ -10,7 +10,7 @@ sudo apt -y update
 
 echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
-    vim-gtk3 \
+    nvim \
     zsh \
     tmux \
     git \
@@ -47,7 +47,7 @@ sudo apt -y --ignore-missing install \
     python3-pip \
     curl
 
-sudo pip3 install ntfy
+sudo pip install ntfy
 
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
@@ -68,6 +68,7 @@ ln -sf ~/config/.vimrc ~/.vimrc
 ln -sf ~/config/.zshrc ~/.zshrc
 ln -sf ~/config/.tmux.conf ~/.tmux.conf
 ln -sf ~/config/gtk.css ~/.config/gtk-3.0/gtk.css
+mkdir ~/.config/nvim && ln -sf ~/config/init.vim ~/.config/nvim/init.vim
 
 cd ~/config
 git submodule update --init
