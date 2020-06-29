@@ -3,4 +3,4 @@ backends:
 linux:
     urgency: low
     transient: true
-    timeout: 2
+    timeout: 5
