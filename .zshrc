@@ -114,7 +114,7 @@ alias v='nvim'
 . ~/config/z/z.sh
 
 # Use ntfy for notifying long commands
-export AUTO_NTFY_DONE_IGNORE="fim vim nvim screen meld ssh ussh gitk git-gui"
+export AUTO_NTFY_DONE_IGNORE="fim vim nvim v ag grep screen meld ssh ussh gitk git-gui"
 eval "$(ntfy shell-integration)"
 
 source /opt/ros/melodic/setup.zsh

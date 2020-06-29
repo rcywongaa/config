@@ -112,7 +112,7 @@ echo "vte-terminal {padding: 0px;}" >> ~/.config/gtk-3.0/gtk.css
 
 git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
-git config --global core.editor "vim"
+git config --global core.editor "nvim"
 git config --global submodule.recurse true
 
 echo "Gnome specific configurations..."
