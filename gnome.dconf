@@ -81,6 +81,7 @@ isolate-workspaces=true
 [shell/extensions/gtile]
 resize1='2x2 0:1 0:1'
 preset-resize-1=['<Primary><Super>KP_1']
+grid-sizes='2x2'
 preset-resize-2=['<Primary><Super>KP_2']
 preset-resize-3=['<Primary><Super>KP_3']
 preset-resize-4=['<Primary><Super>KP_4']
