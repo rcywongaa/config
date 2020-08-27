@@ -109,6 +109,8 @@ alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
+alias source_ros1='source /opt/ros/melodic/setup.zsh'
+alias source_ros2='source /opt/ros/eloquent/setup.zsh'
 
 # Install z directory jumper
 . ~/config/z/z.sh
@@ -117,7 +119,7 @@ alias v='nvim'
 export AUTO_NTFY_DONE_IGNORE="fim vim nvim v ag grep screen meld ssh ussh gitk git-gui"
 eval "$(ntfy shell-integration)"
 
-source /opt/ros/melodic/setup.zsh
+export RCUTILS_CONSOLE_STDOUT_LINE_BUFFERED=1
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
 export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
@@ -196,6 +198,15 @@ this_branch() {
 tag() {
     cmake -H. -B.tag -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
     ln -s .tag/compile_commands.json
+}
+
+# Clean ROS environment variables
+ros_clean() {
+    ROS_ENV_VARS="$(env | grep "ROS_\|AMENT_\|COLCON_\|CATKIN_" | egrep -o '^[^=]+' | tr -s '\n' ' ')"
+    if [[ ! -z "$ROS_ENV_VARS" ]]; then
+        unset ${=ROS_ENV_VARS}
+    fi
+    PATH=$(echo "$PATH" | perl -pe 's|(:?)/opt/ros/[^:]*|\1|')
 }
 
 ####################
