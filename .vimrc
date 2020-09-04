@@ -239,7 +239,7 @@ let g:indent_guides_guide_size = 1
 
 " vim-bookmarks
 let g:bookmark_no_default_key_mappings = 1
-nmap M <Plug>BookmarkToggle
+nmap MM <Plug>BookmarkToggle
 "nmap Mi <Plug>BookmarkAnnotate
 nmap Ma <Plug>BookmarkShowAll
 nmap Mj <Plug>BookmarkNext
