@@ -209,6 +209,14 @@ ros_clean() {
     PATH=$(echo "$PATH" | perl -pe 's|(:?)/opt/ros/[^:]*|\1|')
 }
 
+function mmv()
+{
+    dir="$2"
+    tmp="$2"; tmp="${tmp: -1}"
+    [[ "$tmp" != "/" ]] && dir="$(dirname "$2")"
+    [[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
+}
+
 ####################
 
 ########## THIS MUST BE AT THE END ##########
