@@ -94,12 +94,12 @@ echo "Installing tpm plugins..."
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 779 --user # clipboard indicator
-./gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
-./gnomeshell-extension-manage --version 'latest' --install --extension-id 307 --user # Dash to Dock
+#./gnomeshell-extension-manage --version 'latest' --install --extension-id 10 --user # windowNavigator
+./gnomeshell-extension-manage --version '3.28' --install --extension-id 307 --user # Dash to Dock
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 484 --user # worspace grid
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version 'latest' --install --extension-id 28 --user # gTile
-./gnomeshell-extension-manage --version 'latest' --install --extension-id 1267 --user # No Title Bar
+./gnomeshell-extension-manage --version '3.28' --install --extension-id 723 --user # pixel saver
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
