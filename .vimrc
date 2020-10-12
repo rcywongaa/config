@@ -195,7 +195,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " vim-obsession
 "autocmd VimEnter * Obsess .
-ca ss :Obsess .<CR>
+"ca ss :Obsess .<CR>
 
 " Fswitch
 "nmap <silent> <S-TAB> :FSHere<cr>
@@ -232,6 +232,7 @@ nnoremap <leader>a :Ag<CR>
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
+let NERDTreeCustomOpenArgs={'file':{'reuse':'currenttab'}}
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 0
