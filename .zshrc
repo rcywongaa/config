@@ -101,11 +101,13 @@ if [[ -z "$TMUX" ]]; then
     fi
 fi
 
+alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias usshfs='sshfs -o allow_other,reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
