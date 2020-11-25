@@ -47,7 +47,7 @@ sudo apt -y --ignore-missing install \
     python3-pip \
     curl
 
-sudo pip install ntfy
+sudo pip3 install ntfy
 
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
