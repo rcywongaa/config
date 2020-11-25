@@ -45,9 +45,19 @@ sudo apt -y --ignore-missing install \
     mpv \
     clang-tools-8 \
     python3-pip \
-    curl
+    curl \
+    martmontools \
+    lm-sensors \
+    sensord \
+    memtester \
+    iftop \
+    vnstat \
+    ethtool \
+    cargo
 
 sudo pip3 install ntfy
+
+cargo install proximity-sort
 
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 

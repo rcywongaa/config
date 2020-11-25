@@ -221,6 +221,16 @@ let g:tmux_navigator_disable_when_zoomed = 1
 "let g:ctrlp_working_path_mode = '' "search entire current working directory
 
 " fzf
+" Have :Files order based on proximity: https://github.com/jonhoo/proximity-sort
+function! s:list_cmd()
+  let base = fnamemodify(expand('%'), ':h:.:S')
+  return base == '.' ? 'find -type f' : printf('find -type f | proximity-sort %s', expand('%'))
+endfunction
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+  \                               'options': '--tiebreak=index'}, <bang>0)
+
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>P :History<CR>
 " Open file under cursor

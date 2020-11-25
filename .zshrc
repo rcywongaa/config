@@ -129,6 +129,8 @@ export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
+export PATH=$PATH:/home/rufus/.cargo/bin
+
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 
 # Run fzf and open resultant file in vim
