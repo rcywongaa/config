@@ -96,6 +96,8 @@ set noswapfile
 :let mapleader = " "
 :set cursorline
 
+:set matchpairs+=<:>
+
 " Change directory to currently editing file
 ":set autochdir
 
@@ -335,7 +337,8 @@ nnoremap DD "+dd
 noremap p "+p
 noremap P "+P
 " Yank line paste inline
-nnoremap dl ^"+d$
+nnoremap Dl ^"+d$
+nnoremap dl ^d$
 nnoremap yl ^"+y$
 " Do not overwrite register
 noremap x "_x
@@ -349,6 +352,7 @@ noremap { F{
 noremap } f}
 noremap [ F[
 noremap ] f]
+
 " Replace brackets
 nnoremap r[ %r]``r[
 nnoremap r( %r)``r(
@@ -356,6 +360,7 @@ nnoremap r{ %r}``r{
 nnoremap d( F(%x``x
 nnoremap d[ F[%x``x
 nnoremap d{ F{%x``x
+nnoremap d< F<%x``x
 nnoremap d" F"xf"x
 nnoremap d' F'xf'x
 nnoremap <leader>% [{
@@ -422,6 +427,9 @@ command! ShowOrig vert new | set bt=nofile | r ++edit # | 0d_ | wincmd p
 
 " Always sync syntax
 autocmd BufEnter * :syntax sync fromstart
+
+" Autoresize splits on window resize
+:autocmd VimResized * wincmd =
 
 " Remove cursor if out of focus
 augroup BgHighlight
