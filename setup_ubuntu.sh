@@ -70,6 +70,7 @@ ln -sf ~/config/.tmux.conf ~/.tmux.conf
 ln -sf ~/config/gtk.css ~/.config/gtk-3.0/gtk.css
 mkdir -p ~/.config/ntfy && ln -sf ~/config/ntfy.yml ~/.config/ntfy/ntfy.yml
 mkdir -p ~/.config/nvim && ln -sf ~/config/init.vim ~/.config/nvim/init.vim
+mkdir -p ~/.vim && ln -sf ~/config/filetype.vim ~/.vim/filetype.vim
 
 cd ~/config
 git submodule update --init
