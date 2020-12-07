@@ -5,6 +5,13 @@ if [ "$EUID" -eq 0 ]
     exit
 fi
 
+echo "Adding neovim ppa..."
+sudo add-apt-repository ppa:neovim-ppa/stable
+
+echo "Adding Google ppa..."
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
 echo "Updating..."
 sudo apt -y update
 
@@ -16,6 +23,7 @@ sudo apt -y --ignore-missing install \
     git \
     gitk \
     git-gui \
+    google-chrome-stable \
     meld \
     cmake \
     htop \
@@ -46,14 +54,14 @@ sudo apt -y --ignore-missing install \
     clang-tools-8 \
     python3-pip \
     curl \
-    martmontools \
+    smartmontools \
     lm-sensors \
-    sensord \
     memtester \
     iftop \
     vnstat \
     ethtool \
-    cargo
+    cargo \
+    || { echo 'apt install failed'; exit 1}
 
 sudo pip3 install ntfy
 
@@ -64,12 +72,6 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
 
-echo "Installing google chrome..."
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-sudo apt -y update
-sudo apt -y install google-chrome-stable
 
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
