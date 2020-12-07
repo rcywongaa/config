@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DIR=$(dirname "$(readlink -f "$0")")
+
 if [ "$EUID" -eq 0 ]
     then echo "DO NOT RUN IN SUDO!"
     exit
@@ -76,15 +78,15 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
-ln -sf ~/config/.vimrc ~/.vimrc
-ln -sf ~/config/.zshrc ~/.zshrc
-ln -sf ~/config/.tmux.conf ~/.tmux.conf
-ln -sf ~/config/gtk.css ~/.config/gtk-3.0/gtk.css
-mkdir -p ~/.config/ntfy && ln -sf ~/config/ntfy.yml ~/.config/ntfy/ntfy.yml
-mkdir -p ~/.config/nvim && ln -sf ~/config/init.vim ~/.config/nvim/init.vim
-mkdir -p ~/.vim && ln -sf ~/config/filetype.vim ~/.vim/filetype.vim
+ln -sf ${DIR}/.vimrc ~/.vimrc
+ln -sf ${DIR}/.zshrc ~/.zshrc
+ln -sf ${DIR}/.tmux.conf ~/.tmux.conf
+ln -sf ${DIR}/gtk.css ~/.config/gtk-3.0/gtk.css
+mkdir -p ~/.config/ntfy && ln -sf ${DIR}/ntfy.yml ~/.config/ntfy/ntfy.yml
+mkdir -p ~/.config/nvim && ln -sf ${DIR}/init.vim ~/.config/nvim/init.vim
+mkdir -p ~/.vim && ln -sf ${DIR}/filetype.vim ~/.vim/filetype.vim
 
-cd ~/config
+cd ${DIR}
 git submodule update --init
 
 echo "Install nodejs for coc..."
@@ -92,7 +94,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs
 
 echo "Setting up fzf..."
-~/config/fzf/install
+${DIR}/fzf/install
 
 echo "Installing zplug..."
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
