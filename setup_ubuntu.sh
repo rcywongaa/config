@@ -6,7 +6,7 @@ if [ "$EUID" -eq 0 ]
 fi
 
 echo "Adding neovim ppa..."
-sudo add-apt-repository ppa:neovim-ppa/stable
+sudo add-apt-repository ppa:neovim-ppa/stable -y
 
 echo "Adding Google ppa..."
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -17,7 +17,7 @@ sudo apt -y update
 
 echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
-    nvim \
+    neovim \
     zsh \
     tmux \
     git \
@@ -61,7 +61,7 @@ sudo apt -y --ignore-missing install \
     vnstat \
     ethtool \
     cargo \
-    || { echo 'apt install failed'; exit 1}
+    || { echo 'apt install failed'; exit 1; }
 
 sudo pip3 install ntfy
 
