@@ -143,6 +143,7 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+let g:coc_disable_startup_warning = 1
 
 " CamelCaseMotion
 " Unmap cr used by vim-abolish for coersion: https://github.com/tpope/vim-abolish#coercion
