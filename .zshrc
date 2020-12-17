@@ -19,7 +19,7 @@ __git_files () {
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*:*:ps:*' ignored-patterns '*'
 zstyle ':completion:*' insert-unambiguous true
-zstyle :compinstall filename '/home/rufus/.zshrc'
+zstyle :compinstall filename "/home/$(whoami)/.zshrc"
 # Disable hostname completion
 zstyle ':completion:*:(ssh|scp):hosts' hosts 'reply=()'
 zstyle -e ':completion:*' hosts 'reply=()'
@@ -129,7 +129,7 @@ export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
-export PATH=$PATH:/home/rufus/.cargo/bin
+export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 
