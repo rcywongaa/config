@@ -123,7 +123,6 @@ eval "$(ntfy shell-integration)"
 
 export RCUTILS_CONSOLE_STDOUT_LINE_BUFFERED=1
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export ARM_CC="/home/rufus/arm_toolchain/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf"
 export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
