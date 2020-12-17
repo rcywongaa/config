@@ -226,8 +226,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " fzf
 " Have :Files order based on proximity: https://github.com/jonhoo/proximity-sort
 function! s:list_cmd()
-  let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'find -type f' : printf('find -type f | proximity-sort %s', expand('%'))
+  return printf('find "$(pwd)" -type f | proximity-sort %s', expand('%:p'))
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
