@@ -101,6 +101,8 @@ if [[ -z "$TMUX" ]]; then
     fi
 fi
 
+########## exports and sources ##########
+
 # Install z directory jumper
 . ~/config/z/z.sh
 
@@ -118,6 +120,7 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
 export DISPLAY=:0
+####################
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 
