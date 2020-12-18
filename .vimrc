@@ -244,7 +244,7 @@ nnoremap <leader>a :Ag<CR>
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
-let NERDTreeCustomOpenArgs={'file':{'reuse':'currenttab'}}
+let NERDTreeCustomOpenArgs={'file': {'reuse': 'currenttab', 'where': 'p'}}
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 0
@@ -396,6 +396,9 @@ nnoremap <leader>t :NERDTree %:h<CR>
 " Reload
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
+
+" Show search result count
+:set shortmess-=S
 
 " Remove trailing whitespace (https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file)
 nnoremap <leader>r :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
