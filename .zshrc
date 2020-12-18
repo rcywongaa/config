@@ -101,21 +101,6 @@ if [[ -z "$TMUX" ]]; then
     fi
 fi
 
-alias sudo='sudo ' # this allows us to sudo alias
-alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
-alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
-alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
-alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias usshfs='sshfs -o allow_other,reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
-alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
-alias v='nvim'
-alias source_ros1='source /opt/ros/melodic/setup.zsh'
-alias source_ros2='source /opt/ros/eloquent/setup.zsh'
-alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
-alias source_zsh='source ~/.zshrc'
-
 # Install z directory jumper
 . ~/config/z/z.sh
 
@@ -135,6 +120,21 @@ export PATH=$PATH:/home/$(whoami)/.cargo/bin
 export DISPLAY=:0
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
+
+alias sudo='sudo ' # this allows us to sudo alias
+alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
+alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
+alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
+alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias usshfs='sshfs -o allow_other,reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
+alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
+alias v='nvim'
+alias source_ros1='source /opt/ros/melodic/setup.zsh'
+alias source_ros2='source /opt/ros/eloquent/setup.zsh'
+alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
+alias source_zsh='source ~/.zshrc'
 
 # Run fzf and open resultant file in vim
 # $ fzf
