@@ -113,6 +113,8 @@ alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
 alias source_ros1='source /opt/ros/melodic/setup.zsh'
 alias source_ros2='source /opt/ros/eloquent/setup.zsh'
+alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
+alias source_zsh='source ~/.zshrc'
 
 # Install z directory jumper
 . ~/config/z/z.sh
