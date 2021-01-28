@@ -236,8 +236,8 @@ command! -bang -nargs=? -complete=dir Files
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>P :History<CR>
 " Open file under cursor
-nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query '.expand('<cword>')})<CR>
-nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended -regex ".*/' . expand("%:t:r") . '.(h\|hh\|hpp\|c\|cc\|cpp)$" -not -name "' . expand("%:t") . '"', 'sink': 'e'}))<CR>
+nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query ' . expand('<cword>') . ' --select-1'})<CR>
+nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended -regex ".*/' . expand("%:t:r") . '.(h\|hh\|hpp\|c\|cc\|cpp)$" -not -name "' . expand("%:t") . '"', 'sink': 'e', 'options': '--select-1'}))<CR>
 " https://github.com/junegunn/fzf.vim/issues/346
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <leader>a :Ag<CR>
