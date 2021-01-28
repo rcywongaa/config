@@ -119,7 +119,8 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
-export DISPLAY=:1
+# https://stackoverflow.com/a/49229627/3177701
+export DISPLAY=unix$DISPLAY
 ####################
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
