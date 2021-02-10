@@ -23,6 +23,7 @@ Plug 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree' " Nerdtree
 
@@ -263,6 +264,13 @@ nmap Mx <Plug>BookmarkClearAll
 nmap Mkk <Plug>BookmarkMoveUp
 nmap Mjj <Plug>BookmarkMoveDown
 nmap Mg <Plug>BookmarkMoveToLine
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 "----------------------------------------
 
 
