@@ -112,7 +112,7 @@ gnome_shell_version=$(gnome-shell --version | awk -F '[. ]' '{print $3 "." $4}')
 ./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 779 --user # clipboard indicator
 #./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 10 --user # windowNavigator
 ./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 307 --user # Dash to Dock
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 484 --user # worspace grid
+./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 1485 --user # worspace matrix
 ./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 28 --user # gTile
 ./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 723 --user # pixel saver
