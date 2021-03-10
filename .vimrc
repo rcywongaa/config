@@ -18,7 +18,8 @@ Plug 'morhetz/gruvbox'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdcommenter'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-abolish' " enable :%S to do case-sensitive replace
 Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plug 'junegunn/fzf'
@@ -205,11 +206,11 @@ let g:tmux_navigator_disable_when_zoomed = 1
 "nmap <silent> <S-TAB> :FSHere<cr>
 
 " IndentLine
-"let g:indentLine_char = '⦙'
-"let g:indentLine_enabled = 1
-"let g:indentLine_setColors = 1
-"let g:indentLine_color_gui = '#000000'
-"let g:indentLine_color_term = 25
+let g:indentLine_char = '⦙'
+let g:indentLine_enabled = 1
+let g:indentLine_setColors = 1
+let g:indentLine_color_gui = '#000000'
+let g:indentLine_color_term = 25
 
 " vim-indent-guides
 "let g:indent_guides_auto_colors = 0
