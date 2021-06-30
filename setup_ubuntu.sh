@@ -55,6 +55,7 @@ sudo apt -y --ignore-missing install \
     mpv \
     clang-tools-8 \
     python3-pip \
+    python3-numpy \
     curl \
     smartmontools \
     lm-sensors \
@@ -63,6 +64,7 @@ sudo apt -y --ignore-missing install \
     vnstat \
     ethtool \
     cargo \
+    rename \
     || { echo 'apt install failed'; exit 1; }
 
 sudo pip3 install ntfy

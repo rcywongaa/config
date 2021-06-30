@@ -26,7 +26,10 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'clangd/coc-clangd'
 Plug 'scrooloose/nerdtree' " Nerdtree
+Plug 'dense-analysis/ale'
+Plug 'cespare/vim-toml'
 
 " Unused plugins
 "Plug 'scrooloose/syntastic'
@@ -81,6 +84,12 @@ set noswapfile
 " Auto block comments
 :set formatoptions-=o formatoptions-=r
 
+" Do not hide characters in json / README
+set conceallevel=0
+let g:vim_json_conceal = 0
+autocmd InsertEnter *.json setlocal conceallevel=0
+autocmd InsertLeave *.json setlocal concealcursor=inc
+
 " Free cursor movement
 :set virtualedit=all
 
@@ -132,7 +141,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -218,6 +227,8 @@ let g:indentLine_color_term = 25
 ":hi IndentGuidesEven ctermbg=233
 "let g:indent_guides_enable_on_vim_startup = 1
 "let g:indent_guides_default_mapping = 0
+":set ts=2 sw=2 et
+"let g:indent_guides_start_level = 2
 
 " CtrlP
 "let g:ctrlp_cmd = 'CtrlPMixed'
@@ -258,13 +269,13 @@ let g:bookmark_no_default_key_mappings = 1
 nmap MM <Plug>BookmarkToggle
 "nmap Mi <Plug>BookmarkAnnotate
 nmap Ma <Plug>BookmarkShowAll
-nmap Mj <Plug>BookmarkNext
-nmap Mk <Plug>BookmarkPrev
+nmap Mn <Plug>BookmarkNext
+nmap MN <Plug>BookmarkPrev
 nmap Mc <Plug>BookmarkClear
 nmap Mx <Plug>BookmarkClearAll
-nmap Mkk <Plug>BookmarkMoveUp
-nmap Mjj <Plug>BookmarkMoveDown
-nmap Mg <Plug>BookmarkMoveToLine
+nmap Mk <Plug>BookmarkMoveUp
+nmap Mj <Plug>BookmarkMoveDown
+"nmap Mg <Plug>BookmarkMoveToLine
 
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)

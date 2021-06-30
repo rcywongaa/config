@@ -119,19 +119,18 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
-# https://stackoverflow.com/a/49229627/3177701
-export DISPLAY=unix$DISPLAY
+# Update DISPLAY variable according to the one assigned to gnome-terminal-server
 ####################
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
-
+alias update_display='export DISPLAY=$(cat /proc/$(pidof "gnome-terminal-server")/environ | tr "\0" "\n" | grep ^DISPLAY= | cut -d "=" -f 2)'
 alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias usshfs='sshfs -o allow_other,reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias usshfs='sshfs -o reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
@@ -184,9 +183,11 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m
 }
 
-# fuzzy find history
+# fuzzy find history while ensuring only unique and most recently used order
 h() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | uniq | fzf -e +s --tac | sed -r 's/\\/\\\\/g')
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | \
+      tac | awk '!_[$0]++' | tac | \
+      fzf -e +s --tac | sed -r 's/\\/\\\\/g')
 }
 
 # Create directory and file and echo back filename for chaining
