@@ -111,19 +111,22 @@ export AUTO_NTFY_DONE_IGNORE="fim vim nvim v ag grep screen meld ssh ussh gitk g
 eval "$(ntfy shell-integration)"
 
 export RCUTILS_CONSOLE_STDOUT_LINE_BUFFERED=1
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PYTHONPATH=/opt/drake/lib/python3.6/site-packages:${PYTHONPATH}
+
+# drake related stuff
+export LD_LIBRARY_PATH="/opt/drake/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+export PATH="/opt/drake/bin${PATH:+:${PATH}}"
+export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
-# Update DISPLAY variable according to the one assigned to gnome-terminal-server
-####################
-
 ########## CUSTOM ALIAS & FUNCTIONS ##########
+# Update DISPLAY variable according to the one assigned to gnome-terminal-server
 alias update_display='export DISPLAY=$(cat /proc/$(pidof "gnome-terminal-server")/environ | tr "\0" "\n" | grep ^DISPLAY= | cut -d "=" -f 2)'
+update_display
 alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
@@ -135,7 +138,7 @@ alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChec
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
 alias source_ros1='source /opt/ros/melodic/setup.zsh'
-alias source_ros2='source /opt/ros/eloquent/setup.zsh'
+alias source_ros2='source /opt/ros/foxy/setup.zsh'
 alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
 alias source_zsh='source ~/.zshrc'
 
@@ -229,6 +232,7 @@ function mmv()
     [[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
 }
 
+#source /opt/ros/foxy/setup.zsh
 ####################
 
 ########## THIS MUST BE AT THE END ##########

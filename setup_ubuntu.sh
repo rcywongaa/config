@@ -67,7 +67,7 @@ sudo apt -y --ignore-missing install \
     rename \
     || { echo 'apt install failed'; exit 1; }
 
-sudo pip3 install ntfy
+sudo pip3 install ntfy youtube-dl
 
 cargo install proximity-sort
 

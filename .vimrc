@@ -30,6 +30,7 @@ Plug 'clangd/coc-clangd'
 Plug 'scrooloose/nerdtree' " Nerdtree
 Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
+Plug 'mg979/vim-visual-multi'
 
 " Unused plugins
 "Plug 'scrooloose/syntastic'
@@ -102,10 +103,15 @@ autocmd InsertLeave *.json setlocal concealcursor=inc
 :set relativenumber
 :set hlsearch
 :set incsearch
-:set tabstop=4
 :set nowrap
 :let mapleader = " "
 :set cursorline
+" Soft Tab
+:set expandtab
+:set shiftwidth=2
+:set softtabstop=2
+:set tabstop=2
+
 
 :set matchpairs+=<:>
 
@@ -247,7 +253,7 @@ command! -bang -nargs=? -complete=dir Files
   \                               'options': '--tiebreak=index'}, <bang>0)
 
 nnoremap <leader>p :Files<CR>
-nnoremap <leader>P :History<CR>
+nnoremap <leader>P :call fzf#vim#files("~", 0)<CR>
 " Open file under cursor
 nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query ' . expand('<cword>') . ' --select-1'})<CR>
 nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended -regex ".*/' . expand("%:t:r") . '.(h\|hh\|hpp\|c\|cc\|cpp)$" -not -name "' . expand("%:t") . '"', 'sink': 'e', 'options': '--select-1'}))<CR>
@@ -255,6 +261,7 @@ nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>A :call fzf#vim#ag(expand('<cword>'))<CR>
+nnoremap <leader>* :call fzf#vim#ag(expand('<cword>'))<CR>
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
@@ -283,6 +290,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" vim-visual-multi
+"autocmd User visual_multi_mappings xmap y "+y
 "----------------------------------------
 
 
@@ -339,7 +349,6 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
 nnoremap * *Nzz
-nnoremap <leader>* *Nyw:!ack -r <C-R>"<CR>
 nnoremap N Nzz
 nnoremap n nzz
 " Search from clipboard
@@ -418,6 +427,9 @@ nnoremap <leader>t :NERDTree %:h<CR>
 nnoremap <leader><leader> :tabdo windo source $MYVIMRC<CR>:tabdo wincmd =<CR>:tabdo windo e %<CR>:noh<CR>
 :set autoread
 
+" Set $DISPLAY variable
+command! UpdateDisplay let $DISPLAY = system('cat /proc/$(pidof "gnome-terminal-server")/environ | tr "\0" "\n" | grep ^DISPLAY= | cut -d "=" -f 2')
+
 " Show search result count
 :set shortmess-=S
 
@@ -432,11 +444,6 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
                 \| exe "normal! g'\"" | endif
 endif
-
-" Soft Tab
-:set expandtab
-:set shiftwidth=4
-:set softtabstop=4
 
 " Undo tree navigation
 :set undolevels=5000
