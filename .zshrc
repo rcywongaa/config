@@ -125,8 +125,6 @@ export PATH=$PATH:/home/$(whoami)/.cargo/bin
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 # Update DISPLAY variable according to the one assigned to gnome-terminal-server
-alias update_display='export DISPLAY=$(cat /proc/$(pidof "gnome-terminal-server")/environ | tr "\0" "\n" | grep ^DISPLAY= | cut -d "=" -f 2)'
-update_display
 alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
