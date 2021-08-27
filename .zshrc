@@ -139,6 +139,9 @@ alias source_ros1='source /opt/ros/melodic/setup.zsh'
 alias source_ros2='source /opt/ros/foxy/setup.zsh'
 alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
 alias source_zsh='source ~/.zshrc'
+alias docker_gpu_run='xhost +local:docker && docker run --gpus all -v /tmp/.X11-unix/:/tmp/.X11-unix --env="DISPLAY"'
+alias source_devel='source devel/setup.zsh'
+alias source_install='source devel/setup.zsh'
 
 # Run fzf and open resultant file in vim
 # $ fzf
