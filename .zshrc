@@ -127,7 +127,7 @@ export PATH=$PATH:/home/$(whoami)/.cargo/bin
 # Update DISPLAY variable according to the one assigned to gnome-terminal-server
 alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
-alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml"'
+alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml" -o -name "*.yaml" -o -name "*.yml"'
 alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
@@ -135,7 +135,7 @@ alias usshfs='sshfs -o reconnect,default_permissions,ServerAliveInterval=15,Serv
 alias ursync='rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 alias ag='ag --ignore tags --ignore "*.dae" --ignore "*.obj" --ignore ".fbx"'
 alias v='nvim'
-alias source_ros1='source /opt/ros/melodic/setup.zsh'
+alias source_ros1='source /opt/ros/noetic/setup.zsh'
 alias source_ros2='source /opt/ros/foxy/setup.zsh'
 alias stop_ros='pkill roscore; (pkill gzserver && sleep 2 && pgrep gzserver && pkill -9 gzserver)'
 alias source_zsh='source ~/.zshrc'
@@ -163,9 +163,9 @@ aim() {
 }
 
 # find file and ack pattern
-# $ fack file_name pattern
-fack() {
-    find -name "$1" | ack -x "$2"
+# $ fag file_name pattern
+fag() {
+    find -name "$1" | ag -x "$2"
 }
 
 # Check memory usage of process
