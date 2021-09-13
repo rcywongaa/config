@@ -65,6 +65,7 @@ sudo apt -y --ignore-missing install \
     ethtool \
     cargo \
     rename \
+    calibre \
     || { echo 'apt install failed'; exit 1; }
 
 sudo pip3 install ntfy youtube-dl
