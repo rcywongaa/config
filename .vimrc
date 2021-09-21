@@ -31,6 +31,7 @@ Plug 'scrooloose/nerdtree' " Nerdtree
 Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
 Plug 'mg979/vim-visual-multi'
+Plug 'universal-ctags/ctags'
 
 " Unused plugins
 "Plug 'scrooloose/syntastic'
@@ -162,6 +163,8 @@ map # <Plug>NERDCommenterToggle
 "endfunction
 "let g:coc_disable_startup_warning = 1
 
+" ctags
+map <C-[> <C-T>
 
 " CamelCaseMotion
 " Unmap cr used by vim-abolish for coersion: https://github.com/tpope/vim-abolish#coercion
