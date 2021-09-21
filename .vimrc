@@ -332,6 +332,7 @@ nnoremap <C-=> <C-W>=
 nnoremap ;sp :vsp<CR><C-W>l
 nnoremap ;ta :vsp<CR><C-W>T
 nnoremap ;tn :tabnew<CR>
+nnoremap ;tq :tabclose<CR>
 nnoremap ;tt :vsp<CR><C-W>T:e %:h<CR>
 :ca lsp vsp
 :ca rsp botright vsp
@@ -346,6 +347,9 @@ nnoremap <S-F4> :vertical resize +20<CR>
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
+nnoremap L <nop>
+nnoremap K <nop>
+nnoremap H <nop>
 nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
