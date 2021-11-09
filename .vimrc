@@ -25,8 +25,8 @@ Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'clangd/coc-clangd'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'clangd/coc-clangd'
 Plug 'scrooloose/nerdtree' " Nerdtree
 Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
@@ -101,6 +101,7 @@ autocmd InsertLeave *.json setlocal concealcursor=inc
 :set t_Co=256
 :set background=dark
 :colorscheme gruvbox "bubblegum kolor zenburn jellybeans Tomorrow-Night
+"hi Normal guibg=NONE ctermbg=NONE
 :set relativenumber
 :set hlsearch
 :set incsearch
@@ -113,6 +114,11 @@ autocmd InsertLeave *.json setlocal concealcursor=inc
 :set softtabstop=2
 :set tabstop=2
 
+" Never move cursor
+:set nostartofline
+
+" Make sure .zshrc is loaded
+:set shellcmdflag=-ic
 
 :set matchpairs+=<:>
 
@@ -149,22 +155,23 @@ map # <Plug>NERDCommenterToggle
 "nmap <silent> gi <Plug>(coc-implementation)
 "nmap <silent> gr <Plug>(coc-references)
 ""inoremap <silent><expr> <c-space> coc#refresh()
-"" Use tab for trigger completion with characters ahead and navigate.
-"" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-"inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? "\<C-n>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"let g:coc_disable_startup_warning = 1
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+let g:coc_disable_startup_warning = 1
 
 " ctags
-map <C-[> <C-T>
+"map <C-[> <C-T> " Do not map <C-[> because it is equivalent to mapping <Esc>
+map g[ <C-T>
 
 " CamelCaseMotion
 " Unmap cr used by vim-abolish for coersion: https://github.com/tpope/vim-abolish#coercion
@@ -266,6 +273,8 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : 
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>A :call fzf#vim#ag(expand('<cword>'))<CR>
 nnoremap <leader>* :call fzf#vim#ag(expand('<cword>'))<CR>
+" Have fzf open at the bottom
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
@@ -277,8 +286,9 @@ let g:indent_guides_guide_size = 1
 
 " vim-bookmarks
 let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_highlight_lines = 1
 nmap MM <Plug>BookmarkToggle
-"nmap Mi <Plug>BookmarkAnnotate
+nmap MI <Plug>BookmarkAnnotate
 nmap Ma <Plug>BookmarkShowAll
 nmap Mn <Plug>BookmarkNext
 nmap MN <Plug>BookmarkPrev
@@ -297,6 +307,10 @@ nmap ga <Plug>(EasyAlign)
 
 " vim-visual-multi
 "autocmd User visual_multi_mappings xmap y "+y
+
+" fugitive
+autocmd User FugitiveObject nmap <buffer> - gT
+
 "----------------------------------------
 
 
@@ -417,6 +431,11 @@ nnoremap - gT
 nnoremap = gt
 nnoremap _ :tabm -1<CR>
 nnoremap + :tabm +1<CR>
+
+" Copy filename
+nnoremap <leader>c :let @+=expand("%:t")<CR>
+nnoremap <leader>C :let @+=expand("%:p")<CR>
+
 " Moving between cursorcolumns
 "noremap H 20h
 "noremap L 20l

@@ -128,7 +128,7 @@ export PATH=$PATH:/home/$(whoami)/.cargo/bin
 alias sudo='sudo ' # this allows us to sudo alias
 alias cgrep='grep -r --include="*.hpp" --include="*.cpp" --include="*.h" --include="*.c"'
 alias rfind='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" -o -name "*.launch" -o -name "*.xml" -o -name "*.yaml" -o -name "*.yml"'
-alias cack='find -name "*.h" -o -name "*.c" -o -name "*.hpp" -o -name "*.cpp" -o -name "CMakeLists.txt" | ack --files-from=- '
+alias cag='ag --cpp'
 alias ussh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias uscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias usshfs='sshfs -o reconnect,default_permissions,ServerAliveInterval=15,ServerAliveCountMax=3 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
@@ -142,13 +142,18 @@ alias source_zsh='source ~/.zshrc'
 alias docker_gpu_run='xhost +local:docker && docker run --gpus all -v /tmp/.X11-unix/:/tmp/.X11-unix --env="DISPLAY"'
 alias source_devel='source devel/setup.zsh'
 alias source_install='source devel/setup.zsh'
+alias unzip_all="find . -name '*.zip' -exec sh -c 'unzip -d `dirname {}` {}' ';'"
 
 # Run fzf and open resultant file in vim
-# $ fzf
 fim() {
-    local file
+  local file
+  # If argument is supplied, use argument as query
+  if [ ! -z "$1" ]; then
+    file=$(fzf -1 --exact --query="$1")
+  else
     file=$(fzf -m)
-    [ -n "$file" ] && nvim -p $(echo $file | tr '\n' ' ')
+  fi
+  [ -n "$file" ] && nvim -p $(echo $file | tr '\n' ' ')
 }
 
 # Similar to fim but searches file content instead of file name
@@ -160,12 +165,6 @@ aim() {
   read -r file line <<<"$(ag --nobreak --noheading . | fzf -0 -1 | awk -F: '{print $1, $2}')"
 
   [ -n "$file" ] && nvim -p $(echo $file +$line | tr '\n' ' ')
-}
-
-# find file and ack pattern
-# $ fag file_name pattern
-fag() {
-    find -name "$1" | ag -x "$2"
 }
 
 # Check memory usage of process
@@ -183,8 +182,8 @@ refactor() {
 
 # home-wide directory search
 fd() {
-    cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m
+    cd $(cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
+      -o -type d -print 2> /dev/null | fzf +m)
 }
 
 # fuzzy find history while ensuring only unique and most recently used order
@@ -231,6 +230,17 @@ function mmv()
     tmp="$2"; tmp="${tmp: -1}"
     [[ "$tmp" != "/" ]] && dir="$(dirname "$2")"
     [[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
+}
+
+
+function grep2()
+{
+  rg --multiline "$2.*(.*\n){0,$1}.*$3" | rg "$2|$3"
+}
+
+function range2()
+{
+  rg --multiline "$2.*(.*\n){0,$1}.*$3"
 }
 
 #source /opt/ros/foxy/setup.zsh
