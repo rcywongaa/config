@@ -32,6 +32,9 @@ Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
 Plug 'mg979/vim-visual-multi'
 Plug 'universal-ctags/ctags'
+Plug 'mbbill/undotree'
+"Plug 'wellle/context.vim'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 " Unused plugins
 "Plug 'scrooloose/syntastic'
@@ -150,11 +153,11 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 map # <Plug>NERDCommenterToggle
 
 " coc
-"nmap <silent> gd <Plug>(coc-definition)
-"nmap <silent> gy <Plug>(coc-type-definition)
-"nmap <silent> gi <Plug>(coc-implementation)
-"nmap <silent> gr <Plug>(coc-references)
-""inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -256,7 +259,7 @@ let g:indentLine_color_term = 25
 " fzf
 " Have :Files order based on proximity: https://github.com/jonhoo/proximity-sort
 function! s:list_cmd()
-  return printf('find "$(pwd)" -type f | proximity-sort %s', expand('%:p'))
+  return printf('find "$(pwd)" -type f | proximity-sort "%s"', expand('%:p'))
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -310,6 +313,13 @@ nmap ga <Plug>(EasyAlign)
 
 " fugitive
 autocmd User FugitiveObject nmap <buffer> - gT
+
+" context
+"let g:context_enabled = 0
+"let g:context_max_height = 11
+
+" undotree
+nnoremap <F5> :UndotreeToggle<CR>
 
 "----------------------------------------
 
