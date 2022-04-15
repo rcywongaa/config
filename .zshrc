@@ -55,7 +55,7 @@ PS1=%B%{$fg[blue]%}$'${(r:$COLUMNS::\u2501:)}'%{$reset_color%}%b$PS1
 #bindkey jk vi-cmd-mode
 #bindkey "^H" backward-delete-char
 #bindkey "^R" history-incremental-search-backward
-bindkey '\e.' insert-last-word
+#zle -N insert-last-word smart-insert-last-word
 
 bindkey "^[[3~" delete-char # Delete key
 bindkey "^[[H" beginning-of-line
@@ -87,6 +87,7 @@ function insert-last-word
     fi
 }
 zle -N insert-last-word
+bindkey '\e.' insert-last-word
 
 #source ~/auto-list.zsh
 
@@ -122,6 +123,7 @@ export PYTHONPATH="/opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 export PATH=$PATH:/home/$(whoami)/.cargo/bin
+export PATH=$PATH:/home/$(whoami)/config/bin
 
 ########## CUSTOM ALIAS & FUNCTIONS ##########
 # Update DISPLAY variable according to the one assigned to gnome-terminal-server
@@ -142,7 +144,17 @@ alias source_zsh='source ~/.zshrc'
 alias docker_gpu_run='xhost +local:docker && docker run --gpus all -v /tmp/.X11-unix/:/tmp/.X11-unix --env="DISPLAY"'
 alias source_devel='source devel/setup.zsh'
 alias source_install='source devel/setup.zsh'
-alias unzip_all="find . -name '*.zip' -exec sh -c 'unzip -d `dirname {}` {}' ';'"
+alias disable_lfs='git config --global filter.lfs.smudge "git-lfs smudge --skip -- %f" && git config --global filter.lfs.process "git-lfs filter-process --skip"'
+alias enable_lfs='git config --global filter.lfs.smudge "git-lfs smudge -- %f" && git config --global filter.lfs.process "git-lfs filter-process"'
+
+force_clean() {
+  disable_lfs \
+  && git submodule foreach --recursive 'git clean -xfd && git stash && git reset --hard HEAD'
+}
+
+unzip_all() {
+  find . -name '*.zip' -execdir sh -c 'unzip -d "${1%.*}" "$1"' sh {} \;
+}
 
 # Run fzf and open resultant file in vim
 fim() {
@@ -153,7 +165,7 @@ fim() {
   else
     file=$(fzf -m)
   fi
-  [ -n "$file" ] && nvim -p $(echo $file | tr '\n' ' ')
+  [ -n "$file" ] && nvim -p "$(echo $file | xargs)"
 }
 
 # Similar to fim but searches file content instead of file name
@@ -182,8 +194,8 @@ refactor() {
 
 # home-wide directory search
 fd() {
-    cd $(cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
-      -o -type d -print 2> /dev/null | fzf +m)
+    cd "${1}" && find "$(pwd)" -path '*/\.*' -prune \
+      -o -type d -print 2> /dev/null | fzf +m
 }
 
 # fuzzy find history while ensuring only unique and most recently used order
@@ -232,6 +244,51 @@ function mmv()
     [[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
 }
 
+function drcreate()
+{
+    name="$(cat CONTAINER)" && bin/dr create --name "$name"
+}
+
+function drpack()
+{
+    if [ -z "$1" ]; then
+      snapshot='develop-int-tested'
+    else
+      snapshot="$1"
+    fi
+    name="$(cat CONTAINER)" && bin/dr packages --name "$name" --freeze "$snapshot" && bin/dr packages --name "$name" --install --brain
+}
+
+function drsetup()
+{
+    drcreate && drpack "$1"
+}
+
+function drstop()
+{
+    name="$(cat CONTAINER)" && bin/dr stop --name "$name"
+}
+
+function drenter()
+{
+    name="$(cat CONTAINER)" && bin/dr enter --name "$name"
+}
+
+function drcomp()
+{
+    name="$(cat CONTAINER)" && bin/dr compile --name "$name" "$@"
+}
+
+function drclean()
+{
+    name="$(cat CONTAINER)" && bin/dr clean --build --name "$name"
+}
+
+alias find_errors='ag -A1 "\[gee_main-99\] has died|terminate called after throwing an instance of"' 
+function tests_with_errors()
+{
+  ag -l -A1 "\[gee_main-99\] has died|terminate called after throwing an instance of" | awk -F '/' '{ print $1"/"$2}' | rev | cut -c 3- | rev | sort | uniq
+}
 
 function grep2()
 {
@@ -243,6 +300,67 @@ function range2()
   rg --multiline "$2.*(.*\n){0,$1}.*$3"
 }
 
+function rebase_submodule()
+{
+  if [ -z "$1" ]; then
+    echo "Please provide path to submodule"
+    exit
+  fi
+  submodule_dir="$1"
+  submodule_hash=$(git ls-tree HEAD "${submodule_dir}" | awk '{print $3}')
+  if [ $? -ne 0 ] || [ -z "${submodule_hash}" ]; then
+    echo "Could not determine submodule commit"
+    exit
+  fi
+  pushd "${submodule_dir}"
+  if ! git fetch --all ; then echo "git fetch failed" ; popd ; return ; fi
+  branch=$(git branch --contains | sed '/detached/d' | sed 's/* //' | awk '{print $1}')
+  if ! git switch "${branch}" ; then ; echo "Failed switching to branch ${branch}" ; popd ; return ; fi
+  if ! git rebase "${submodule_hash}" ; then ; echo "Failed rebasing ${branch} on top of ${submodule_hash}" ; popd ; return ; fi
+  echo "Calling git push --force-with-lease in $(pwd)"
+  git push --force-with-lease
+  popd
+  if ! git add "${submodule_dir}" ; then ; echo "Failed to add ${submodule_dir}" ; popd ; return ; fi
+  echo "Submodule git added in $(pwd)"
+}
+
+function rebase_develop()
+{
+  if git fetch origin develop ; then
+    if ! git rebase origin/develop ; then
+      rebase_submodule ext_ws/src/ros_launch_structure
+    fi
+  fi
+}
+
+# Taken from https://github.com/catkin/catkin_tools/issues/551#issuecomment-553521463
+function generate_compile_commands()
+{
+  cd `catkin locate --workspace $(pwd)`
+
+  concatenated="build/compile_commands.json"
+
+  echo "[" > $concatenated
+
+  first=1
+  for d in build/*
+  do
+      f="$d/compile_commands.json"
+
+      if test -f "$f"; then
+          if [ $first -eq 0 ]; then
+              echo "," >> $concatenated
+          fi
+
+          cat $f | sed '1d;$d' >> $concatenated
+      fi
+
+      first=0
+  done
+
+  echo "]" >> $concatenated
+}
+
 #source /opt/ros/foxy/setup.zsh
 ####################
 
@@ -250,4 +368,4 @@ function range2()
 source ~/.zplug/init.zsh
 
 # List zplug plugins here
-zplug "zsh-users/zsh-autosuggestions"
+#zplug "zsh-users/zsh-autosuggestions"
