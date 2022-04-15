@@ -1,7 +1,10 @@
-@import url('/home/rufus/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/stylesheet.css');
-@import url('/home/rufus/.local/share/gnome-shell/extensions/no-title-bar@franglais125.gmail.com/stylesheet-tiled.css');
-
-vte-terminal {
-    padding: 0px;
-}
 vte-terminal {padding: 0px;}
+
+decoration {
+  border: 1px solid #77216F;
+  background: #77216F;
+}
+decoration:backdrop {
+  border: 1px solid #000000;
+  background: #000000;
+}
