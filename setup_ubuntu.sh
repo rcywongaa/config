@@ -133,6 +133,9 @@ git config --global user.email "rcywongaa@gmail.com"
 git config --global user.name "Rufus Wong"
 git config --global core.editor "nvim"
 git config --global submodule.recurse true
+git config --global merge.conflictstyle diff3
+# https://git-scm.com/docs/git-log
+git config --global rebase.instructionFormat "[%ad] (%an <%ae>) %s"
 
 echo "Gnome specific configurations..."
 gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'
