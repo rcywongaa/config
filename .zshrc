@@ -4,7 +4,7 @@ stty -ixon
 HISTFILE=~/.histfile
 HISTSIZE=50000
 SAVEHIST=50000
-setopt appendhistory sharehistory nomatch notify hist_expire_dups_first
+setopt appendhistory sharehistory nomatch notify hist_expire_dups_first hist_ignore_dups
 unsetopt autocd beep correct
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
