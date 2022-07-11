@@ -147,6 +147,14 @@ alias source_install='source devel/setup.zsh'
 alias disable_lfs='git config --global filter.lfs.smudge "git-lfs smudge --skip -- %f" && git config --global filter.lfs.process "git-lfs filter-process --skip"'
 alias enable_lfs='git config --global filter.lfs.smudge "git-lfs smudge -- %f" && git config --global filter.lfs.process "git-lfs filter-process"'
 
+md_to_background() {
+  pandoc -V geometry:paperwidth=53.3cm -V geometry:paperheight=30cm -V geometry:margin=1cm -V fontsize=12pt "$1" -o tmp.pdf \
+  && pdftoppm -jpeg -r 300 tmp.pdf cheatsheet \
+  && mv cheatsheet-1.jpg ~/Pictures/ \
+  && gsettings set org.gnome.desktop.background picture-uri file:////home/rufus/Pictures/cheatsheet-1.jpg \
+  && rm tmp.pdf
+}
+
 force_clean() {
   disable_lfs \
   && git submodule foreach --recursive 'git clean -xfd && git stash && git reset --hard HEAD'
