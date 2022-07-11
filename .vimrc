@@ -266,8 +266,8 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
-nnoremap <leader>p :Files<CR>
-nnoremap <leader>P :call fzf#vim#files("~", 0)<CR>
+nnoremap <C-P> :Files<CR>
+nnoremap <C-S-P> :call fzf#vim#files("~", 0)<CR>
 " Open file under cursor
 nnoremap <leader><Enter> :call fzf#vim#files('.', {'options':'--query ' . expand('<cword>') . ' --select-1'})<CR>
 nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended -regex ".*/' . expand("%:t:r") . '.(h\|hh\|hpp\|c\|cc\|cpp)$" -not -name "' . expand("%:t") . '"', 'sink': 'e', 'options': '--select-1'}))<CR>
