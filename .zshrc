@@ -156,6 +156,12 @@ unzip_all() {
   find . -name '*.zip' -execdir sh -c 'unzip -d "${1%.*}" "$1"' sh {} \;
 }
 
+# Attempts to reattach to a branch that contains current HEAD (counteracts detached HEAD)
+head_branch() {
+  head="$(git rev-parse HEAD)"
+  git show-ref --heads | grep $head | awk '{print $2}' | sed 's$refs/heads/$$'
+}
+
 # Run fzf and open resultant file in vim
 fim() {
   local file
@@ -304,17 +310,17 @@ function rebase_submodule()
 {
   if [ -z "$1" ]; then
     echo "Please provide path to submodule"
-    exit
+    return
   fi
   submodule_dir="$1"
   submodule_hash=$(git ls-tree HEAD "${submodule_dir}" | awk '{print $3}')
   if [ $? -ne 0 ] || [ -z "${submodule_hash}" ]; then
     echo "Could not determine submodule commit"
-    exit
+    return
   fi
   pushd "${submodule_dir}"
   if ! git fetch --all ; then echo "git fetch failed" ; popd ; return ; fi
-  branch=$(git branch --contains | sed '/detached/d' | sed 's/* //' | awk '{print $1}')
+  branch=$(head_branch)
   if ! git switch "${branch}" ; then ; echo "Failed switching to branch ${branch}" ; popd ; return ; fi
   if ! git rebase "${submodule_hash}" ; then ; echo "Failed rebasing ${branch} on top of ${submodule_hash}" ; popd ; return ; fi
   echo "Calling git push --force-with-lease in $(pwd)"
