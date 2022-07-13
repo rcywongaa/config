@@ -81,13 +81,25 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 echo "Changing default shell to zsh..."
 chsh -s /bin/zsh
 
+echo "Installing oh-my-zsh..."
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "Linking config files..."
 ln -sf ${DIR}/.vimrc ~/.vimrc
 ln -sf ${DIR}/.zshrc ~/.zshrc
+ln -sf ${DIR}/oh-my-zsh-custom ~/.oh-my-zsh/custom
 ln -sf ${DIR}/.tmux.conf ~/.tmux.conf
+ln -sf ${DIR}/.p10k.zsh ~/.p10k.zsh
 ln -sf ${DIR}/gtk.css ~/.config/gtk-3.0/gtk.css
 mkdir -p ~/.config/ntfy && ln -sf ${DIR}/ntfy.yml ~/.config/ntfy/ntfy.yml
 mkdir -p ~/.config/nvim && ln -sf ${DIR}/init.vim ~/.config/nvim/init.vim
 mkdir -p ~/.vim && ln -sf ${DIR}/filetype.vim ~/.vim/filetype.vim
+
+echo "Installing fonts..."
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf -O ~/.local/share/fonts/
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf -O ~/.local/share/fonts/
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf -O ~/.local/share/fonts/
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -O ~/.local/share/fonts/
 
 cd ${DIR}
 git submodule update --init

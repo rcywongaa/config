@@ -1,99 +1,125 @@
-# Disable Ctrl-S freeze
-stty -ixon
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=50000
-SAVEHIST=50000
-setopt appendhistory sharehistory nomatch notify hist_expire_dups_first hist_ignore_dups
-unsetopt autocd beep correct
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-alias ls='ls --color=auto'
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Avoid slowdown when completing git files
-__git_files () {
-    _wanted files expl 'local files' _files
-}
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-zstyle ':completion:*' completer _complete _ignored
-zstyle ':completion:*:*:ps:*' ignored-patterns '*'
-zstyle ':completion:*' insert-unambiguous true
-zstyle :compinstall filename "/home/$(whoami)/.zshrc"
-# Disable hostname completion
-zstyle ':completion:*:(ssh|scp):hosts' hosts 'reply=()'
-zstyle -e ':completion:*' hosts 'reply=()'
-zstyle ':completion:*:make:*' path-completion false
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-source "${HOME}"/config/completion.zsh
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-autoload -Uz compinit
-compinit -i
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-zmodload -i zsh/complist
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# End of lines added by compinstall
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Available colors:
-# black
-# red
-# green
-# yellow
-# blue
-# magenta
-# cyan
-# white
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
 
-autoload -U colors && colors
-RPROMPT="%{$fg[cyan]%}%B%~%b%{$reset_color%}"
-PROMPT="%{$fg[black]%}$%B%{$fg[yellow]%}>%b%{$fg[black]%}$%{$reset_color%}"
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
-setopt promptsubst
-PS1=%B%{$fg[blue]%}$'${(r:$COLUMNS::\u2501:)}'%{$reset_color%}%b$PS1
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-#bindkey -v
-#bindkey jk vi-cmd-mode
-#bindkey "^H" backward-delete-char
-#bindkey "^R" history-incremental-search-backward
-#zle -N insert-last-word smart-insert-last-word
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-bindkey "^[[3~" delete-char # Delete key
-bindkey "^[[H" beginning-of-line
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[7~" beginning-of-line
-bindkey "^[[F" end-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[8~" end-of-line
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-word_pos=-1
-cmd_pos=-1
-word_count=0
-offset=1
-function insert-last-word
-{
-    zmodload -i zsh/parameter
-    zle .insert-last-word -- ${cmd_pos} ${word_pos}
-    buffer=${history[`expr $HISTNO - $offset`]}
-    word_count=${(w)#history[`expr $HISTNO - $offset`]}
-    word_pos=`expr "${word_pos}" - 1`
-    if [[ `expr 0 - $word_pos` -gt $word_count ]]; then
-        word_pos=-1
-        cmd_pos=-1
-        #while [[ ${history[`expr $HISTNO - $offset`]} == ${history[`expr $HISTNO - $offset - 1`]} ]]; do
-            offset=`expr "${offset}" + 1`
-        #done
-    else
-        cmd_pos=0
-    fi
-}
-zle -N insert-last-word
-bindkey '\e.' insert-last-word
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
 
-#source ~/auto-list.zsh
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-#TODO: Hint for ..
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-# Launch tmux on start
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  #git
+  zsh-autosuggestions
+  zsh-autocomplete
+  zsh-syntax-highlighting
+  zsh-z
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+#################### CUSTOM STUFF ####################
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion) # List history suggestions before completion
+bindkey '^ ' autosuggest-accept # Use Ctrl-Space to accept suggestions
+zstyle ':completion:*:*:man:*:*' menu select=long search # Suppress "zsh: do you wish to see all X possibilities"
+
+########## tmux setup ##########
 if [[ -z "$TMUX" ]]; then
     if [[ -n "$(tmux list-session | grep -v 'attached')" ]]; then
         tmux a
@@ -103,9 +129,6 @@ if [[ -z "$TMUX" ]]; then
 fi
 
 ########## exports and sources ##########
-
-# Install z directory jumper
-. ~/config/z/z.sh
 
 # Use ntfy for notifying long commands
 export AUTO_NTFY_DONE_IGNORE="fim vim nvim v ag grep screen meld ssh ussh gitk git-gui"
@@ -353,11 +376,5 @@ function generate_compile_commands()
   jq -s 'map(.[])' **/compile_commands.json > compile_commands.json
 }
 
-#source /opt/ros/foxy/setup.zsh
-####################
-
-########## THIS MUST BE AT THE END ##########
-source ~/.zplug/init.zsh
-
-# List zplug plugins here
-#zplug "zsh-users/zsh-autosuggestions"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
