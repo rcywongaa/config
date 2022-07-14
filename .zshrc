@@ -116,7 +116,9 @@ source $ZSH/oh-my-zsh.sh
 #################### CUSTOM STUFF ####################
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion) # List history suggestions before completion
+zstyle ':autocomplete:*' insert-unambiguous yes # Tab inserts unambiguous
 bindkey '^ ' autosuggest-accept # Use Ctrl-Space to accept suggestions
+zstyle ':autocomplete:tab:*' widget-style menu-complete
 zstyle ':completion:*:*:man:*:*' menu select=long search # Suppress "zsh: do you wish to see all X possibilities"
 
 ########## tmux setup ##########
