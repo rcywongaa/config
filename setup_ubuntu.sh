@@ -130,6 +130,7 @@ echo "Installing tpm plugins..."
 ./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
 ./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
+./gnomeshell-extension-manage --version latest --install --extension-id 891 --user #  windows blur effect
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
