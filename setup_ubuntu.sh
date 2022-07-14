@@ -122,15 +122,14 @@ echo "Installing tpm plugins..."
 # install the plugins
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
-gnome_shell_version=$(gnome-shell --version | awk -F '[. ]' '{print $3 "." $4}')
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 779 --user # clipboard indicator
-#./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 10 --user # windowNavigator
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 307 --user # Dash to Dock
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 1485 --user # worspace matrix
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 545 --user # hide top bar
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 28 --user # gTile
-./gnomeshell-extension-manage --version "${gnome_shell_version}" --install --extension-id 723 --user # pixel saver
+./gnomeshell-extension-manage --version latest --install --extension-id 779 --user # clipboard indicator
+#./gnomeshell-extension-manage --version latest --install --extension-id 10 --user # windowNavigator
+./gnomeshell-extension-manage --version latest --install --extension-id 307 --user # Dash to Dock
+./gnomeshell-extension-manage --version latest --install --extension-id 1485 --user # worspace matrix
+./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
+./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
+./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
