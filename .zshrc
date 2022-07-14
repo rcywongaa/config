@@ -121,15 +121,6 @@ bindkey '^ ' autosuggest-accept # Use Ctrl-Space to accept suggestions
 zstyle ':autocomplete:tab:*' widget-style menu-complete
 zstyle ':completion:*:*:man:*:*' menu select=long search # Suppress "zsh: do you wish to see all X possibilities"
 
-########## tmux setup ##########
-if [[ -z "$TMUX" ]]; then
-    if [[ -n "$(tmux list-session | grep -v 'attached')" ]]; then
-        tmux a
-    else
-        tmux new
-    fi
-fi
-
 # Custom insert-last-word to cycle all previous words
 word_pos=-1
 cmd_pos=-1
