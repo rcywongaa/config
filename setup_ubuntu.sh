@@ -87,6 +87,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 echo "Linking config files..."
 ln -sf ${DIR}/.vimrc ~/.vimrc
 ln -sf ${DIR}/.zshrc ~/.zshrc
+rm -r ~/.oh-my-zsh/custom
 ln -sf ${DIR}/oh-my-zsh-custom ~/.oh-my-zsh/custom
 ln -sf ${DIR}/.p10k.zsh ~/.p10k.zsh
 ln -sf ${DIR}/gtk.css ~/.config/gtk-3.0/gtk.css
