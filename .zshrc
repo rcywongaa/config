@@ -85,6 +85,13 @@ plugins=(
   zsh-z
 )
 
+########## ZSH PLUGIN CONFIGS ##########
+HISTFILE=~/.histfile
+HISTSIZE=50000
+SAVEHIST=50000
+ZSH_AUTOSUGGEST_STRATEGY=(history completion) # List history suggestions before completion
+####################
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -113,11 +120,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#################### CUSTOM STUFF ####################
-
-ZSH_AUTOSUGGEST_STRATEGY=(history completion) # List history suggestions before completion
+#################### MISC CONFIGS ####################
 zstyle ':autocomplete:*' insert-unambiguous yes # Tab inserts unambiguous
 bindkey '^ ' autosuggest-accept # Use Ctrl-Space to accept suggestions
+# Pressing tab still occasionally causes "zsh: do you wish to see all X possiblities"
+# Requires zsh 5.9 for fix
+# https://github.com/marlonrichert/zsh-autocomplete/issues/291
 zstyle ':autocomplete:tab:*' widget-style menu-complete
 zstyle ':completion:*:*:man:*:*' menu select=long search # Suppress "zsh: do you wish to see all X possibilities"
 
@@ -146,7 +154,7 @@ function insert-last-word
 zle -N insert-last-word
 bindkey '\e.' insert-last-word
 
-########## exports and sources ##########
+########## EXPORTS AND SOURCES ##########
 
 # Use ntfy for notifying long commands
 export AUTO_NTFY_DONE_IGNORE="fim vim nvim v ag grep screen meld ssh ussh gitk git-gui"
