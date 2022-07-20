@@ -21,6 +21,7 @@ echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
     neovim \
     zsh \
+    terminator \
     git \
     gitk \
     git-gui \
