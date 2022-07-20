@@ -101,6 +101,10 @@ wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20B
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf -O ~/.local/share/fonts/
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -O ~/.local/share/fonts/
 
+echo "Installing terminator plugin..."
+mkdir -p ~/.config/terminator/plugins
+ln -sf ${DIR}/terminator-open-scrollback-plugin/open_scrollback.py ~/.config/terminator/plugins/open_scrollback.py
+
 cd ${DIR}
 git submodule update --init
 
@@ -111,6 +115,9 @@ sudo apt install nodejs
 echo "Setting up fzf..."
 ${DIR}/fzf/install
 
+echo "Installing GNOME extensions..."
+mkdir -p ~/.local/share/gnome-shell/extensions
+ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
 echo "Installing zplug..."
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
@@ -130,7 +137,6 @@ echo "Installing tpm plugins..."
 ./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
 ./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
-./gnomeshell-extension-manage --version latest --install --extension-id 891 --user #  windows blur effect
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
