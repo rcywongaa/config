@@ -21,7 +21,6 @@ echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
     neovim \
     zsh \
-    tmux \
     git \
     gitk \
     git-gui \
@@ -88,7 +87,6 @@ echo "Linking config files..."
 ln -sf ${DIR}/.vimrc ~/.vimrc
 ln -sf ${DIR}/.zshrc ~/.zshrc
 ln -sf ${DIR}/oh-my-zsh-custom ~/.oh-my-zsh/custom
-ln -sf ${DIR}/.tmux.conf ~/.tmux.conf
 ln -sf ${DIR}/.p10k.zsh ~/.p10k.zsh
 ln -sf ${DIR}/gtk.css ~/.config/gtk-3.0/gtk.css
 mkdir -p ~/.config/ntfy && ln -sf ${DIR}/ntfy.yml ~/.config/ntfy/ntfy.yml
@@ -118,16 +116,6 @@ ${DIR}/fzf/install
 echo "Installing GNOME extensions..."
 mkdir -p ~/.local/share/gnome-shell/extensions
 ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
-echo "Installing zplug..."
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
-echo "Cloning tpm..."
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-echo "Installing tpm plugins..."
-# Taken from https://github.com/tmux-plugins/tpm/issues/6
-# install the plugins
-~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
 ./gnomeshell-extension-manage --version latest --install --extension-id 779 --user # clipboard indicator
