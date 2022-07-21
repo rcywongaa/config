@@ -22,9 +22,6 @@
 [submodule "oh-my-zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = oh-my-zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "terminator-open-scrollback-plugin"]
-	path = terminator-open-scrollback-plugin
-	url = git@github.com:rcywongaa/terminator-open-scrollback-plugin.git
 [submodule "gnome-shell-extension-wbe"]
 	path = gnome-shell-extension-wbe
 	url = https://github.com/rcywongaa/gnome-shell-extension-wbe

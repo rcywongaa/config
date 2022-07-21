@@ -101,8 +101,8 @@ wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20I
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -O ~/.local/share/fonts/
 
 echo "Installing terminator plugin..."
-mkdir -p ~/.config/terminator/plugins
-ln -sf ${DIR}/terminator-open-scrollback-plugin/open_scrollback.py ~/.config/terminator/plugins/open_scrollback.py
+rm -r ~/.config/terminator
+ln -sf ${DIR}/terminator-config ~/.config/terminator
 
 cd ${DIR}
 git submodule update --init
