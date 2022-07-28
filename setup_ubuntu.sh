@@ -141,8 +141,10 @@ git config --global user.name "Rufus Wong"
 git config --global core.editor "nvim"
 git config --global submodule.recurse true
 git config --global merge.conflictstyle diff3
+git config --global core.pager 'less -FRX' # do not run less unnecessarily
 # https://git-scm.com/docs/git-log
 git config --global rebase.instructionFormat "[%ad] (%an <%ae>) %s"
+# Optionally: https://github.com/emilio/clang-format-merge
 
 echo "Gnome specific configurations..."
 gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'
