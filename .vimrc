@@ -324,6 +324,8 @@ autocmd User FugitiveObject nmap <buffer> - gT
 " undotree
 nnoremap <F5> :UndotreeToggle<CR>
 
+" vim-interestingwords
+nnoremap <leader>* :call InterestingWords('n')<cr>
 "----------------------------------------
 
 
