@@ -33,6 +33,7 @@ Plug 'cespare/vim-toml'
 Plug 'mg979/vim-visual-multi'
 Plug 'universal-ctags/ctags'
 Plug 'mbbill/undotree'
+Plug 'lfv89/vim-interestingwords'
 "Plug 'wellle/context.vim'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
@@ -261,6 +262,8 @@ let g:indentLine_color_term = 25
 function! s:list_cmd()
   return printf('find "$(pwd)" -type f | proximity-sort "%s"', expand('%:p'))
 endfunction
+
+"--------------------
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
