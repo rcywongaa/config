@@ -126,6 +126,7 @@ ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani
 ./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
 ./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
+./gnomeshell-extension-manage --version latest --install --extension-id 120 --user # system monitor
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
