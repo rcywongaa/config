@@ -21,5 +21,5 @@ class OpenScrollback(plugin.Plugin):
                 f.write(content)
             tab = self.current_window.tab_new()
             new_terminal = self.current_window.get_focussed_terminal()
-            command = "vim " + temp_file.name + '\n'
+            command = " vim " + temp_file.name + '\n'
             new_terminal.vte.feed_child(str(command).encode("utf-8"))
