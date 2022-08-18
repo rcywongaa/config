@@ -83,6 +83,7 @@ plugins=(
   zsh-autocomplete
   zsh-syntax-highlighting
   zsh-z
+  tmux
 )
 
 ########## ZSH PLUGIN CONFIGS ##########
