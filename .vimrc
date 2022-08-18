@@ -25,8 +25,8 @@ Plug 'bkad/CamelCaseMotion'  " word motion with camelcase and underscores
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'clangd/coc-clangd'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'clangd/coc-clangd'
 Plug 'scrooloose/nerdtree' " Nerdtree
 Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
@@ -278,7 +278,7 @@ nmap <S-TAB> :call fzf#run(fzf#wrap({'source': 'find . -regextype posix-extended
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>A :call fzf#vim#ag(expand('<cword>'))<CR>
-nnoremap <leader>* :call fzf#vim#ag(expand('<cword>'))<CR>
+"nnoremap <leader>* :call fzf#vim#ag(expand('<cword>'))<CR>
 " Have fzf open at the bottom
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
 
