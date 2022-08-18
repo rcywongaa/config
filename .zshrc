@@ -90,6 +90,7 @@ HISTFILE=~/.histfile
 HISTSIZE=50000
 SAVEHIST=50000
 ZSH_AUTOSUGGEST_STRATEGY=(history completion) # List history suggestions before completion
+setopt HIST_IGNORE_SPACE # Do not save commands starting with <space> in history
 ####################
 
 source $ZSH/oh-my-zsh.sh
