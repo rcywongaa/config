@@ -370,23 +370,23 @@ function rebase_submodule()
     echo "Please provide path to submodule"
     return
   fi
-  #current_submodule_hash=$(git ls-tree HEAD "${submodule_dir}" | awk '{print $3}')
-  #if [ $? -ne 0 ] || [ -z "${current_submodule_hash}" ]; then
-    #echo "Could not determine current submodule commit"
-    #return
-  #fi
+  submodule_dir="$1"
+  current_submodule_hash=$(git ls-tree HEAD "${submodule_dir}" | awk '{print $3}')
+  if [ $? -ne 0 ] || [ -z "${current_submodule_hash}" ]; then
+    echo "Could not determine current submodule commit"
+    return
+  fi
   required_submodule_hash=$(git rebase --show-current-patch | grep "+Subproject commit " | awk '{print $3}')
   if [ $? -ne 0 ] || [ -z "${required_submodule_hash}" ]; then
     echo "Could not determine required submodule commit"
     return
   fi
-  submodule_dir="$1"
   pushd "${submodule_dir}"
   if ! git fetch --all ; then echo "git fetch failed" ; popd ; return ; fi
   # use xargs to trim spaces
-  branch="$(git branch --contains ${required_submodule_hash} | xargs)"
+  branch="$(git branch --contains ${required_submodule_hash} | grep -v "HEAD detached" | xargs)"
   if ! git switch "${branch}" ; then ; echo "Failed switching to branch ${branch}" ; popd ; return ; fi
-  if ! git rebase "${submodule_hash}" ; then ; echo "Failed rebasing ${branch} on top of ${submodule_hash}" ; popd ; return ; fi
+  if ! git rebase "${current_submodule_hash}" ; then ; echo "Failed rebasing ${branch} on top of ${current_submodule_hash}" ; popd ; return ; fi
   echo "Calling git push --force-with-lease in $(pwd)"
   git push --force-with-lease
   popd
