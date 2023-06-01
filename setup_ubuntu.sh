@@ -66,7 +66,13 @@ sudo apt -y --ignore-missing install \
     cargo \
     rename \
     calibre \
+    texlive \
+    latexmk \
+    pandoc \
+    tlp \
     || { echo 'apt install failed'; exit 1; }
+
+sudo tlp start
 
 sudo pip3 install ntfy youtube-dl
 
@@ -120,14 +126,15 @@ mkdir -p ~/.local/share/gnome-shell/extensions
 ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
-./gnomeshell-extension-manage --version latest --install --extension-id 779 --user # clipboard indicator
+./gnomeshell-extension-manage --version latest --install --extension-id 4839 --user # clipboard history
 #./gnomeshell-extension-manage --version latest --install --extension-id 10 --user # windowNavigator
-./gnomeshell-extension-manage --version latest --install --extension-id 307 --user # Dash to Dock
+#./gnomeshell-extension-manage --version latest --install --extension-id 307 --user # Dash to Dock
+./gnomeshell-extension-manage --version latest --install --extension-id 1160 --user # Dash to panel
 ./gnomeshell-extension-manage --version latest --install --extension-id 1485 --user # worspace matrix
 ./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
 ./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
-./gnomeshell-extension-manage --version latest --install --extension-id 120 --user # system monitor
+./gnomeshell-extension-manage --version latest --install --extension-id 3010 --user # system monitor
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
@@ -147,5 +154,8 @@ git config --global rebase.instructionFormat "[%ad] (%an <%ae>) %s"
 
 echo "Gnome specific configurations..."
 gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'
+
+echo "Disabling middle click paste..."
+ln -sf ${DIR}/.xbindkeysrc ~/.xbindkeysrc
 
 echo "Done, please relog in"
