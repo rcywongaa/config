@@ -2,7 +2,8 @@
   borderless = True
   scroll_tabbar = True
   title_hide_sizetext = True
-  inactive_color_offset = 0.5
+  title_inactive_fg_color = "#eeeeec"
+  inactive_color_offset = 0.6060606060606061
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, InactivityWatch, OpenScrollback
 [keybindings]
   new_tab = <Alt>w
@@ -28,10 +29,11 @@
   layout_launcher = None
 [profiles]
   [[default]]
-    background_darkness = 0.75
+    background_darkness = 0.8
     background_type = transparent
     cursor_color = "#aaaaaa"
     font = MesloLGS NF 10
+    foreground_color = "#ffffff"
     show_titlebar = False
     scrollbar_position = hidden
     scrollback_infinite = True
