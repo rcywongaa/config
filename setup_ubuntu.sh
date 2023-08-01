@@ -70,13 +70,16 @@ sudo apt -y --ignore-missing install \
     latexmk \
     pandoc \
     tlp \
+    xournal \
+    nautilus-actions \
+    gir1.2-gtop-2.0 gir1.2-nm-1.0 gir1.2-clutter-1.0 gnome-system-monitor \
     || { echo 'apt install failed'; exit 1; }
 
 sudo tlp start
 
 sudo pip3 install ntfy youtube-dl
 
-cargo install proximity-sort
+#cargo install proximity-sort
 
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
@@ -114,9 +117,9 @@ ln -sf ${DIR}/terminator-config ~/.config/terminator
 cd ${DIR}
 git submodule update --init
 
-echo "Install nodejs for coc..."
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt install nodejs
+#echo "Install nodejs for coc..."
+#curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+#sudo apt install nodejs
 
 echo "Setting up fzf..."
 ${DIR}/fzf/install
