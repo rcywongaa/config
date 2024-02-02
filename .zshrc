@@ -83,7 +83,7 @@ plugins=(
   zsh-autocomplete
   zsh-syntax-highlighting
   zsh-z
-  tmux
+  #tmux
 )
 
 ########## ZSH PLUGIN CONFIGS ##########
@@ -125,6 +125,8 @@ source $ZSH/oh-my-zsh.sh
 #################### MISC CONFIGS ####################
 zstyle ':autocomplete:*' insert-unambiguous yes # Tab inserts unambiguous
 bindkey '^ ' autosuggest-accept # Use Ctrl-Space to accept suggestions
+bindkey "${terminfo[kcuu1]}" fzf-history-widget # bind up key to history search
+#bindkey '^[[A' fzf-history-widget # bind up key to history search
 # Pressing tab still occasionally causes "zsh: do you wish to see all X possiblities"
 # Requires zsh 5.9 for fix
 # https://github.com/marlonrichert/zsh-autocomplete/issues/291
@@ -307,46 +309,6 @@ function mmv()
     tmp="$2"; tmp="${tmp: -1}"
     [[ "$tmp" != "/" ]] && dir="$(dirname "$2")"
     [[ -a "$dir" ]] || mkdir -p "$dir" && mv "$@"
-}
-
-function drcreate()
-{
-    name="$(cat CONTAINER)" && bin/dr create --name "$name"
-}
-
-function drpack()
-{
-    if [ -z "$1" ]; then
-      snapshot='develop-int-tested'
-    else
-      snapshot="$1"
-    fi
-    name="$(cat CONTAINER)" && bin/dr packages --name "$name" --freeze "$snapshot" && bin/dr packages --name "$name" --install --brain
-}
-
-function drsetup()
-{
-    drcreate && drpack "$1"
-}
-
-function drstop()
-{
-    name="$(cat CONTAINER)" && bin/dr stop --name "$name"
-}
-
-function drenter()
-{
-    name="$(cat CONTAINER)" && bin/dr enter --name "$name"
-}
-
-function drcomp()
-{
-    name="$(cat CONTAINER)" && bin/dr compile --name "$name" "$@"
-}
-
-function drclean()
-{
-    name="$(cat CONTAINER)" && bin/dr clean --build --name "$name"
 }
 
 alias find_errors='ag -A1 "\[gee_main-99\] has died|terminate called after throwing an instance of"' 

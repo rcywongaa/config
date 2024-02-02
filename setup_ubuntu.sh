@@ -136,8 +136,10 @@ ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani
 ./gnomeshell-extension-manage --version latest --install --extension-id 1485 --user # worspace matrix
 ./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
-./gnomeshell-extension-manage --version latest --install --extension-id 723 --user # pixel saver
+./gnomeshell-extension-manage --version latest --install --extension-id 1267 --user # no title bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 3010 --user # system monitor
+./gnomeshell-extension-manage --version latest --install --extension-id 1319 --user # GSConnect
+./gnomeshell-extension-manage --version latest --install --extension-id 3843 --user # Just perfection
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
