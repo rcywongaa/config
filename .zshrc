@@ -266,10 +266,11 @@ fd() {
 }
 
 # fuzzy find history while ensuring only unique and most recently used order
+# Also ensures multiline history works correctly
 h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | sed -r 's/ *[0-9]*\*? *//' | \
       tac | awk '!_[$0]++' | tac | \
-      fzf -e +s --tac | sed -r 's/\\/\\\\/g')
+      fzf -e +s --tac | sed -r 's/\\/\\\\/g' | xargs -0 -I{} echo -e {})
 }
 
 # Create directory and file and echo back filename for chaining
