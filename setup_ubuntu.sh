@@ -203,7 +203,4 @@ git config --global rebase.instructionFormat "[%ad] (%an <%ae>) %s"
 echo "Gnome specific configurations..."
 gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'
 
-echo "Disabling middle click paste..."
-ln -sf ${DIR}/.xbindkeysrc ~/.xbindkeysrc
-
 echo "Done, please relog in"
