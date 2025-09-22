@@ -33,7 +33,6 @@ sudo apt -y --ignore-missing install \
     xclip \
     sysstat \
     speedcrunch \
-    ctags \
     inkscape \
     gnome-tweak-tool \
     gparted \
@@ -53,7 +52,6 @@ sudo apt -y --ignore-missing install \
     parcellite \
     picocom \
     mpv \
-    clang-tools-8 \
     python3-pip \
     python3-numpy \
     curl \
@@ -71,34 +69,78 @@ sudo apt -y --ignore-missing install \
     pandoc \
     tlp \
     xournal \
-    nautilus-actions \
+    gnome-shell-extensions \
+    pipx \
+    fzf \
+    flatpak \
+    kdenlive \
+    timeshift \
+    tesseract-ocr imagemagick scrot xsel \
     gir1.2-gtop-2.0 gir1.2-nm-1.0 gir1.2-clutter-1.0 gnome-system-monitor \
     || { echo 'apt install failed'; exit 1; }
 
 sudo tlp start
 
-sudo pip3 install ntfy youtube-dl
+pipx ensurepath
+pipx install youtube-dl
+
+echo "Setting up Docker..."
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+#sudo apt install gnome-software-plugin-flatpak
+#flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#flatpak install flathub io.github.seadve.Kooha
+
 
 #cargo install proximity-sort
-
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
 
+#echo "Changing default shell to zsh..."
+#chsh -s /bin/zsh
 
-echo "Changing default shell to zsh..."
-chsh -s /bin/zsh
+#echo "Installing oh-my-zsh..."
+#sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "Installing oh-my-zsh..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "Setting up fish shell..."
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt install fish
+
+chsh -s $(which fish)
+
+fish
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install IlanCosman/tide@v6
+fisher install PatrickF1/fzf.fish
+#fisher install meaningful-ooo/sponge
+fisher install franciscolourenco/done
+fisher install jethrokuan/z
+fisher install edc/bass
+
+tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
+
+sudo snap install code-insiders --classic
+sudo snap install kooha
+
+echo "Setting up OCR..."
+sudo ln -s ~/config/bin/lens /usr/local/bin/lens 
 
 echo "Linking config files..."
 ln -sf ${DIR}/.vimrc ~/.vimrc
-ln -sf ${DIR}/.zshrc ~/.zshrc
-rm -r ~/.oh-my-zsh/custom
-ln -sf ${DIR}/oh-my-zsh-custom ~/.oh-my-zsh/custom
-ln -sf ${DIR}/.p10k.zsh ~/.p10k.zsh
+#ln -sf ${DIR}/.zshrc ~/.zshrc
+#rm -r ~/.oh-my-zsh/custom
+#ln -sf ${DIR}/oh-my-zsh-custom ~/.oh-my-zsh/custom
+#ln -sf ${DIR}/.p10k.zsh ~/.p10k.zsh
 ln -sf ${DIR}/gtk.css ~/.config/gtk-3.0/gtk.css
 mkdir -p ~/.config/ntfy && ln -sf ${DIR}/ntfy.yml ~/.config/ntfy/ntfy.yml
 mkdir -p ~/.config/nvim && ln -sf ${DIR}/init.vim ~/.config/nvim/init.vim
@@ -121,22 +163,23 @@ git submodule update --init
 #curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 #sudo apt install nodejs
 
-echo "Setting up fzf..."
-${DIR}/fzf/install
+#echo "Setting up fzf..."
+#${DIR}/fzf/install
 
 echo "Installing GNOME extensions..."
 mkdir -p ~/.local/share/gnome-shell/extensions
-ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
+
+# windows blur effect deprecated
+#ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
 
 # http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
 ./gnomeshell-extension-manage --version latest --install --extension-id 4839 --user # clipboard history
 #./gnomeshell-extension-manage --version latest --install --extension-id 10 --user # windowNavigator
-#./gnomeshell-extension-manage --version latest --install --extension-id 307 --user # Dash to Dock
 ./gnomeshell-extension-manage --version latest --install --extension-id 1160 --user # Dash to panel
 ./gnomeshell-extension-manage --version latest --install --extension-id 1485 --user # worspace matrix
-./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
+#./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
 ./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
-./gnomeshell-extension-manage --version latest --install --extension-id 1267 --user # no title bar
+#./gnomeshell-extension-manage --version latest --install --extension-id 1267 --user # no title bar (unmaintained)
 ./gnomeshell-extension-manage --version latest --install --extension-id 3010 --user # system monitor
 ./gnomeshell-extension-manage --version latest --install --extension-id 1319 --user # GSConnect
 ./gnomeshell-extension-manage --version latest --install --extension-id 3843 --user # Just perfection
