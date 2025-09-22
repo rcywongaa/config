@@ -1,10 +1,9 @@
 [global_config]
   borderless = True
   scroll_tabbar = True
-  title_hide_sizetext = True
-  title_inactive_fg_color = "#eeeeec"
   inactive_color_offset = 0.75
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, InactivityWatch, OpenScrollback
+  disable_mouse_paste = True
 [keybindings]
   new_tab = <Alt>w
   go_up = <Alt>k
@@ -26,12 +25,11 @@
   switch_to_tab_9 = <Alt>9
   switch_to_tab_10 = <Alt>0
   new_window = None
-  layout_launcher = None
+  layout_launcher = ""
 [profiles]
   [[default]]
     background_darkness = 0.8
     background_type = transparent
-    cursor_color = "#aaaaaa"
     font = MesloLGS NF 10
     foreground_color = "#ffffff"
     show_titlebar = False
