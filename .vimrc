@@ -385,13 +385,18 @@ nnoremap <leader>J J
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :w !sudo tee %<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
 nnoremap * *Nzz
 nnoremap N Nzz
 nnoremap n nzz
 " Search from clipboard
 nnoremap <leader>/ /<C-R>+
-" Search for visually selected text
-vnoremap * y/<C-R>"<CR>
+" Search for visually selected text (including special symbols)
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 " Search for bad whitespace
 nnoremap <leader>$ /[ ]\+$<CR>``zz
 " Unhighlight
