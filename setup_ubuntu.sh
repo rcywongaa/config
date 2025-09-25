@@ -171,17 +171,17 @@ mkdir -p ~/.local/share/gnome-shell/extensions
 # windows blur effect deprecated
 #ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
 
-# http://bernaerts.dyndns.org/linux/76-gnome/345-gnome-shell-install-remove-extension-command-line-script#h2-all-in-one-installation-removal-script
-./gnomeshell-extension-manage --version latest --install --extension-id 4839 --user # clipboard history
-#./gnomeshell-extension-manage --version latest --install --extension-id 10 --user # windowNavigator
-./gnomeshell-extension-manage --version latest --install --extension-id 1160 --user # Dash to panel
-./gnomeshell-extension-manage --version latest --install --extension-id 1485 --user # worspace matrix
-#./gnomeshell-extension-manage --version latest --install --extension-id 545 --user # hide top bar
-./gnomeshell-extension-manage --version latest --install --extension-id 28 --user # gTile
-#./gnomeshell-extension-manage --version latest --install --extension-id 1267 --user # no title bar (unmaintained)
-./gnomeshell-extension-manage --version latest --install --extension-id 3010 --user # system monitor
-./gnomeshell-extension-manage --version latest --install --extension-id 1319 --user # GSConnect
-./gnomeshell-extension-manage --version latest --install --extension-id 3843 --user # Just perfection
+pipx install gnome-extensions-cli --system-site-packages
+gext install 4839 # clipboard history
+gext install 1160 # Dash to panel
+gext install 1485 # worspace matrix
+gext install 28 # gTile
+gext install 3010 # system monitor
+gext install 1319 # GSConnect
+gext install 3843 # Just perfection
+# Unmaintained
+#gext install 545 # hide top bar
+#gext install 10 # windowNavigator
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
