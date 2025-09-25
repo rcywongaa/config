@@ -116,18 +116,17 @@ sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt update
 sudo apt install fish
 
-chsh -s $(which fish)
+#chsh -s $(which fish)  # Change in terminator instead
 
-fish
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-fisher install IlanCosman/tide@v6
-fisher install PatrickF1/fzf.fish
-#fisher install meaningful-ooo/sponge
-fisher install franciscolourenco/done
-fisher install jethrokuan/z
-fisher install edc/bass
+fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+fish -c 'fisher install IlanCosman/tide@v6'
+fish -c 'fisher install PatrickF1/fzf.fish'
+#fish -c 'fisher install meaningful-ooo/sponge'
+fish -c 'fisher install franciscolourenco/done'
+fish -c 'fisher install jethrokuan/z'
+fish -c 'fisher install edc/bass'
 
-tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
+fish -c "tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No"
 
 sudo snap install code-insiders --classic
 sudo snap install kooha
