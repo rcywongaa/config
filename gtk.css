@@ -9,6 +9,19 @@ decoration:backdrop {
   background: #000000;
 }
 
+.just-perfection .switcher-list .item-box:selected
+{
+    background-color: #dd4814;
+    color: #eeeeec;
+}
+
+.just-perfection .workspace-thumbnail-indicator
+{
+  border: 10px solid #dd4814;
+  border-radius: 3px;
+  padding: 0px;
+}
+
 .terminator-terminal-window notebook tab {
     background-color: #222;
     padding: 0;
