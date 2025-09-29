@@ -127,6 +127,7 @@ fish -c 'fisher install jethrokuan/z'
 fish -c 'fisher install edc/bass'
 
 fish -c "tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No"
+ln -s ~/config/fish/config.fish ~/.config/fish/config.fish
 
 sudo snap install code-insiders --classic
 sudo snap install kooha
