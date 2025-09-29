@@ -132,6 +132,10 @@ ln -s ~/config/fish/config.fish ~/.config/fish/config.fish
 sudo snap install code-insiders --classic
 sudo snap install kooha
 
+echo "Use fzf from source instead of apt..."
+sudo apt remove fzf
+./fzf/install
+
 echo "Setting up OCR..."
 sudo ln -s ~/config/bin/lens /usr/local/bin/lens 
 
