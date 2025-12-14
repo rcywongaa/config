@@ -21,7 +21,6 @@ echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
     neovim \
     zsh \
-    terminator \
     git \
     gitk \
     git-gui \
@@ -116,8 +115,6 @@ sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt update
 sudo apt install fish
 
-#chsh -s $(which fish)  # Change in terminator instead
-
 fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
 fish -c 'fisher install IlanCosman/tide@v6'
 fish -c 'fisher install PatrickF1/fzf.fish'
@@ -128,6 +125,8 @@ fish -c 'fisher install edc/bass'
 
 fish -c "tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No"
 ln -s ~/config/fish/config.fish ~/.config/fish/config.fish
+ln -s ~/config/alacritty ~/.config/alacritty
+ln -s ~/config/zellij ~/.config/zellij
 
 sudo snap install code-insiders --classic
 sudo snap install kooha
@@ -155,10 +154,6 @@ wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20R
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf -P ~/.local/share/fonts/
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf -P ~/.local/share/fonts/
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -P ~/.local/share/fonts/
-
-echo "Installing terminator plugin..."
-rm -r ~/.config/terminator
-ln -sf ${DIR}/terminator-config ~/.config/terminator
 
 cd ${DIR}
 git submodule update --init
