@@ -1,0 +1,4 @@
+window-decoration=none
+command = /usr/bin/fish --login --interactive
+shell-integration = fish
+background-opacity = 0.75

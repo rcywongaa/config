@@ -19,6 +19,7 @@ sudo apt -y update
 
 echo "Installing common packages..."
 sudo apt -y --ignore-missing install \
+    terminator \
     neovim \
     zsh \
     git \
@@ -53,6 +54,7 @@ sudo apt -y --ignore-missing install \
     mpv \
     python3-pip \
     python3-numpy \
+    python3-venv \
     curl \
     smartmontools \
     lm-sensors \
@@ -60,7 +62,6 @@ sudo apt -y --ignore-missing install \
     iftop \
     vnstat \
     ethtool \
-    cargo \
     rename \
     calibre \
     texlive \
@@ -70,7 +71,6 @@ sudo apt -y --ignore-missing install \
     xournal \
     gnome-shell-extensions \
     pipx \
-    fzf \
     flatpak \
     kdenlive \
     timeshift \
@@ -98,9 +98,14 @@ pipx install youtube-dl
 #flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 #flatpak install flathub io.github.seadve.Kooha
 
+echo "Install Rust..."
+curl https://sh.rustup.rs -sSf | sh
 
-#cargo install proximity-sort
+cargo install proximity-sort
+cargo install --locked zellij
+cargo install alacritty
 
+sudo snap install ghostty --classic
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
 
@@ -132,8 +137,25 @@ sudo snap install code-insiders --classic
 sudo snap install kooha
 
 echo "Use fzf from source instead of apt..."
-sudo apt remove fzf
 ./fzf/install
+
+echo "Installing GNOME extensions..."
+mkdir -p ~/.local/share/gnome-shell/extensions
+
+# windows blur effect deprecated
+#ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
+
+pipx install gnome-extensions-cli --system-site-packages
+gext install 4839 # clipboard history
+gext install 1160 # Dash to panel
+gext install 1485 # worspace matrix
+gext install 28 # gTile
+gext install 3010 # system monitor
+gext install 1319 # GSConnect
+gext install 3843 # Just perfection
+# Unmaintained
+#gext install 545 # hide top bar
+#gext install 10 # windowNavigator
 
 echo "Setting up OCR..."
 sudo ln -s ~/config/bin/lens /usr/local/bin/lens 
@@ -161,27 +183,6 @@ git submodule update --init
 #echo "Install nodejs for coc..."
 #curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 #sudo apt install nodejs
-
-#echo "Setting up fzf..."
-#${DIR}/fzf/install
-
-echo "Installing GNOME extensions..."
-mkdir -p ~/.local/share/gnome-shell/extensions
-
-# windows blur effect deprecated
-#ln -sf ${DIR}/gnome-shell-extension-wbe/windows-blur-effects@com.gmail.lviggiani ~/.local/share/gnome-shell/extensions/windows-blur-effects@com.gmail.lviggiani
-
-pipx install gnome-extensions-cli --system-site-packages
-gext install 4839 # clipboard history
-gext install 1160 # Dash to panel
-gext install 1485 # worspace matrix
-gext install 28 # gTile
-gext install 3010 # system monitor
-gext install 1319 # GSConnect
-gext install 3843 # Just perfection
-# Unmaintained
-#gext install 545 # hide top bar
-#gext install 10 # windowNavigator
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv

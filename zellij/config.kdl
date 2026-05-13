@@ -1,3 +1,4 @@
+default_shell "fish"
 keybinds {
   normal {
     bind "Alt v" { NewPane "Right" ;}
