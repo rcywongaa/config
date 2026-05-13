@@ -186,7 +186,8 @@ git submodule update --init
 
 echo "Loading saved gnome configs..."
 ./import_export_keybindings.pl -i keybindings.csv
-dconf load /org/gnome/ < gnome.dconf
+dconf load /org/gnome/shell/ < org_gnome_shell.dconf
+# export with dconf dump /org/gnome/shell > org_gnome_shell.dconf
 
 #sudo systemctl start sshd.service
 
