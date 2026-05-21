@@ -6,7 +6,7 @@ if status is-interactive
   # back to plain fish after detaching instead of closing the window.
   if not set -q ZELLIJ
       and test "$TERM_PROGRAM" = "ghostty"
-      zellij attach -c main
+      zellij
       exit
   end
 
