@@ -33,7 +33,6 @@ sudo apt -y --ignore-missing install \
     xclip \
     sysstat \
     speedcrunch \
-    inkscape \
     gnome-tweak-tool \
     gparted \
     filezilla \
@@ -83,16 +82,25 @@ sudo tlp start
 pipx ensurepath
 pipx install youtube-dl
 
-# echo "Setting up Docker..."
-# sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-# sudo chmod a+r /etc/apt/keyrings/docker.asc
-# echo \
-#   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-#   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-#   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-# sudo apt-get update
-# sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+echo "Setting up Docker..."
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 #sudo apt install gnome-software-plugin-flatpak
 #flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -106,6 +114,10 @@ cargo install --locked zellij
 cargo install alacritty
 
 sudo snap install ghostty --classic
+sudo snap install inkscape
+sudo snap install code-insiders --classic
+sudo snap install kooha
+
 # Optional packages
 # sudo apt -y install wireshark kicad texstudio freecad
 
@@ -132,9 +144,6 @@ fish -c "tide configure --auto --style=Rainbow --prompt_colors='True color' --sh
 ln -s ~/config/fish/config.fish ~/.config/fish/config.fish
 ln -s ~/config/alacritty ~/.config/alacritty
 ln -s ~/config/zellij ~/.config/zellij
-
-sudo snap install code-insiders --classic
-sudo snap install kooha
 
 echo "Use fzf from source instead of apt..."
 ./fzf/install
