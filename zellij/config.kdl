@@ -17,3 +17,4 @@ keybinds {
     bind "Alt Space" { EditScrollback; }
   }
 }
+show_startup_tips false
