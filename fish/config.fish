@@ -24,5 +24,6 @@ set --universal tide_left_prompt_items pwd
 alias source_ros "bass source /opt/ros/jazzy/setup.bash"
 set --export PYTHONPATH $PYTHONPATH /opt/drake/lib/python$(python3 -c 'import sys; print("{0}.{1}".format(*sys.version_info))')/site-packages
 alias this_branch "git rev-parse --abbrev-ref HEAD"
+alias catkin_config 'catkin config --cmake-args -DCMAKE_MODULE_PATH="$(catkin locate)/cmake;$(catkin locate)/src/forge_calibration/cmake"'
 
 
