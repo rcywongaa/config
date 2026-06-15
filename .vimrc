@@ -347,8 +347,8 @@ nnoremap $ $l
 " Window Scrolling
 nnoremap <C-E> <C-E>j
 nnoremap <C-Y> <C-Y>k
-noremap zl 8zl
-noremap zh 8zh
+noremap L 8zl
+noremap H 8zh
 noremap ZL 32zl
 noremap ZH 32zh
 
@@ -376,9 +376,7 @@ nnoremap <S-F4> :vertical resize +20<CR>
 
 nnoremap ZZ <nop>
 nnoremap J <nop>
-nnoremap L <nop>
 nnoremap K <nop>
-nnoremap H <nop>
 nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 nnoremap <leader>J J
