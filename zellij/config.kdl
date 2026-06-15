@@ -15,6 +15,8 @@ keybinds {
     bind "Alt 9" { GoToTab 9; }
     bind "Alt z" { ToggleFocusFullscreen; }
     bind "Alt Space" { EditScrollback; }
+    bind "PageUp" { HalfPageScrollUp; }
+    bind "PageDown" { HalfPageScrollDown; }
   }
 }
 show_startup_tips false
