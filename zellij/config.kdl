@@ -24,3 +24,5 @@ keybinds {
   }
 }
 show_startup_tips false
+copy_command "xclip -selection clipboard"
+
