@@ -17,6 +17,10 @@ keybinds {
     bind "Alt Space" { EditScrollback; }
     bind "PageUp" { HalfPageScrollUp; }
     bind "PageDown" { HalfPageScrollDown; }
+    bind "Alt h" "Alt Left" { MoveFocus "Left"; }
+    bind "Alt l" "Alt Right" { MoveFocus "Right"; }
+    bind "Alt j" "Alt Down" { MoveFocus "Down"; }
+    bind "Alt k" "Alt Up" { MoveFocus "Up"; }
   }
 }
 show_startup_tips false
