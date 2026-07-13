@@ -1,7 +1,9 @@
-[shell]
+[terminal.shell]
 program = "/bin/fish"
 args = ["-c", "zellij"]
 
 [window]
 decorations = "None"
 opacity = 0.8
+
+[terminal]

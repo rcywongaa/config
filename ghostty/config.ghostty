@@ -1,5 +1,5 @@
 window-decoration=none
-command = /usr/bin/fish --login --interactive
+command = TERM=xterm-256color /usr/bin/fish --login --interactive
 shell-integration = fish
 background-opacity = 0.75
 shell-integration-features = ssh-terminfo,ssh-env
